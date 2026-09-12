@@ -1,0 +1,257 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4efe8;
+    color: #2b2926;
+}
+
+header {
+    background-color: #1b1a18;
+    padding: 18px 60px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    color: #b77a4a;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+nav ul li a {
+    color: #ece7e1;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+nav ul li a:hover {
+    color: #b77a4a;
+}
+
+nav button {
+    background-color: #b77a4a;
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.hero {
+    min-height: 620px;
+    padding: 80px 60px;
+
+    display: flex;
+    align-items: center;
+
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(20, 18, 16, 0.82) 0%,
+            rgba(20, 18, 16, 0.62) 40%,
+            rgba(20, 18, 16, 0.20) 100%
+        ),
+        url("images/hero.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.hero-text {
+    max-width: 650px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-label {
+    display: inline-block;
+    color: #d39a68;
+    font-size: 13px;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.hero h1 {
+    font-size: 64px;
+    line-height: 1.05;
+    font-weight: 500;
+    margin-bottom: 25px;
+    color: #ffffff;
+}
+
+.hero h1 span {
+    display: block;
+    color: #d39a68;
+}
+
+.hero p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #e5ded7;
+    max-width: 520px;
+    margin-bottom: 35px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.hero-buttons a {
+    text-decoration: none;
+    padding: 14px 24px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.primary-btn {
+    background-color: #b77a4a;
+    color: white;
+}
+
+.primary-btn:hover {
+    background-color: #96613a;
+}
+
+.secondary-btn {
+    border: 1px solid #ffffff;
+    color: #ffffff;
+}
+
+.secondary-btn:hover {
+    background-color: #ffffff;
+    color: #1b1a18;
+}
+
+.hero-image {
+    flex: 1;
+    height: 520px;
+    overflow: hidden;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.categories {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    padding: 0 60px 60px;
+    background-color: #f4efe8;
+}
+
+.category-card {
+    position: relative;
+    min-height: 260px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    text-decoration: none;
+    overflow: hidden;
+}
+
+.category-card:nth-child(1) {
+    background-image: url("images/site-marble.png");
+}
+
+.category-card:nth-child(2) {
+    background-image: url("images/granit.jpg");
+}
+
+.category-card:nth-child(3) {
+    background-image: url("images/porselen.jpg");
+}
+
+.category-card:nth-child(4) {
+    background-image: url("images/proje.jpg");
+}
+
+.category-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(20, 18, 16, 0.10),
+        rgba(20, 18, 16, 0.75)
+    );
+}
+
+.category-content {
+    position: absolute;
+    inset: 0;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.category-icon {
+    font-size: 24px;
+    color: #1b1a18;
+    margin-bottom: 12px;
+}
+
+.category-content h2 {
+    color: #000000;
+    font-size: 14px;
+}
+
+.category-arrow {
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #1b1a18;
+    color: white;
+    border-radius: 50%;
+}
+
+.category-content p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #eee7df;
+    margin-bottom: 12px;
+}
+
+.category-content span {
+    color: #d39a68;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+}
+
+.marble-card {
+    background-image: url("images/site-marble.png");
+}
+
