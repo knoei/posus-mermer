@@ -1,32 +1,53 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr>">
 <head>
-
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Posel Madencilik</title>
+    <meta name="viewport" content="width=decive-width, initial-scale=1.0">
+
+    <title>Posus Mermer</title>
 
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
-    <header>
-        <nav>
-            <div class="logo">
-                POSEL
-            </div>
+    <header class="site-header">
+        <nav class="navbar">
+            
+            <a href="#" class="logo">
+                POSUS
+            </a>
 
-            <ul>
-                <li><a href="#">Ana Sayfa</a></li>
-                <li><a href="#">Ürünler</a></li>
-                <li><a href="#">Projeler</a></li>
-                <li><a href="#">Masa Modelleri</a></li>
-                <li><a href="#">İletişim</a></li>
+            <ul class="nav-links">
+                <li>
+                    <a href="#">Ana Sayfa</a>
+                </li>
+
+                <li>
+                    <a href="#">Ürünler</a>
+
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Mermer</a></li>
+                        <li><a href="#">Granit</a></li>
+                        <li><a href="#">Porselen</a></li>
+                        <li><a href="#">Kuvars</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#">Masalar</a>
+                </li>
+
+                <li>
+                    <a href="#">Projeler</a>
+                </li>
+
+                <li>
+                    <a href="#">İletişim</a>
+                </li>
             </ul>
 
-            <button> Teklif Al </button>
+            <a href="#" class="quote-btn">Teklif Al</a>
 
         </nav>
     </header>
@@ -35,123 +56,103 @@
 
         <section class="hero">
 
-            <div class="hero-text">
+            <div class="hero-content">
+                <span class="hero-label">DOĞAL TAŞ • MODERN TASARIM</span>
+
                 <h1>
-                    Doğal Taşa
-                    <span>Değer Katan</span>
-                    Tasarımlar
+                    Doğal Taşın
+                    <span>Modern Hali</span>
                 </h1>
-
                 <p>
-                    Seçkin doğal taşları modern tasarım ve güçlü işçilikle
-                    buluşturuyoruz.
+                    Mermer, granit ve porselen yüzeyleri modern 
+                    tasarım anlayışıyla buluşturuyoruz.
                 </p>
 
-                <div class="hero-buttons">
-                    <a href="#" class="primary-btn">Ürünleri İncele</a>
-                    <a href="#" class="secondary-btn">Projelerimizi Gör</a>
+                <div class="hero-actions">
+                    <a href="#" class="hero-primary-btn">Ürünleri Keşfet</a>
                 </div>
+
             </div>
 
         </section>
 
-        <section class="categories">
-            
-            <a href="#" class="category-card marble-card">
-                <div class="category-content">
-                    <h2>Mermer</h2>
-                    <p>Estetiğin doğal hali</p>
-                    <span class="category-button">➜</span>
+        <section class="table-categories">
+
+            <a href="#" class="table-category-card">
+                <div class="table-category-text">
+                    <h3>Mermer <br> Masalar</h3>
+                    <span class="table-category-arrow">➜</span>
                 </div>
+
+                <img src="images/marble-table-category.png" alt="Mermer Masa">
             </a>
 
-            <a href="#" class="category-card granite-card">
-                <div class="category-content">
-                    <h2>Granit</h2>
-                    <p>Güçlü ve dayanıklı yüzeyler</p>
-                    <span class="category-button">➜</span>
+            <a href="#" class="table-category-card">
+                <div class="table-category-text">
+                    <h3>Granit <br> Masalar</h3>
+                    <span class="table-category-arrow">➜</span>
                 </div>
+
+                <img src="images/granite-table-category.png" alt="Granit Masa">
             </a>
 
-            <a href="#" class="category-card porcelain-card">
-                <div class="category-content">
-                    <h2>Porselen</h2>
-                    <p>Modern yaşam alanları için</p>
-                    <span class="category-button">➜</span>
+            <a href="#" class="table-category-card">
+                <div class="table-category-text">
+                    <h3>Porselen <br> Masalar</h3>
+                    <span class="table-category-arrow">➜</span>
                 </div>
+
+                <img src="images/porcelain-table-category.png" alt="Porselen Masa">
             </a>
 
-            <a href="#" class="category-card project-card">
-                <div class="category-content ">
-                    <h2>Özel Projeler</h2>
-                    <p>Mekana özel estetik çözümler</p>
-                    <span class="category-button">➜</span>
-                </div>
-            </a>
+
         </section>
 
-        <section class="about-section">
+        <!-- <section class="hero-features">
 
-            <div class="about-visual">
-                <img src="images/about-quarry.png" alt="Posus Taş Ocağı">
-                <span class="about-visual-text">DOĞADAN GELECEĞE</span>
-            </div>
+            <div class="hero-feature">
+                <img src="images/special-msrmnt.png"
+                 alt="Özel Ölçü Üretim"
+                 class="feature-image">
 
-            <div class="about-content">
-                <span class="section-label">POSUS MERMER</span>
-                
-                <h2>Doğal Taşta <br> Güvenilir Çözüm Ortağınız</h2>
-
-                <p>
-                    Mermer, granit ve porselen ürünlerinde kaliteli malzemeyi
-                     güçlü işçilikle buluşturuyor; yaşam alanları ve projeler için
-                      estetik ve uzun ömürlü çözümler üretiyoruz.
-                </p>
-
-                <div class="about-features">
-
-                    <div class="feature">
-                        <strong>Üst Kalite</strong>
-                        <span>Özenle seçilmiş doğal taşlar</span>
-                    </div>
-
-                    <div class="feature">
-                        <strong>Uzman Üretim</strong>
-                        <span>Deneyimli ekip ve güçlü işçilik</span>
-                    </div>
-
-                    <div class="feature">
-                        <strong>Özel Çözümler</strong>
-                        <span>Projeye ve ölçüye özel üretim</span>
-                    </div>
-
+                <div class="feature-text">
+                    <h3>Özel Öçlü Üretim</h3>
+                    <p>Projeye ve alana özel ölçüler.</p>
                 </div>
 
             </div>
 
-            <div class="about-stats">
-                <span class="stats-label">DOĞAL TAŞLA <br> DAHA İYİ BİR YARIN </span>
+            <div class="hero-feature">
+                <img src="images/shipping.png"
+                 alt="Güvenli Teslimat"
+                 class="feature-image">
 
-                <div class="stat">
-                    <strong>30+</strong>
-                    <span>Yıllık Tecrübe</span>
+                <div class="feature-text">
+                    <h3>Depomuzdan Güvenli Teslimat</h3>
+                    <p>Ürünlerinizi özenle hazırlayıp teslim ediyoruz.</p>
                 </div>
 
-                <div class="stat">
-                    <strong>500+</strong>
-                    <span>Tamamlanan Proje</span>
-                </div>
-                    
-                <div class="stat">
-                    <strong>%100</strong>
-                    <span>Müşteri Memnuniyeti</span>
-                </div>
             </div>
 
-        </section>
+            <div class="hero-feature">
+
+                <img src="images/beveling.png"
+                 alt="Tecrübeli İşçilik"
+                 class="feature-image">
+
+                <div class="feature-text">
+
+                    <h3>30+ Yıllık Tecrübe</h3>
+                    <p>Doğal taşta yılların deneyimi ve usta işçilik.</p>
+                </div>
+
+            </div>
+
+        </section> -->
 
     </main>
 
     <script src="script.js"></script>
+
 </body>
 </html>
