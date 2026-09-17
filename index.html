@@ -7,47 +7,36 @@
     <title>Posus Mermer</title>
 
     <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
 </head>
 
 <body>
 
     <header class="site-header">
         <nav class="navbar">
-            
-            <a href="#" class="logo">
-                POSUS
+
+            <a href="index.html" class="navbar-logo">
+                <img src="images/posus-logo.png" alt="Posus Mermer">
             </a>
 
-            <ul class="nav-links">
-                <li>
-                    <a href="#">Ana Sayfa</a>
-                </li>
-
-                <li>
-                    <a href="#">Ürünler</a>
-
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Mermer</a></li>
-                        <li><a href="#">Granit</a></li>
-                        <li><a href="#">Porselen</a></li>
-                        <li><a href="#">Kuvars</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="#">Masalar</a>
-                </li>
-
-                <li>
-                    <a href="#">Projeler</a>
-                </li>
-
-                <li>
-                    <a href="#">İletişim</a>
-                </li>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#">Ana Sayfa</a></li>
+                <li><a href="#">Ürünler</a></li>
+                <li><a href="#">Masalar</a></li>
+                <li><a href="#">Projeler</a></li>
+                <li><a href="#">İletişim</a></li>
             </ul>
 
             <a href="#" class="quote-btn">Teklif Al</a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Menüyü Aç">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
 
         </nav>
     </header>
@@ -55,6 +44,8 @@
     <main>
 
         <section class="hero">
+
+            <div class="hero-mobile-image"></div>
 
             <div class="hero-content">
                 <span class="hero-label">DOĞAL TAŞ • MODERN TASARIM</span>
@@ -202,69 +193,76 @@
 
             </div>
         </section>
-<section class="trust-strip">
+        <section class="trust-strip">
 
-    <div class="trust-item">
+            <div class="trust-item">
+                <i class="fa-solid fa-hammer trust-icon"></i>
 
-        <div class="trust-icon">
-            <svg viewBox="0 0 64 64" aria-hidden="true">
-                <path d="M18 20l10-10 8 8-10 10z"></path>
-                <path d="M30 22l18 18"></path>
-                <path d="M46 38l6 6"></path>
-                <path d="M12 26l12-12"></path>
-                <path d="M20 34L8 46"></path>
-            </svg>
+                <div class="trust-text">
+                    <h3>1. Sınıf İşçilik</h3>
+                    <p>30+ yıllık tecrübemizle</p>
+                </div>
+            </div>
+
+            <div class="trust-item">
+                <i class="fa-regular fa-gem trust-icon"></i>
+
+                <div class="trust-text">
+                    <h3>Orijinal Mermer</h3>
+                    <p>Doğadan, doğrudan size.</p>
+                </div>
+            </div>
+
+            <div class="trust-item">
+                <i class="fa-solid fa-industry trust-icon"></i>
+
+                <div class="trust-text">
+                    <h3>Depo Teslim</h3>
+                    <p>Güvenli ve hızlı teslimat.</p>
+                </div>
+            </div>
+
+        </section>
+
+
+        <footer class="site-footer">
+
+    <div class="footer-main">
+
+        <div class="footer-brand">
+            <img src="images/posus-logo-footer.png" alt="Posus Mermer">
         </div>
 
-        <div class="trust-text">
-            <h3>1. Sınıf İşçilik</h3>
-            <p>Ustalıkla, yıllarca sizinle.</p>
+        <div class="footer-column">
+            <h3>Hızlı Erişim</h3>
+
+            <a href="#">Ana Sayfa</a>
+            <a href="#">Ürünler</a>
+            <a href="#">Masalar</a>
+            <a href="#">Projeler</a>
+            <a href="#">İletişim</a>
+        </div>
+
+        <div class="footer-column footer-contact">
+            <h3>İletişim</h3>
+
+            <p>İstanbul, Türkiye</p>
+            <p>+90 531 284 7383</p>
+            <p>posusmermer@gmail.com</p>
+
+            <div class="footer-socials">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
         </div>
 
     </div>
 
-    <div class="trust-item">
-
-        <div class="trust-icon">
-            <svg viewBox="0 0 64 64" aria-hidden="true">
-                <path d="M14 20h36"></path>
-                <path d="M20 10h24l10 10-22 34L10 20z"></path>
-                <path d="M20 10l12 44"></path>
-                <path d="M44 10L32 54"></path>
-                <path d="M14 20l18-10 18 10"></path>
-            </svg>
-        </div>
-
-        <div class="trust-text">
-            <h3>Orijinal Mermer</h3>
-            <p>Doğadan, doğrudan size.</p>
-        </div>
-
+    <div class="footer-bottom">
+        <span>© 2026 Posus Mermer. Tüm hakları saklıdır.</span>
     </div>
 
-    <div class="trust-item">
-
-        <div class="trust-icon">
-            <svg viewBox="0 0 64 64" aria-hidden="true">
-                <path d="M8 48V24l14 8v-8l14 8v-8l18 10v14z"></path>
-                <path d="M42 22V10h8v16"></path>
-                <path d="M16 40h4"></path>
-                <path d="M26 40h4"></path>
-                <path d="M36 40h4"></path>
-                <path d="M46 40h4"></path>
-            </svg>
-        </div>
-
-        <div class="trust-text">
-            <h3>Depo Teslim</h3>
-            <p>Güvenli ve hızlı teslimat.</p>
-        </div>
-
-    </div>
-
-</section>
-
-
+</footer>
 
         <!-- <section class="hero-features">
 
