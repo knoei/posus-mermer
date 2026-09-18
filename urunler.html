@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ürünler | Posus Mermer</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+</head>
+<body>
+
+    <header class="site-header">
+        <nav class="navbar">
+
+            <a href="index.html" class="navbar-logo">
+                <img src="images/posus-logo.png" alt="Posus Mermer">
+            </a>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="urunler.html" class="active">Ürünler</a></li>
+                <li><a href="masalar.html">Masalar</a></li>
+                <li><a href="projeler.html">Projeler</a></li>
+                <li><a href="iletisim.html">İletişim</a></li>
+            </ul>
+
+            <a href="iletisim.html" class="quote-btn">
+                Teklif Al
+            </a>
+
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- PRODUCTS HERO -->
+        <section class="products-hero">
+
+            <div class="products-hero-content">
+                <span>DOĞAL TAŞ KOLEKSİYONUMUZ</span>
+
+                <h1>Ürünler</h1>
+
+                <p>
+                    Doğanın milyonlarca yılda yarattığı eşsiz taşları,
+                    modern yaşam alanlarına taşıyoruz.
+                </p>
+            </div>
+
+            <div class="products-hero-note">
+                <span></span>
+
+                <p>
+                    ZAMANSIZ<br>
+                    DOĞAL<br>
+                    EŞSİZ
+                </p>
+            </div>
+
+        </section>
+
+
+        <!-- CATEGORY CARDS -->
+        <section class="product-category-nav">
+
+            <button class="category-showcase active" data-category="all">
+                <img src="images/stones/marbles/mugla-beyazi.jpg" alt="">
+                <div>
+                    <strong>Tümü</strong>
+                    <span>Tüm Ürünler</span>
+                </div>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+            <button class="category-showcase" data-category="mermer">
+                <img src="images/stones/marbles/calacatta.jpg" alt="">
+                <div>
+                    <strong>Mermer</strong>
+                    <span>Doğal Zarafet</span>
+                </div>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+            <button class="category-showcase" data-category="granit">
+                <img src="images/stones/granites/star-galaxy.jpg" alt="">
+                <div>
+                    <strong>Granit</strong>
+                    <span>Güçlü Yapı</span>
+                </div>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+            <button class="category-showcase" data-category="porselen">
+                <img src="images/stones/porcelains/calacatta-borghini.jpg" alt="">
+                <div>
+                    <strong>Porselen</strong>
+                    <span>Modern Yüzeyler</span>
+                </div>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+            <button class="category-showcase" data-category="traverten">
+                <img src="images/stones/marbles/traverten.jpg" alt="">
+                <div>
+                    <strong>Traverten</strong>
+                    <span>Doğal Doku</span>
+                </div>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+        </section>
+
+
+        <!-- FILTER AREA -->
+        <section class="product-catalog">
+
+            <div class="catalog-toolbar">
+
+                <div class="catalog-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        id="stoneSearch"
+                        placeholder="Taş adı ara... (örn. Muğla, Emperador, Nero...)"
+                    >
+                </div>
+
+                <select id="categoryFilter">
+                    <option value="all">Kategori: Tümü</option>
+                    <option value="mermer">Mermer</option>
+                    <option value="granit">Granit</option>
+                    <option value="porselen">Porselen</option>
+                    <option value="traverten">Traverten</option>
+                </select>
+
+                <select id="colorFilter">
+                    <option value="all">Renk Tonu: Tümü</option>
+                    <option value="beyaz">Beyaz</option>
+                    <option value="bej">Bej</option>
+                    <option value="gri">Gri</option>
+                    <option value="siyah">Siyah</option>
+                    <option value="kirmizi">Kırmızı</option>
+                    <option value="yesil">Yeşil</option>
+                    <option value="kahverengi">Kahverengi</option>
+                </select>
+
+                <select id="seriesFilter">
+                    <option value="all">Seri: Tümü</option>
+                    <option value="casual">Casual</option>
+                    <option value="premium">Premium</option>
+                    <option value="deluxe">Deluxe</option>
+                </select>
+
+                <div class="catalog-count">
+                    <span id="productCount">0</span> ürün bulundu
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCTS GENERATED BY JS -->
+            <div class="stone-grid" id="stoneGrid"></div>
+
+
+            <div class="no-products" id="noProducts">
+                Aramanızla eşleşen ürün bulunamadı.
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+
+        <div class="footer-main">
+
+            <div class="footer-brand">
+                <img src="images/posus-logo-footer.png" alt="Posus Mermer">
+            </div>
+
+            <div class="footer-column">
+                <h3>Hızlı Erişim</h3>
+
+                <a href="index.html">Ana Sayfa</a>
+                <a href="urunler.html">Ürünler</a>
+                <a href="masalar.html">Masalar</a>
+                <a href="projeler.html">Projeler</a>
+                <a href="iletisim.html">İletişim</a>
+            </div>
+
+            <div class="footer-column footer-contact">
+                <h3>İletişim</h3>
+
+                <p>İstanbul, Türkiye</p>
+                <p>+90 531 284 7383</p>
+                <p>posusmermer@gmail.com</p>
+
+                <div class="footer-socials">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 Posus Mermer. Tüm hakları saklıdır.</span>
+        </div>
+
+    </footer>
+
+    <script src="js/stones.js"></script>
+    <script src="js/products-page.js"></script>
+    <script src="js/script.js"></script>
+
+</body>
+</html>
