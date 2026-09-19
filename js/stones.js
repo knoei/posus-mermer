@@ -7,26 +7,59 @@ function slugifyTr(text) {
         .replace(/ö/g, "o")
         .replace(/ş/g, "s")
         .replace(/ü/g, "u")
-        .replace(/\+/g, "plus")
         .replace(/[^a-z0-9\s-]/g, "")
         .replace(/\s+/g, "-")
         .replace(/-+/g, "-")
         .trim();
 }
 
+
+/* =========================
+   CATEGORY
+========================= */
+
 function getCategory(name) {
     const n = name.toLowerCase("tr-TR");
 
-    if (n.includes("onyx")) return "onyx";
-    if (n.includes("traverten")) return "traverten";
-    if (n.includes("bazalt")) return "dogal-tas";
-    if (n.includes("andezit")) return "dogal-tas";
+    if (n.includes("onyx")) {
+        return "onyx";
+    }
+
+    if (n.includes("traverten")) {
+        return "traverten";
+    }
+
+    if (
+        n.includes("bazalt") ||
+        n.includes("andezit")
+    ) {
+        return "dogal-tas";
+    }
 
     return "mermer";
 }
 
+
+/* =========================
+   COLOR
+========================= */
+
 function getColor(name) {
     const n = name.toLowerCase("tr-TR");
+
+    const colorOverrides = {
+        "aden dark": "kahverengi",
+        "patara dark": "kahverengi",
+        "rosalia dark": "kahverengi",
+        "olive maron": "kahverengi",
+        "dark olive": "kahverengi"
+    };
+
+    if (colorOverrides[n]) {
+        return colorOverrides[n];
+    }
+
+    /* WHITE */
 
     if (
         n.includes("white") ||
@@ -37,19 +70,29 @@ function getColor(name) {
         n.includes("volakas") ||
         n.includes("calacatta") ||
         n.includes("arabescato") ||
-        n.includes("statuarietto")
-    ) return "beyaz";
+        n.includes("statuarietto") ||
+        n.includes("dolomit")
+    ) {
+        return "beyaz";
+    }
+
+
+    /* BEIGE */
 
     if (
         n.includes("bej") ||
         n.includes("beige") ||
-        n.includes("beji") ||
         n.includes("cream") ||
         n.includes("crema") ||
         n.includes("vanilla") ||
         n.includes("mink") ||
         n.includes("ivory")
-    ) return "bej";
+    ) {
+        return "bej";
+    }
+
+
+    /* GREY */
 
     if (
         n.includes("grey") ||
@@ -57,32 +100,49 @@ function getColor(name) {
         n.includes("gray") ||
         n.includes("silver") ||
         n.includes("sedef")
-    ) return "gri";
+    ) {
+        return "gri";
+    }
+
+
+    /* GREEN */
 
     if (
-        n.includes("siyah") ||
-        n.includes("black") ||
-        n.includes("nero") ||
-        n.includes("noir") ||
-        n.includes("dark")
-    ) return "siyah";
-
-    if (
-        n.includes("yesil") ||
         n.includes("yeşil") ||
+        n.includes("yesil") ||
         n.includes("verde") ||
         n.includes("olive")
-    ) return "yesil";
+    ) {
+        return "yesil";
+    }
+
+
+    /* RED / BURGUNDY / PINK */
 
     if (
         n.includes("red") ||
         n.includes("rosso") ||
         n.includes("bordo") ||
-        n.includes("visne") ||
         n.includes("vişne") ||
+        n.includes("visne") ||
         n.includes("pink") ||
         n.includes("pembe")
-    ) return "kirmizi";
+    ) {
+        return "kirmizi";
+    }
+
+
+    /* BLUE */
+
+    if (
+        n.includes("mavi") ||
+        n.includes("azur")
+    ) {
+        return "mavi";
+    }
+
+
+    /* BROWN */
 
     if (
         n.includes("brown") ||
@@ -91,17 +151,34 @@ function getColor(name) {
         n.includes("maron") ||
         n.includes("golden") ||
         n.includes("gold")
-    ) return "kahverengi";
+    ) {
+        return "kahverengi";
+    }
+
+
+    /* BLACK */
 
     if (
-        n.includes("mavi") ||
-        n.includes("azur")
-    ) return "mavi";
+        n.includes("siyah") ||
+        n.includes("black") ||
+        n.includes("nero") ||
+        n.includes("noir") ||
+        n.includes("dark")
+    ) {
+        return "siyah";
+    }
+
 
     return "karisik";
 }
 
+
+/* =========================
+   STONE NAMES
+========================= */
+
 const stoneNames = [
+
     "Aden Dark",
     "Adıyaman Dark Emperador",
     "Adıyaman Light Emperador",
@@ -113,9 +190,9 @@ const stoneNames = [
     "Afyon Gri",
     "Afyon Kaplan Postu",
     "Afyon Menekşe",
-    "Afyon Süprem",
+    "Afyon Supreme",
     "Afyon Şeker",
-    "Akhisar Bej",
+    "Akhisar Beji",
     "Akşehir Siyahı",
     "Alanya Siyahı",
     "Alexandrette Black",
@@ -126,8 +203,8 @@ const stoneNames = [
     "Azur Açık Mavi",
     "Azur Beyaz",
     "Azur Gri Kalsit",
-    "Balıkesir Siyah",
-    "Bazalt++++",
+    "Balıkesir Siyahı",
+    "Bazalt",
     "Beyaz Dolomit",
     "Beyaz Onyx",
     "Bianco Carrara Gioia",
@@ -159,8 +236,8 @@ const stoneNames = [
     "Elazığ Vişne",
     "Golden Brown",
     "Golden Crystal",
-    "Golpazarı Bej",
-    "Harmankaya Bej",
+    "Golpazarı Beji",
+    "Harmankaya Beji",
 
     "Harmankaya",
     "Heaven White",
@@ -168,7 +245,6 @@ const stoneNames = [
     "İspanyol Dark Emperador",
     "Kastamonu Eflani",
     "Kemalpaşa",
-    "Kırmızı Rosso Levanto",
     "Leopard Salome",
     "Limra",
     "Manyas Beyazı",
@@ -200,7 +276,7 @@ const stoneNames = [
     "Rosso Levanto",
     "Royal Beige",
     "Royal Brown",
-    "Rozalya Dark",
+    "Rosalia Dark",
 
     "Rustik Yeşil",
     "Sahara Noir",
@@ -227,15 +303,124 @@ const stoneNames = [
     "Vietnam White",
     "Volakas",
     "Yerli Dark Emperador"
+
 ];
 
-const stones = stoneNames.map(name => ({
-    id: slugifyTr(name),
-    name: name,
-    category: getCategory(name),
-    color: getColor(name),
-    series: "casual",
-    image: `images/stones/${slugifyTr(name)}.jpg`
-}));
+
+/* =========================
+   FILE NAME EXCEPTIONS
+========================= */
+
+/*
+Most filenames automatically follow:
+
+Muğla Beyazı
+↓
+mugla-beyazi.jpg
+
+Only filenames that don't follow that rule
+need to be written here.
+*/
+
+const imageOverrides = {
+
+    "bazalt": "bazalt.jpg",
+
+    "manyas-beyazi": "manyas-beyazi.jpeg"
+
+};
+
+
+/* =========================
+   IMAGE FILE
+========================= */
+
+function getImageFile(name) {
+
+    /*
+    Bazalt++++ is called that in the catalog,
+    but the actual file is bazalt.jpg.
+    */
+
+    if (name === "Bazalt++++") {
+        return "bazalt.jpg";
+    }
+
+
+    const slug = slugifyTr(name);
+
+
+    /*
+    Check whether this stone has
+    a special filename.
+    */
+
+    if (imageOverrides[slug]) {
+        return imageOverrides[slug];
+    }
+
+
+    /*
+    Normal case:
+    mugla-beyazi.jpg
+    calacatta.jpg
+    verde-guatemala.jpg
+    etc.
+    */
+
+    return `${slug}.jpg`;
+}
+
+
+/* =========================
+   CREATE STONE OBJECTS
+========================= */
+
+const stones = stoneNames.map(name => {
+
+    /*
+    Normal ID is generated from its name.
+    */
+
+    let id = slugifyTr(name);
+
+
+    /*
+    Bazalt++++ would otherwise create
+    a strange ID, so simplify it.
+    */
+
+    if (name === "Bazalt++++") {
+        id = "bazalt";
+    }
+
+
+    return {
+
+        id: id,
+
+        name: name,
+
+        category: getCategory(name),
+
+        color: getColor(name),
+
+        /*
+        Temporary.
+        We'll assign the real
+        Casual / Premium / Deluxe values later.
+        */
+
+        series: "casual",
+
+        image: `images/marbles/${getImageFile(name)}`
+
+    };
+
+});
+
 
 console.log(stones);
+
+console.log(stones[0]);
+console.log(stones[0].image);
