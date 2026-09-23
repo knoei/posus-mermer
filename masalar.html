@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title> Masalar | Posus Mermer </title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+    <header>
+        <div class="navbar-inner">
+
+            <a href="index.html" class="nav-logo">
+                <img src="images/posus-logo.png" alt="Posus Mermer">
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html">Ana Sayfa</a>
+                <a href="urunler.html">Ürünler</a>
+                <a href="masalar.html">Masalar</a>
+                <a href="#">Projeler</a>
+                <a href="#">İletişim</a>
+            </nav>
+
+            <div class="nav-actions">
+
+                <button class="nav-search-btn">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+
+                <button class="wishlist-btn">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+
+                <button class="cart-btn">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count">0</span>
+                </button>
+
+                <a href="#" class="offer-btn">
+                    Teklif Al
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+        </div>
+    </header>
+
+    <section class="tables-hero">
+        <div class="tables-hero-content">
+            <div class="tables-breadcrumb">
+                Ana Sayfa <span></span> Masalar
+            </div>
+
+            <span class="tables-eyebrow">
+                DOĞAL TAŞ KOLEKSİYONU
+            </span>
+
+            <h1>Masalar</h1>
+
+            <p>
+                Doğal taşın eşsiz dokusu, yaşam alanlarınıza zamansız bir
+                şıklık katar. Cafe, restoran ve ticari mekanlar için
+                tasarlanan masa koleksiyonlarımız estetik ve dayanıklılığı
+                bir araya getirir.
+            </p>
+
+            <div class="hero-small-line">
+                <span></span>
+                MEKANLARA DEĞER KATAN DOĞALLIK
+            </div>
+
+        </div>
+
+        <div class="tables-hero-image">
+            <img src="images/tables/table-hero.jpg" alt="Doğal taş masa koleksiyonu">
+        </div>
+
+    </section>
+
+    <main class="tables-section">
+        <aside class="table-filters">
+            <div class="filter-header">
+                <h3>Filtrele</h3>
+
+                <button id="clearFilters">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    Tüm Filtreleri Temizle
+                </button>
+            </div>
+
+            <div class="filter-group">
+                <h4 class="filter-group"></h4>
+                <label>
+                    <input 
+                        type="radio"
+                        name="category"
+                        value="all"
+                        checked
+                    >
+                    Tümü
+                </label>
+
+                <label>
+                    <input 
+                        type="radio"
+                        name="category"
+                        value="cafe-restaurant"
+                    >
+                    Cafe & Restaurant
+                </label>
+
+                <label>
+                    <input 
+                        type="radio"
+                        name="category"
+                        value="dining"    
+                    >
+                    Ev & Yaşam
+                </label>
+
+            </div>
+
+            <!-- SHAPE -->
+            <div class="filter-group">
+
+                <h4>Şekil</h4>
+
+                <label>
+                    <input 
+                        type="radio"
+                        name="shape"
+                        value="all"
+                        checked
+                    >
+                    Tümü
+                </label>
+
+                <label>
+                    <input 
+                        type="radio"
+                        name="shape"
+                        value="yuvarlak"
+                    >
+                    Yuvarlak
+                </label>
+
+                <label>
+                    <input 
+                        type="radio"
+                        name="shape"
+                        value="kare"
+                    >
+                    Kare
+                </label>
+
+                <label>
+                    <input 
+                        type="radio"
+                        name="shape"
+                        value="dikdortgen"
+                    >
+                    Dikdörtgen
+                </label>
+
+            </div>
+
+            <!-- MATERIAL -->
+            <div class="filter-group">
+                <h4>Malzeme</h4>
+                <label>
+                    <input 
+                        type="radio"
+                        name="material"
+                        value="all"
+                        checked
+                    >
+                    Tümü
+                </label>
+                
+                <label>
+                    <input 
+                        type="radio"
+                        name="material"
+                        value="mermer"
+                    >
+                    Mermer
+                </label>
+                
+                <label>
+                    <input 
+                        type="radio"
+                        name="material"
+                        value="traverten"
+                    >
+                    Traverten
+                </label>
+                
+                <label>
+                    <input 
+                        type="radio"
+                        name="material"
+                        value="granit"
+                    >
+                    Granit
+                </label>
+
+            </div>
+
+            <!-- SIZE -->
+
+            <div class="filter-group">
+                <h4>Ölçü Aralığı</h4>
+                
+                <div class="size-filter">
+                    <input 
+                        type="number"
+                        id="minSize"
+                        placeholder="Min (cm)"
+                    >
+
+                    <input 
+                        type="number"
+                        id="maxSize"
+                        placeholder="Max (cm)"
+                    >
+                </div>
+
+                <button id="applySizeFilter" class="apply-filter-btn">
+                    Uygula
+                </button>
+
+            </div>
+                        
+        </aside>
+
+            <!-- RIGHT SIDE -->
+
+        <section class="tables-content">
+            <div class="tables-toolbar">
+                <p>
+                    <strong id="tableCount">0</strong>
+                    ürün listeleniyor
+                </p>
+
+                <div class="toolbar-right">
+                    <label for="sortTables">
+                        Sıralama:
+                    </label>
+
+                    <select id="sortTables">
+                        <option value="featured">Öne Çıkanlar</option>
+                        <option value="price-low">
+                            Fiyat: Düşükten Yükseğe
+                        </option>
+                        <option value="price-high">
+                            Fiyat: Yüksekten Düşüğe
+                        </option>
+                        <option value="name">
+                            İsme Göre
+                        </option>
+                    </select>
+
+                </div>
+            </div>
+
+            <!-- GRID -->
+            <div class="tables-grid" id="tablesGrid">
+            </div>
+
+            <div class="tables-empty" id="tablesEmpty">
+                Bu kriterlere uygun masa bulunamadı.
+            </div>
+
+        </section>
+        
+    </main>
+
+    <section class="tables-benefits">
+        <div>
+            <i class="fa-regular fa-gem"></i>
+            <span>
+                <strong>%100 Doğal Taş</strong>
+                Eşsiz ve benzersiz yüzeyler
+            </span>
+        </div>
+
+        <div>
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>
+                <strong>Uzun Ömürlü</strong>
+                Dayanıklı ve sağlam yapı
+            </span>
+        </div>
+
+        <div>
+            <i class="fa-solid fa-truck"></i>
+            <span>
+                <strong>Türkiye'nin Her Yerine Teslimat</strong>
+                Güvenli ve özenli taşıma
+            </span>
+        </div>
+
+        <div>
+            <i class="fa-solid fa-gear"></i>
+            <span>
+                <strong>Özel Ölçü Üretim</strong>
+                Mekanınıza özel çözümler
+            </span>
+        </div>
+
+        <div>
+            <i class="fa-solid fa-headset"></i>
+            <span>
+                <strong>Uzman Destek</strong>
+                Her adımda yanınızda
+            </span>
+        </div>
+
+
+    </section>
+
+
+    <script src="js/tables.js"></script>
+    <script src="js/tables-page.js"></script>
+    <script src="js/script.js"></script>
+
+</body>
+
+
+</html>
