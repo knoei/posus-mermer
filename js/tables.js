@@ -1,131 +1,211 @@
 const tables = [
-
     {
-        id: "mugla-beyazi-cafe",
-        name: "Muğla Beyazı Mermer Masa",
-        material: "mermer",
-        materialName: "Muğla Beyazı",
+        id: 1,
+        name: "Muğla Beyazı",
+        model: "mugla_beyazi",
+        material: "Mermer",
         category: "cafe-restaurant",
         shape: "yuvarlak",
-
-        minSize: 50,
-        maxSize: 150,
-
-        startingPrice: 9750,
-
-        image: "images/tables/mugla-beyazi.jpg"
+        price: 2700,
+        image: "images/tables/mugla-beyazi-60.jpg"
     },
 
     {
-        id: "verde-guatemala-cafe",
-        name: "Verde Guatemala Masa",
-        material: "mermer",
-        materialName: "Verde Guatemala",
+        id: 2,
+        name: "Silvia Beige",
+        model: "silvia_beige",
+        material: "Mermer",
         category: "cafe-restaurant",
         shape: "yuvarlak",
-
-        minSize: 60,
-        maxSize: 140,
-
-        startingPrice: 12500,
-
-        image: "images/tables/verde-guatemala.jpg"
+        price: 2700,
+        image: "images/tables/silvia-beige-60.jpg"
     },
 
     {
-        id: "traverten-cafe",
-        name: "Traverten Masa",
-        material: "traverten",
-        materialName: "Traverten",
+        id: 3,
+        name: "Golden Mist",
+        model: "golden_mist",
+        material: "Mermer",
         category: "cafe-restaurant",
         shape: "yuvarlak",
-
-        minSize: 50,
-        maxSize: 150,
-
-        startingPrice: 8900,
-
-        image: "images/tables/traverten.jpg"
+        price: 2700,
+        image: "images/tables/golden-mist-60.jpg"
     },
 
     {
-        id: "alexander-black-cafe",
-        name: "Alexander Black Masa",
-        material: "mermer",
-        materialName: "Alexander Black",
-        category: "cafe-restaurant",
-        shape: "kare",
-
-        minSize: 60,
-        maxSize: 120,
-
-        startingPrice: 13750,
-
-        image: "images/tables/alexander-black.jpg"
-    },
-
-    {
-        id: "menekse-cafe",
-        name: "Menekşe Mermer Masa",
-        material: "mermer",
-        materialName: "Menekşe",
+        id: 4,
+        name: "Aurelia Gold",
+        model: "aurelia_gold",
+        material: "Mermer",
         category: "cafe-restaurant",
         shape: "yuvarlak",
-
-        minSize: 50,
-        maxSize: 120,
-
-        startingPrice: 11250,
-
-        image: "images/tables/menekse.jpg"
+        price: 2700,
+        image: "images/tables/aurelia-gold-60.jpg"
     },
 
     {
-        id: "akhisar-bej-cafe",
-        name: "Akhisar Bej Masa",
-        material: "mermer",
-        materialName: "Akhisar Bej",
-        category: "cafe-restaurant",
-        shape: "dikdortgen",
-
-        minSize: 60,
-        maxSize: 140,
-
-        startingPrice: 10500,
-
-        image: "images/tables/akhisar-bej.jpg"
-    },
-
-    {
-        id: "siyah-granit-cafe",
-        name: "Siyah Granit Masa",
-        material: "granit",
-        materialName: "Siyah Granit",
+        id: 5,
+        name: "Adranos",
+        model: "adranos",
+        material: "Mermer",
         category: "cafe-restaurant",
         shape: "yuvarlak",
-
-        minSize: 60,
-        maxSize: 120,
-
-        startingPrice: 9250,
-
-        image: "images/tables/siyah-granit.jpg"
+        price: 3000,
+        image: "images/tables/adranos-60.jpg"
     },
 
     {
-        id: "silver-travertine-cafe",
-        name: "Silver Travertine Masa",
-        material: "traverten",
-        materialName: "Silver Travertine",
+        id: 6,
+        name: "Emperador",
+        model: "emperador",
+        material: "Mermer",
         category: "cafe-restaurant",
-        shape: "kare",
+        shape: "yuvarlak",
+        price: 3000,
+        image: "images/tables/emperador-60.jpg"
+    },
 
-        minSize: 60,
-        maxSize: 140,
+    {
+        id: 7,
+        name: "Akhisar Beji",
+        model: "akhisar_beji",
+        material: "Mermer",
+        category: "cafe-restaurant",
+        shape: "yuvarlak",
+        price: 0,
+        image: "images/tables/akhisar-beji-60.jpg"
+    },
 
-        startingPrice: 11900,
+    {
+        id: 8,
+        name: "Spider Beige",
+        model: "spider_beige",
+        material: "Mermer",
+        category: "cafe-restaurant",
+        shape: "yuvarlak",
+        price: 0,
+        image: "images/tables/spider-beige-60.jpg"
+    },
 
-        image: "images/tables/silver-travertine.jpg"
+    {
+        id: 9,
+        name: "Tundra Gri",
+        model: "tundra_gri",
+        material: "Mermer",
+        category: "cafe-restaurant",
+        shape: "yuvarlak",
+        price: 0,
+        image: "images/tables/tundra-gri-60.jpg"
+    },
+
+    {
+        id: 10,
+        name: "Traverten",
+        model: "traverten",
+        material: "Traverten",
+        category: "cafe-restaurant",
+        shape: "yuvarlak",
+        price: 0,
+        image: "images/tables/traverten-60.jpg"
+    },
+
+    {
+        id: 11,
+        name: "Verde Guatemala",
+        model: "verde_guatemala",
+        material: "Mermer",
+        category: "cafe-restaurant",
+        shape: "yuvarlak",
+        price: 0,
+        image: "images/tables/verde-guatemala-60.jpg"
+    },
+
+    {
+        id: 12,
+        name: "Elazığ Petrol Yeşili",
+        model: "elazig_petrol_yesili",
+        material: "Mermer",
+        category: "cafe-restaurant",
+        shape: "yuvarlak",
+        price: 0,
+        image: "images/tables/elazig-petrol-yesili-60.jpg"
+    },
+
+    {
+        id: 13,
+        name: "Star Galaxy",
+        model: "star_galaxy",
+        material: "Granit",
+        category: "cafe-restaurant",
+        shape: "yuvarlak",
+        price: 0,
+        image: "images/tables/star-galaxy-60.jpg"
+    },
+
+    {
+        id: 14,
+        name: "Alexander Black",
+        model: "alexander_black",
+        material: "Mermer",
+        category: "cafe-restaurant",
+        shape: "yuvarlak",
+        price: 0,
+        image: "images/tables/alexander-black-60.jpg"
+    },
+
+    {
+        id: 15,
+        name: "Elazığ Vişne",
+        model: "elazig_visne",
+        material: "Mermer",
+        category: "cafe-restaurant",
+        shape: "yuvarlak",
+        price: 0,
+        image: "images/tables/elazig-visne-60.jpg"
+    },
+
+    {
+        id: 16,
+        name: "Menekşe",
+        model: "menekse",
+        material: "Mermer",
+        category: "cafe-restaurant",
+        shape: "yuvarlak",
+        price: 0,
+        image: "images/tables/menekse-60.jpg"
+    },
+
+    {
+        id: 17,
+        name: "Leylak",
+        model: "leylak",
+        material: "Mermer",
+        category: "cafe-restaurant",
+        shape: "yuvarlak",
+        price: 0,
+        image: "images/tables/leylak-60.jpg"
+    },
+
+    {
+        id: 18,
+        name: "Sofita Bej",
+        model: "sofita_bej",
+        material: "Mermer",
+        category: "cafe-restaurant",
+        shape: "yuvarlak",
+        price: 0,
+        image: "images/tables/sofita-bej-60.jpg"
+    },
+
+    {
+        id: 19,
+        name: "Ash Black",
+        model: "ash_black",
+        material: "Granit",
+        category: "cafe-restaurant",
+        shape: "yuvarlak",
+        price: 0,
+        image: "images/tables/ash-black-60.jpg"
     }
 
-];
+]
