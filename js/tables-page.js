@@ -36,25 +36,27 @@ productList.forEach((table) => {
                 aria-label="Favorilere ekle"
             >
                 <i class="fa-regular fa-heart"></i>
-
             </button>
-        
+
         </div>
 
         <div class="table-card-content">
 
-            <h3>${table.name}</h3>
+            <div class="table-card-top">
 
-            <div class="table-meta">
+                <div>
+                    <h3>${table.name}</h3>
 
-                <span>${table.material}</span>
+                    <span class="table-material">
+                        ${table.material}
+                    </span>
+                </div>
 
             </div>
 
             <div class="table-card-bottom">
 
                 <div class="table-price">
-
                     <strong>
                         ${formatPrice(table.price)}
                     </strong>
@@ -62,7 +64,6 @@ productList.forEach((table) => {
                     <span class="sub-price">
                         'dan başlayan fiyatlarla
                     </span>
-
                 </div>
 
                 <a
@@ -74,7 +75,7 @@ productList.forEach((table) => {
                 </a>
 
             </div>
-        
+
         </div>
     `;
 

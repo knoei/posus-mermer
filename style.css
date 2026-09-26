@@ -1546,13 +1546,12 @@ header {
 }
 
 .table-card-bottom {
-    margin-top: 15px;
-
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-
-    gap: 10px;
+    gap: 12px;
+    padding-top: 14px;
+    border-top: 1px solid #eee7df;
 }
 
 .table-price {
@@ -1705,6 +1704,22 @@ header {
     color: #8c837a;
 }
 
+.table-card-content h3 {
+    margin: 0 0 6px;
+    font-family: Georgia, serif;
+    font-size: 19px;
+    font-weight: 400;
+    color: #211c18;
+}
+
+.table-meta {
+    margin-bottom: 16px;
+}
+
+.table-meta span {
+    font-size: 10px;
+    color: #8d847b;
+}
 
 @media (max-width: 1024px) {
 
