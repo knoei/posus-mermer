@@ -26,10 +26,7 @@ productList.forEach((table) => {
     card.innerHTML = `
         <div class="table-card-image">
 
-            <img
-                src="${table.image}"
-                alt="${table.name}"
-            >
+            <img src="${table.image}" alt="${table.name}">                
 
             <button
                 class="table-favorite"
@@ -78,6 +75,12 @@ productList.forEach((table) => {
 
         </div>
     `;
+
+    card.addEventListener("click", (event) => {
+        if (event.target.closest(".table-favorite")) return;
+
+        window.location.href = `masa-detay.html?id=${table.id}`
+    })
 
     tablesGrid.appendChild(card);
 });

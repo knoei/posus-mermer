@@ -1721,6 +1721,14 @@ header {
     color: #8d847b;
 }
 
+.table-card-image .table-favorite {
+    z-index: 1;
+}
+
+.table-product-card {
+    cursor: pointer;
+}
+
 @media (max-width: 1024px) {
 
     header {

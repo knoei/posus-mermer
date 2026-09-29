@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masa Detayı | Posus Mermer</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .product-detail {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .product-detail img {
+            width: 100%;
+            display: block;
+            background: #f3f0eb;    
+        }
+
+        .product-detail h1 {
+            font-family: Georgia, serif;
+            font-size: clamp(32px, 4vw, 54px);
+            font-weight: 400;
+            margin: 14px 0;
+        }
+
+        .product-detail .price {
+            color: #7b4c27;
+            font-size: 28px;
+            margin: 24px 0;
+        }
+
+        .product-detail a {
+            color: #9f7547;
+        }
+
+        @media (max-width: 700px) {
+            .product-detail {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="product-detail" id="productDetail">
+        <img id="productImage" alt="">
+
+        <div>
+            <a href="masalar.html">← Masalara dön</a>
+            <h1 id="productName"></h1>
+            <p id="productMaterial"></p>
+            <p class="price" id="productPrice"></p>
+        </div>
+    </main>
+
+    <script src="js/tables.js"></script>
+    <script>
+        const id = Number(new URLSearchParams(window.location.search).get("id"));
+        const product = tables.find(table => table.id === id);
+
+        if (product) {
+            document.title = `${product.name} | Posus Mermer`;
+            document.getElementById("productImage").src = product.image;
+            document.getElementById("productImage").alt = `${product.name} masa`;
+            document.getElementById("productImage").textContent = product.name;
+            document.getElementById("productImage").textContent = product.material;
+            document.getElementById("productImage").textContent =
+                new Intl.NumberFormat("tr-TR").format(product.price) + " ₺'dan başlayan fiyatlarla";
+        } else {
+            document.getElementById("productDetail").innerHTML =
+                '<p> Ürün bulunamadı. <a href="masalar.html">Masalara dön</a></p>';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+body {
+    background: #f7f5f1;
+    color: #171512;
+}
+
+.detail-image,
+.detail-contact {
+    border-radius: 5px;
+}
+
+.detail-image {
+    background: #f3f0eb;
+    border: 1px solid #e6dfd7;
+}
+
+.detail-info h1,
+.detail-contact h2,
+.detail-price strong {
+    font-family: Georgia, serif;
+    font-weight: 400;
+}
+
+.detail-eyebrow,
+.detail-breadcrumb a:hover,
+.detail-back:hover {
+    color: #9f7547;
+}
+
+.detail-contact a,
+.detail-not-found a {
+    background: #9f7547;
+    border-radius: 3px;
+}
+
+.detail-contact a:hover,
+.detail-not-found a:hover {
+    background: #765330;
+}
