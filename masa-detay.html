@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Masa Detayı | Posus Mermer</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
         .product-detail {
@@ -46,17 +48,151 @@
                 gap: 25px;
             }
         }
+
+        .product-specs {
+            margin-top: 24px;
+            border-top: 1px solid #e6dfd7;
+        }
+
+        .product-specs > div {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 14px 0;
+            border-bottom: 1px solid #e6dfd7;
+        }
+
+        .product-specs dt {
+            color: #7d756c;
+        }
+
+        .product-specs dd {
+            margin: 0;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .product-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .product-options label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #7d756c;
+        }
+
+        .product-options select,
+        .product-options input {
+            width: 100%;
+            min-width: 0;
+            padding: 12px;
+            border: 1px solid #e6dfd7;
+            border-radius: 3px;
+            background: #fff;
+            color: #171512;
+            font: inherit;
+        }
+
     </style>
 </head>
 <body>
+    <header>
+        <div class="navbar-inner">
+
+            <a href="index.html" class="nav-logo">
+                <img src="images/posus-logo.png" alt="Posus Mermer">
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html">Ana Sayfa</a>
+                <a href="urunler.html">Ürünler</a>
+                <a href="masalar.html">Masalar</a>
+                <a href="#">Projeler</a>
+                <a href="#">İletişim</a>
+            </nav>
+
+            <div class="nav-actions">
+
+                <button class="nav-search-btn">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+
+                <button class="wishlist-btn">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+
+                <button class="cart-btn">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count">0</span>
+                </button>
+
+                <a href="#" class="offer-btn">
+                    Teklif Al
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+        </div>
+    </header>
+
+
     <main class="product-detail" id="productDetail">
         <img id="productImage" alt="">
 
         <div>
             <a href="masalar.html">← Masalara dön</a>
             <h1 id="productName"></h1>
-            <p id="productMaterial"></p>
+            <dl class="product-specs">
+                <div>
+                    <dt>Malzeme</dt>
+                    <dd id="productMaterial"></dd>
+                </div>
+
+                <div>
+                    <dt>Şekil</dt>
+                    <dd id="productShape"></dd>
+                </div>
+
+                <div>
+                    <dt>Kullanım Alanı</dt>
+                    <dd id="productCategory"></dd>
+                </div>
+            </dl>
             <p class="price" id="productPrice"></p>
+
+            <div class="product-options">
+                <div>
+                    <label for="productSize">Çap (cm)</label>
+                    <select id="productSize">
+                        <option value="60">60 cm</option>
+                        <option value="70">70 cm</option>
+                        <option value="80">80 cm</option>
+                        <option value="90">90 cm</option>
+                        <option value="100">100 cm</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="productQuantity">Adet</label>
+                    <input 
+                        type="number"
+                        id="productQuantity"    
+                        min="1"
+                        step="1"
+                        value="1"
+                        required
+                    >
+                </div>
+            </div>
+
+            <p id="selectionSummary" aria-live="polite"></p>
+
         </div>
     </main>
 
@@ -69,10 +205,51 @@
             document.title = `${product.name} | Posus Mermer`;
             document.getElementById("productImage").src = product.image;
             document.getElementById("productImage").alt = `${product.name} masa`;
-            document.getElementById("productImage").textContent = product.name;
-            document.getElementById("productImage").textContent = product.material;
-            document.getElementById("productImage").textContent =
+            document.getElementById("productName").textContent = product.name;
+            document.getElementById("productMaterial").textContent = product.material;
+            
+            const shapeNames = {
+                yuvarlak: "Yuvarlak",
+                kare: "Kare",
+                dikdortgen: "Dikdörtgen"
+            }
+
+            const categoryNames = {
+                "cafe-restaurant": "Kafe & Restoran",
+                dining: "Ev & Yaşam"
+            }
+
+            document.getElementById("productShape").textContent = 
+                shapeNames[product.shape] || product.shape;
+
+            document.getElementById("productCategory").textContent =
+                categoryNames[product.category] || product.category;
+
+            document.getElementById("productPrice").textContent =
                 new Intl.NumberFormat("tr-TR").format(product.price) + " ₺'dan başlayan fiyatlarla";
+
+            const sizeInput = document.getElementById("productSize")
+            const quantityInput = document.getElementById("productQuantity")
+            const summary = document.getElementById("selectionSummary")
+
+            function updateSelection() {
+                const size = Number(sizeInput.value)
+                const quantity = Number(quantityInput.value)
+
+                if (!Number.isInteger(quantity) || quantity < 1) {
+                    summary.textContent = "Lütfen en az 1 adet girin."
+                    return;
+                }
+
+                summary.textContent = 
+                    `${product.name} - ${size} cm çap, ${quantity} adet`;
+            }
+
+            sizeInput.addEventListener("change", updateSelection);
+            quantityInput.addEventListener("input", updateSelection);
+
+            updateSelection();
+
         } else {
             document.getElementById("productDetail").innerHTML =
                 '<p> Ürün bulunamadı. <a href="masalar.html">Masalara dön</a></p>';
