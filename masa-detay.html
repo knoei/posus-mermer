@@ -169,13 +169,7 @@
             <div class="product-options">
                 <div>
                     <label for="productSize">Çap (cm)</label>
-                    <select id="productSize">
-                        <option value="60">60 cm</option>
-                        <option value="70">70 cm</option>
-                        <option value="80">80 cm</option>
-                        <option value="90">90 cm</option>
-                        <option value="100">100 cm</option>
-                    </select>
+                    <select id="productSize"></select>
                 </div>
 
                 <div>
@@ -225,30 +219,59 @@
             document.getElementById("productCategory").textContent =
                 categoryNames[product.category] || product.category;
 
-            document.getElementById("productPrice").textContent =
-                new Intl.NumberFormat("tr-TR").format(product.price) + " ₺'dan başlayan fiyatlarla";
-
+            const productPrice = document.getElementById("productPrice")
             const sizeInput = document.getElementById("productSize")
             const quantityInput = document.getElementById("productQuantity")
             const summary = document.getElementById("selectionSummary")
 
-            function updateSelection() {
-                const size = Number(sizeInput.value)
-                const quantity = Number(quantityInput.value)
+            Object.keys(product.prices).forEach(size => {
+                const option = document.createElement("option");
 
-                if (!Number.isInteger(quantity) || quantity < 1) {
-                    summary.textContent = "Lütfen en az 1 adet girin."
+                option.value = size;
+                option.textContent = `${size} cm`;
+
+                sizeInput.appendChild(option);
+            });
+
+            function updatePrice() {
+                const selectedSize = Number(sizeInput.value);
+                const selectedPrice = product.prices[selectedSize];
+
+                if (!selectedPrice) {
+                    productPrice.textContent = "Bu ölçü için fiyat yakında eklenecek."
                     return;
                 }
 
-                summary.textContent = 
+                productPrice.textContent =
+                    new Intl.NumberFormat("tr-TR").format(selectedPrice) + " ₺";
+            }
+
+            function updateSelection() {
+                const size = Number(sizeInput.value);
+                const quantity = Number(quantityInput.value);
+                const selectedPrice = product.prices[size];
+
+                if (!Number.isInteger(quantity) || quantity < 1) {
+                    summary.textContent = "Lütfen en az 1 adet girin.";
+                    return;
+                }
+
+                productPrice.textContent =
+                    new Intl.NumberFormat("tr-TR").format(selectedPrice) + " ₺";
+
+                summary.textContent =
                     `${product.name} - ${size} cm çap, ${quantity} adet`;
             }
 
-            sizeInput.addEventListener("change", updateSelection);
+            sizeInput.addEventListener("change", () => {
+                updateSelection();
+                updatePrice();
+            });
+            
             quantityInput.addEventListener("input", updateSelection);
 
             updateSelection();
+            updatePrice();
 
         } else {
             document.getElementById("productDetail").innerHTML =

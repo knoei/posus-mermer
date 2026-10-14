@@ -6,7 +6,17 @@ const tables = [
         material: "Mermer",
         category: "cafe-restaurant",
         shape: "yuvarlak",
-        price: 2700,
+
+        price: 3000,
+
+        prices: {
+            60: 3000,
+            70: 3600,
+            80: 4800,
+            90: 6000,
+            100: 7600
+        },
+
         image: "images/tables/mugla-beyazi-cafe.png"
     },
 
@@ -17,7 +27,17 @@ const tables = [
         material: "Mermer",
         category: "cafe-restaurant",
         shape: "yuvarlak",
-        price: 2700,
+
+        price: 3000,
+
+        prices: {
+            60: 3000,
+            70: null,
+            80: null,
+            90: null,
+            100: null
+        },
+
         image: "images/tables/silvia-cafe.png"
     },
 
@@ -28,7 +48,17 @@ const tables = [
         material: "Mermer",
         category: "cafe-restaurant",
         shape: "yuvarlak",
-        price: 2700,
+
+        price: 3000,
+
+        prices: {
+            60: 3000,
+            70: 3600,
+            80: 4800,
+            90: 6000,
+            100: 7600
+        },
+
         image: "images/tables/golden-mist-cafe.png"
     },
 
@@ -39,7 +69,17 @@ const tables = [
         material: "Mermer",
         category: "cafe-restaurant",
         shape: "yuvarlak",
-        price: 2700,
+
+        price: 3000,
+
+        prices: {
+            60: 3000,
+            70: 3600,
+            80: 4800,
+            90: 6000,
+            100: 7600
+        },
+
         image: "images/tables/aurelia-gold-cafe.png"
     },
 
@@ -50,7 +90,17 @@ const tables = [
         material: "Mermer",
         category: "cafe-restaurant",
         shape: "yuvarlak",
-        price: 3000,
+
+        price: 3600,
+
+        prices: {
+            60: 3600,
+            70: null,
+            80: null,
+            90: null,
+            100: null
+        },
+
         image: "images/tables/adranos-cafe.png"
     },
 
@@ -61,7 +111,17 @@ const tables = [
         material: "Mermer",
         category: "cafe-restaurant",
         shape: "yuvarlak",
+
         price: 3000,
+
+        prices: {
+            60: 3000,
+            70: null,
+            80: null,
+            90: null,
+            100: null
+        },
+
         image: "images/tables/emperador-cafe.png"
     },
 
@@ -72,7 +132,17 @@ const tables = [
         material: "Mermer",
         category: "cafe-restaurant",
         shape: "yuvarlak",
+
         price: 3300,
+
+        prices: {
+            60: 3300,
+            70: null,
+            80: null,
+            90: null,
+            100: null
+        },
+
         image: "images/tables/akhisar-cafe.png"
     },
 
@@ -83,7 +153,17 @@ const tables = [
         material: "Mermer",
         category: "cafe-restaurant",
         shape: "yuvarlak",
+
         price: 3300,
+
+        prices: {
+            60: 3300,
+            70: null,
+            80: null,
+            90: null,
+            100: null
+        },
+
         image: "images/tables/spider-cafe.png"
     },
 
@@ -94,7 +174,17 @@ const tables = [
         material: "Mermer",
         category: "cafe-restaurant",
         shape: "yuvarlak",
+
         price: 3600,
+
+        prices: {
+            60: 3600,
+            70: null,
+            80: null,
+            90: null,
+            100: null
+        },
+
         image: "images/tables/tundra-cafe.png"
     },
 
@@ -105,7 +195,17 @@ const tables = [
         material: "Traverten",
         category: "cafe-restaurant",
         shape: "yuvarlak",
+
         price: 4200,
+
+        prices: {
+            60: 4200,
+            70: null,
+            80: null,
+            90: null,
+            100: null
+        },
+
         image: "images/tables/traverten-cafe.png"
     },
 
@@ -116,7 +216,17 @@ const tables = [
         material: "Mermer",
         category: "cafe-restaurant",
         shape: "yuvarlak",
+
         price: 4200,
+
+        prices: {
+            60: 4200,
+            70: null,
+            80: null,
+            90: null,
+            100: null
+        },
+
         image: "images/tables/verde-cafe.png"
     },
 
@@ -127,7 +237,17 @@ const tables = [
         material: "Mermer",
         category: "cafe-restaurant",
         shape: "yuvarlak",
+
         price: 4200,
+
+        prices: {
+            60: 4200,
+            70: null,
+            80: null,
+            90: null,
+            100: null
+        },
+
         image: "images/tables/elazig-petrol-cafe.png"
     },
 
@@ -138,7 +258,17 @@ const tables = [
         material: "Granit",
         category: "cafe-restaurant",
         shape: "yuvarlak",
+
         price: 4500,
+
+        prices: {
+            60: 4500,
+            70: null,
+            80: null,
+            90: null,
+            100: null
+        },
+
         image: "images/tables/galaxy-cafe.png"
     },
 
@@ -149,7 +279,17 @@ const tables = [
         material: "Mermer",
         category: "cafe-restaurant",
         shape: "yuvarlak",
+
         price: 6600,
+
+        prices: {
+            60: 6600,
+            70: null,
+            80: null,
+            90: null,
+            100: null
+        },
+
         image: "images/tables/alexander-black-cafe.png"
     },
 
@@ -160,7 +300,17 @@ const tables = [
         material: "Mermer",
         category: "cafe-restaurant",
         shape: "yuvarlak",
+
         price: 6600,
+
+        prices: {
+            60: 6600,
+            70: null,
+            80: null,
+            90: null,
+            100: null
+        },
+
         image: "images/tables/visne-cafe.png"
     },
 
@@ -171,7 +321,17 @@ const tables = [
         material: "Mermer",
         category: "cafe-restaurant",
         shape: "yuvarlak",
+
         price: 4200,
+
+        prices: {
+            60: 4200,
+            70: null,
+            80: null,
+            90: null,
+            100: null
+        },
+
         image: "images/tables/menekse-cafe.png"
     },
 
@@ -182,7 +342,17 @@ const tables = [
         material: "Mermer",
         category: "cafe-restaurant",
         shape: "yuvarlak",
+
         price: 4200,
+
+        prices: {
+            60: 4200,
+            70: null,
+            80: null,
+            90: null,
+            100: null
+        },
+
         image: "images/tables/leylak-cafe.png"
     },
 
@@ -193,7 +363,17 @@ const tables = [
         material: "Mermer",
         category: "cafe-restaurant",
         shape: "yuvarlak",
+
         price: 4200,
+
+        prices: {
+            60: 4200,
+            70: null,
+            80: null,
+            90: null,
+            100: null
+        },
+
         image: "images/tables/sofita-cafe.png"
     },
 
@@ -204,8 +384,17 @@ const tables = [
         material: "Granit",
         category: "cafe-restaurant",
         shape: "yuvarlak",
+
         price: 4200,
+
+        prices: {
+            60: 4200,
+            70: null,
+            80: null,
+            90: null,
+            100: null
+        },
+
         image: "images/tables/ash-black-cafe.png"
     }
-
-]
+];

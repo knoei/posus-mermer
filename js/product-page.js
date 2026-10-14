@@ -1,5 +1,5 @@
 /* =========================
-   ALL PRODUCTS
+        ALL PRODUCTS
 ========================= */
 
 const allProducts = [
@@ -10,7 +10,7 @@ const allProducts = [
 
 
 /* =========================
-   HTML ELEMENTS
+        HTML ELEMENTS
 ========================= */
 
 const stoneGrid = document.getElementById("stoneGrid");
