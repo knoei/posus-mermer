@@ -1,106 +1,313 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Masa Detayı | Posus Mermer</title>
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
+        /* PRODUCT DETAIL LAYOUT */
+
         .product-detail {
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 0 24px;
+            max-width: 1240px;
+            margin: 64px auto 100px;
+            padding: 0 28px;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
+            grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+            gap: clamp(36px, 5vw, 76px);
+            align-items: start;
         }
 
-        .product-detail img {
-            width: 100%;
+        /* PRODUCT IMAGE */
+
+        .product-visual {
+            padding: 14px;
+            background: #efebe5;
+            border: 1px solid #e6dfd7;
+            border-radius: 16px;
+            box-shadow: 0 18px 45px rgba(45, 32, 21, 0.055);
+        }
+
+        .product-visual img {
             display: block;
-            background: #f3f0eb;    
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            background: #f3f0eb;
+            border-radius: 10px;
         }
 
-        .product-detail h1 {
-            font-family: Georgia, serif;
-            font-size: clamp(32px, 4vw, 54px);
-            font-weight: 400;
-            margin: 14px 0;
+        /* PRODUCT INFORMATION */
+
+        .product-info-panel {
+            min-width: 0;
+            padding-top: 4px;
         }
 
-        .product-detail .price {
-            color: #7b4c27;
-            font-size: 28px;
-            margin: 24px 0;
-        }
-
-        .product-detail a {
+        .product-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
             color: #9f7547;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: color 0.2s ease;
         }
 
-        @media (max-width: 700px) {
-            .product-detail {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
+        .product-back:hover {
+            color: #765330;
         }
+
+        .product-eyebrow {
+            margin: 30px 0 8px;
+            color: #9f7547;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2.4px;
+            text-transform: uppercase;
+        }
+
+        .product-info-panel h1 {
+            margin: 0;
+            color: #171512;
+            font-family: Georgia, serif;
+            font-size: clamp(36px, 4vw, 54px);
+            font-weight: 400;
+            line-height: 1.12;
+        }
+
+        /* PRODUCT SPECIFICATIONS */
 
         .product-specs {
-            margin-top: 24px;
+            margin: 28px 0 0;
             border-top: 1px solid #e6dfd7;
         }
 
         .product-specs > div {
             display: flex;
             justify-content: space-between;
-            gap: 20px;
+            align-items: baseline;
+            gap: 18px;
             padding: 14px 0;
             border-bottom: 1px solid #e6dfd7;
         }
 
         .product-specs dt {
             color: #7d756c;
+            font-size: 14px;
         }
 
         .product-specs dd {
             margin: 0;
+            color: #25201c;
+            font-size: 14px;
             font-weight: 600;
             text-align: right;
         }
 
+        /* UNIT PRICE */
+
+        .product-unit-price {
+            margin-top: 26px;
+        }
+
+        .product-unit-label {
+            margin: 0 0 7px;
+            color: #7d756c;
+            font-size: 12px;
+        }
+
+        .product-detail .price {
+            margin: 0;
+            color: #8c5c35;
+            font-size: clamp(25px, 3vw, 34px);
+            font-weight: 500;
+            line-height: 1.25;
+        }
+
+        /* SIZE AND QUANTITY */
+
         .product-options {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
             gap: 16px;
-            margin-top: 24px;
+            margin-top: 28px;
         }
 
         .product-options label {
             display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: #7d756c;
+            margin-bottom: 9px;
+            color: #6e655d;
+            font-size: 13px;
+            font-weight: 500;
         }
 
         .product-options select,
         .product-options input {
+            box-sizing: border-box;
             width: 100%;
             min-width: 0;
-            padding: 12px;
-            border: 1px solid #e6dfd7;
-            border-radius: 3px;
+            height: 50px;
+            padding: 0 14px;
+            border: 1px solid #dcd2c8;
+            border-radius: 8px;
+            outline: none;
             background: #fff;
             color: #171512;
             font: inherit;
+            font-size: 14px;
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
         }
 
+        .product-options select:focus,
+        .product-options input:focus {
+            border-color: #a67b51;
+            box-shadow: 0 0 0 3px rgba(166, 123, 81, 0.12);
+        }
+
+        /* ORDER SUMMARY */
+
+        .order-summary {
+            margin-top: 26px;
+            padding: 20px 22px;
+            border: 1px solid #e4d9cd;
+            border-radius: 12px;
+            background: #f0ebe4;
+        }
+
+        .order-summary-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .order-summary-label {
+            color: #6e655d;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .total-price {
+            margin: 0;
+            color: #171512;
+            font-family: Georgia, serif;
+            font-size: clamp(22px, 2.6vw, 28px);
+            text-align: right;
+        }
+
+        .selection-summary {
+            margin: 12px 0 0;
+            padding-top: 12px;
+            border-top: 1px solid #e0d5c8;
+            color: #786e64;
+            font-size: 12px;
+        }
+
+        .product-note {
+            margin: 14px 0 0;
+            color: #847a70;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* ADD TO CART */
+
+        .add-to-cart-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+
+            width: 100%;
+            min-height: 54px;
+            margin-top: 18px;
+
+            border: none;
+            border-radius: 8px;
+
+            background: #211d19;
+            color: #fff;
+
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+
+            cursor: pointer;
+            transition: background 0.25s ease, transform 0.25s ease;
+        }
+
+        .add-to-cart-btn:hover {
+            background: #9f7547;
+            transform: translateY(-2px);
+        }
+
+        .add-to-cart-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .cart-message {
+            margin: 12px 0 0;
+            color: #54744d;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .cart-message:empty {
+            display: none;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+            .product-detail {
+                gap: 30px;
+                padding: 0 22px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .product-detail {
+                grid-template-columns: 1fr;
+                margin: 30px auto 70px;
+                gap: 30px;
+            }
+
+            .product-eyebrow {
+                margin-top: 22px;
+            }
+
+            .product-visual {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 390px) {
+            .product-options {
+                grid-template-columns: 1fr;
+            }
+
+            .order-summary {
+                padding: 18px;
+            }
+        }
     </style>
 </head>
+
 <body>
+
+    <!-- NAVBAR -->
+
     <header>
         <div class="navbar-inner">
 
@@ -142,13 +349,36 @@
     </header>
 
 
-    <main class="product-detail" id="productDetail">
-        <img id="productImage" alt="">
+    <!-- PRODUCT DETAIL -->
 
-        <div>
-            <a href="masalar.html">← Masalara dön</a>
+    <main class="product-detail" id="productDetail">
+
+        <!-- LEFT: PRODUCT IMAGE -->
+
+        <div class="product-visual">
+            <img id="productImage" alt="">
+        </div>
+
+
+        <!-- RIGHT: PRODUCT INFORMATION -->
+
+        <div class="product-info-panel">
+
+            <a class="product-back" href="masalar.html">
+                ← Masalara dön
+            </a>
+
+            <p class="product-eyebrow">
+                Doğal taş masa koleksiyonu
+            </p>
+
             <h1 id="productName"></h1>
+
+
+            <!-- PRODUCT SPECIFICATIONS -->
+
             <dl class="product-specs">
+
                 <div>
                     <dt>Malzeme</dt>
                     <dd id="productMaterial"></dd>
@@ -163,10 +393,27 @@
                     <dt>Kullanım Alanı</dt>
                     <dd id="productCategory"></dd>
                 </div>
+
             </dl>
-            <p class="price" id="productPrice"></p>
+
+
+            <!-- UNIT PRICE -->
+
+            <div class="product-unit-price">
+
+                <p class="product-unit-label">
+                    Birim fiyat
+                </p>
+
+                <p class="price" id="productPrice"></p>
+
+            </div>
+
+
+            <!-- PRODUCT OPTIONS -->
 
             <div class="product-options">
+
                 <div>
                     <label for="productSize">Çap (cm)</label>
                     <select id="productSize"></select>
@@ -174,109 +421,296 @@
 
                 <div>
                     <label for="productQuantity">Adet</label>
-                    <input 
+
+                    <input
                         type="number"
-                        id="productQuantity"    
+                        id="productQuantity"
                         min="1"
                         step="1"
                         value="1"
                         required
                     >
                 </div>
+
             </div>
 
-            <p id="selectionSummary" aria-live="polite"></p>
+
+            <!-- TOTAL PRICE -->
+
+            <div class="order-summary" aria-live="polite">
+
+                <div class="order-summary-top">
+
+                    <span class="order-summary-label">
+                        Toplam tutar
+                    </span>
+
+                    <p class="total-price" id="totalPrice"></p>
+
+                </div>
+
+                <p
+                    class="selection-summary"
+                    id="selectionSummary"
+                ></p>
+
+            </div>
+
+            <button type="button" class="add-to-cart-btn" id="addToCartBtn">
+                <i class="fa-solid fa-bag-shopping"></i>
+                Sepete Ekle
+            </button>
+
+            <p id="cartMessage" class="cart-message" aria-live="polite"></p>
+
+            <p class="product-note">
+                Toplam tutar seçilen ölçü ve adede göre hesaplanır.
+            </p>
 
         </div>
+
     </main>
 
+
+    <!-- PRODUCT DATA -->
+
     <script src="js/tables.js"></script>
+
     <script>
-        const id = Number(new URLSearchParams(window.location.search).get("id"));
+
+        const id = Number(
+            new URLSearchParams(window.location.search).get("id")
+        );
+
         const product = tables.find(table => table.id === id);
 
+
         if (product) {
+
             document.title = `${product.name} | Posus Mermer`;
-            document.getElementById("productImage").src = product.image;
-            document.getElementById("productImage").alt = `${product.name} masa`;
-            document.getElementById("productName").textContent = product.name;
-            document.getElementById("productMaterial").textContent = product.material;
-            
+
+            document.getElementById("productImage").src =
+                product.image;
+
+            document.getElementById("productImage").alt =
+                `${product.name} masa`;
+
+            document.getElementById("productName").textContent =
+                product.name;
+
+            document.getElementById("productMaterial").textContent =
+                product.material;
+
+
+            /* SHAPE AND CATEGORY NAMES */
+
             const shapeNames = {
                 yuvarlak: "Yuvarlak",
                 kare: "Kare",
                 dikdortgen: "Dikdörtgen"
-            }
+            };
 
             const categoryNames = {
                 "cafe-restaurant": "Kafe & Restoran",
                 dining: "Ev & Yaşam"
-            }
+            };
 
-            document.getElementById("productShape").textContent = 
+
+            document.getElementById("productShape").textContent =
                 shapeNames[product.shape] || product.shape;
 
             document.getElementById("productCategory").textContent =
                 categoryNames[product.category] || product.category;
 
-            const productPrice = document.getElementById("productPrice")
-            const sizeInput = document.getElementById("productSize")
-            const quantityInput = document.getElementById("productQuantity")
-            const summary = document.getElementById("selectionSummary")
+
+            /* ELEMENT REFERENCES */
+
+            const productPrice =
+                document.getElementById("productPrice");
+
+            const productSize =
+                document.getElementById("productSize");
+
+            const productQuantity =
+                document.getElementById("productQuantity");
+
+            const totalPrice =
+                document.getElementById("totalPrice");
+
+            const selectionSummary =
+                document.getElementById("selectionSummary");
+
+
+            /* POPULATE SIZE OPTIONS */
 
             Object.keys(product.prices).forEach(size => {
+
                 const option = document.createElement("option");
 
                 option.value = size;
                 option.textContent = `${size} cm`;
 
-                sizeInput.appendChild(option);
+                productSize.appendChild(option);
+
             });
 
-            function updatePrice() {
-                const selectedSize = Number(sizeInput.value);
-                const selectedPrice = product.prices[selectedSize];
 
-                if (!selectedPrice) {
-                    productPrice.textContent = "Bu ölçü için fiyat yakında eklenecek."
-                    return;
-                }
+            /* FORMAT PRICE */
 
-                productPrice.textContent =
-                    new Intl.NumberFormat("tr-TR").format(selectedPrice) + " ₺";
+            function formatPrice(price) {
+
+                return new Intl.NumberFormat("tr-TR", {
+                    style: "currency",
+                    currency: "TRY",
+                    maximumFractionDigits: 0
+                }).format(price);
+
             }
+
+
+            /* UPDATE PRICE AND TOTAL */
 
             function updateSelection() {
-                const size = Number(sizeInput.value);
-                const quantity = Number(quantityInput.value);
-                const selectedPrice = product.prices[size];
 
-                if (!Number.isInteger(quantity) || quantity < 1) {
-                    summary.textContent = "Lütfen en az 1 adet girin.";
+                const selectedSize = productSize.value;
+
+                const quantity = Math.max(
+                    1,
+                    parseInt(productQuantity.value, 10) || 1
+                );
+
+                const unitPrice = product.prices[selectedSize];
+
+
+                selectionSummary.textContent =
+                    `${selectedSize} cm · ${quantity} adet`;
+
+
+                if (
+                    unitPrice === null ||
+                    unitPrice === undefined
+                ) {
+
+                    productPrice.textContent =
+                        "Bu ölçü için fiyat henüz eklenmedi";
+
+                    totalPrice.textContent = "—";
+
                     return;
                 }
 
-                productPrice.textContent =
-                    new Intl.NumberFormat("tr-TR").format(selectedPrice) + " ₺";
 
-                summary.textContent =
-                    `${product.name} - ${size} cm çap, ${quantity} adet`;
+                productPrice.textContent =
+                    `${formatPrice(unitPrice)} / adet`;
+
+                totalPrice.textContent =
+                    formatPrice(unitPrice * quantity);
+
             }
 
-            sizeInput.addEventListener("change", () => {
-                updateSelection();
-                updatePrice();
-            });
-            
-            quantityInput.addEventListener("input", updateSelection);
+
+            /* EVENT LISTENERS */
+
+            productSize.addEventListener(
+                "change",
+                updateSelection
+            );
+
+            productQuantity.addEventListener(
+                "input",
+                updateSelection
+            );
+
+
+            /* INITIAL CALCULATION */
 
             updateSelection();
-            updatePrice();
+
+                        /* ADD TO CART */
+
+            const addToCartBtn = document.getElementById("addToCartBtn");
+            const cartMessage = document.getElementById("cartMessage");
+
+            function getCart() {
+                try {
+                    const saved = JSON.parse(localStorage.getItem("posusCart") || "[]");
+                    return Array.isArray(saved) ? saved : [];
+                } catch {
+                    return [];
+                }
+            }
+
+            function updateCartCount() {
+                const cart = getCart();
+
+                const count = cart.reduce((total, item) => {
+                    return total + item.quantity;
+                }, 0);
+
+                const cartCounter = document.querySelector(".cart-count");
+
+                if (cartCounter) {
+                    cartCounter.textContent = count;
+                }
+            }
+
+            addToCartBtn.addEventListener("click", () => {
+
+                const selectedSize = productSize.value;
+                const quantity = Number(productQuantity.value);
+                const unitPrice = product.prices[selectedSize];
+
+                if (!Number.isInteger(quantity) || quantity < 1) {
+                    cartMessage.textContent = "Lütfen geçerli bir adet girin.";
+                    return;
+                }
+
+                if (unitPrice === null || unitPrice === undefined) {
+                    cartMessage.textContent = "Bu ölçü için fiyat bulunmuyor.";
+                    return;
+                }
+
+                const cart = getCart();
+
+                const existingItem = cart.find(item =>
+                    item.id === product.id &&
+                    item.size === selectedSize
+                );
+
+                if (existingItem) {
+                    existingItem.quantity += quantity;
+                    existingItem.price = unitPrice;
+                } else {
+                    cart.push({
+                        id: product.id,
+                        name: product.name,
+                        image: product.image,
+                        material: product.material,
+                        size: selectedSize,
+                        quantity: quantity,
+                        price: unitPrice
+                    });
+                }
+
+                localStorage.setItem("posusCart", JSON.stringify(cart));
+
+                updateCartCount();
+
+    cartMessage.textContent = "Ürün sepetinize eklendi!";
+});
+
+/* SHOW CURRENT CART COUNT */
+
+updateCartCount();
 
         } else {
+
             document.getElementById("productDetail").innerHTML =
-                '<p> Ürün bulunamadı. <a href="masalar.html">Masalara dön</a></p>';
+                '<p>Ürün bulunamadı. <a href="masalar.html">Masalara dön</a></p>';
+
         }
+
     </script>
+
 </body>
 </html>
