@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="tr>">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=decive-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Posus Mermer</title>
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mini-cart.css">
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -23,16 +24,27 @@
             </a>
 
             <ul class="nav-links" id="navLinks">
-                <li><a href="#">Ana Sayfa</a></li>
+                <li><a href="index.html" class="active">Ana Sayfa</a></li>
                 <li><a href="urunler.html">Ürünler</a></li>
-                <li><a href="#">Masalar</a></li>
+                <li><a href="masalar.html">Masalar</a></li>
                 <li><a href="#">Projeler</a></li>
                 <li><a href="#">İletişim</a></li>
             </ul>
 
-            <a href="#" class="quote-btn">Teklif Al</a>
+            <div class="nav-actions">
+                <button class="nav-search-btn" type="button" aria-label="Ara">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <button class="wishlist-btn" type="button" aria-label="Favoriler">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+                <button class="cart-btn" type="button" aria-label="Sepeti aç">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count">0</span>
+                </button>
+            </div>
 
-            <button class="menu-toggle" id="menuToggle" aria-label="Menüyü Aç">
+            <button class="menu-toggle" id="menuToggle" type="button" aria-label="Menüyü aç" aria-expanded="false" aria-controls="navLinks">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -68,7 +80,7 @@
 
         <section class="table-categories">
 
-            <a href="#" class="table-category-card">
+            <a href="masalar.html" class="table-category-card">
                 <div class="table-category-text">
                     <h3>Mermer <br> Masalar</h3>
                     <span class="table-category-arrow">➜</span>
@@ -77,7 +89,7 @@
                 <img src="images/marble-table-category.png" alt="Mermer Masa">
             </a>
 
-            <a href="#" class="table-category-card">
+            <a href="masalar.html" class="table-category-card">
                 <div class="table-category-text">
                     <h3>Granit <br> Masalar</h3>
                     <span class="table-category-arrow">➜</span>
@@ -86,7 +98,7 @@
                 <img src="images/granite-table-category.png" alt="Granit Masa">
             </a>
 
-            <a href="#" class="table-category-card">
+            <a href="masalar.html" class="table-category-card">
                 <div class="table-category-text">
                     <h3>Porselen <br> Masalar</h3>
                     <span class="table-category-arrow">➜</span>
@@ -238,7 +250,7 @@
 
             <a href="#">Ana Sayfa</a>
             <a href="urunler.html">Ürünler</a>
-            <a href="#">Masalar</a>
+            <a href="masalar.html">Masalar</a>
             <a href="#">Projeler</a>
             <a href="#">İletişim</a>
         </div>
@@ -309,6 +321,7 @@
     </main>
 
     <script src="js/script.js"></script>
+    <script src="js/cart-popover.js"></script>
 
 </body>
 </html>

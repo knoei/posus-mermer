@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masa Kombinasyonu | Posus Mermer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mini-cart.css">
+    <link rel="stylesheet" href="kombinasyon.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="navbar">
+            <a href="index.html" class="navbar-logo"><img src="images/posus-logo.png" alt="Posus Mermer"></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="urunler.html">Ürünler</a></li>
+                <li><a href="masalar.html" class="active">Masalar</a></li>
+                <li><a href="#">Projeler</a></li>
+                <li><a href="#">İletişim</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="nav-search-btn" type="button" aria-label="Ara"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button class="wishlist-btn" type="button" aria-label="Favoriler"><i class="fa-regular fa-heart"></i></button>
+                <button class="cart-btn" type="button" aria-label="Sepeti aç"><i class="fa-solid fa-bag-shopping"></i><span class="cart-count">0</span></button>
+            </div>
+            <button class="menu-toggle" id="menuToggle" type="button" aria-label="Menüyü aç" aria-expanded="false" aria-controls="navLinks">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="combination-page">
+        <div class="combination-intro">
+            <a href="masalar.html" class="combination-back"><i class="fa-solid fa-arrow-left"></i> Masalara dön</a>
+            <p class="combination-eyebrow">KENDİ MASANI OLUŞTUR</p>
+            <h1>Tabla ve ayağı bir araya getir.</h1>
+            <p>Mermer türünü ve masa ayağını ayrı ayrı değiştirerek kombinasyonu anında görüntüle.</p>
+        </div>
+
+        <section class="combination-studio" aria-label="Masa kombinasyonu oluşturucu">
+            <div class="combination-preview">
+                <div class="preview-stage">
+                    <div class="table-size-badge" aria-label="Tabla çapı 60 santimetre"><span>Ø</span> 60 cm</div>
+                    <img class="combo-tabletop-image" id="comboTabletopImage" src="images/tabletops/tabletop-01-clean.png" alt="Muğla Beyazı mermer tabla">
+                    <div class="table-junction-shadow" aria-hidden="true"></div>
+                    <img class="combo-leg-image" id="comboLegImage" src="images/table-legs/cafe-leg-01-clean.png" alt="Yuvarlak taban siyah kafe masa ayağı">
+                </div>
+                <div class="selection-summary" aria-live="polite">
+                    <div><span>Seçili Mermer</span><strong id="selectedStone">Muğla Beyazı</strong></div>
+                    <b>+</b>
+                    <div><span>Seçili Ayak</span><strong id="selectedLeg">Merkez Kaide</strong></div>
+                </div>
+            </div>
+
+            <div class="combination-controls">
+                <article class="carousel-control" aria-labelledby="stoneCarouselTitle">
+                    <div class="control-heading"><span>01</span><div><p>Tabla Seçimi</p><h2 id="stoneCarouselTitle">Mermer Türü</h2></div></div>
+                    <div class="carousel-row">
+                        <button class="carousel-arrow" id="stonePrev" type="button" aria-label="Önceki mermer"><i class="fa-solid fa-chevron-left"></i></button>
+                        <div class="carousel-card"><div class="material-swatch" id="stoneSwatch"></div><div><strong id="stoneName">Muğla Beyazı</strong><span id="stoneCount">1 / 6</span></div></div>
+                        <button class="carousel-arrow" id="stoneNext" type="button" aria-label="Sonraki mermer"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </article>
+
+                <article class="carousel-control" aria-labelledby="legCarouselTitle">
+                    <div class="control-heading"><span>02</span><div><p>Ayak Seçimi</p><h2 id="legCarouselTitle">Masa Ayağı</h2></div></div>
+                    <div class="carousel-row">
+                        <button class="carousel-arrow" id="legPrev" type="button" aria-label="Önceki masa ayağı"><i class="fa-solid fa-chevron-left"></i></button>
+                        <div class="carousel-card">
+                            <div class="leg-miniature"><img id="legMiniatureImage" src="images/table-legs/cafe-leg-01-clean.png" alt=""></div>
+                            <div><strong id="legName">Yuvarlak Taban Siyah</strong><span id="legCount">1 / 10</span></div>
+                        </div>
+                        <button class="carousel-arrow" id="legNext" type="button" aria-label="Sonraki masa ayağı"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                    <p class="prototype-note">Kafe masaları için 10 farklı ayak modeli.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/script.js"></script>
+    <script src="js/cart-popover.js"></script>
+    <script src="js/kombinasyon.js"></script>
+</body>
+</html>

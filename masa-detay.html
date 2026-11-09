@@ -7,6 +7,7 @@
     <title>Masa Detayı | Posus Mermer</title>
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mini-cart.css">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
@@ -221,6 +222,13 @@
 
         /* ADD TO CART */
 
+        .cart-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+            margin-top: 18px;
+        }
+
         .add-to-cart-btn {
             display: flex;
             align-items: center;
@@ -229,7 +237,6 @@
 
             width: 100%;
             min-height: 54px;
-            margin-top: 18px;
 
             border: none;
             border-radius: 8px;
@@ -254,6 +261,31 @@
             opacity: 0.5;
             cursor: not-allowed;
             transform: none;
+        }
+
+        .go-to-cart-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 54px;
+            border: 1px solid #9f7547;
+            border-radius: 8px;
+            background: #9f7547;
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background .25s ease, transform .25s ease;
+        }
+
+        .go-to-cart-btn:hover {
+            background: #765330;
+            transform: translateY(-2px);
+        }
+
+        .go-to-cart-btn.is-hidden {
+            display: none;
         }
 
         .cart-message {
@@ -308,45 +340,45 @@
 
     <!-- NAVBAR -->
 
-    <header>
-        <div class="navbar-inner">
+    <header class="site-header">
+        <nav class="navbar">
 
-            <a href="index.html" class="nav-logo">
+            <a href="index.html" class="navbar-logo">
                 <img src="images/posus-logo.png" alt="Posus Mermer">
             </a>
 
-            <nav class="nav-links">
-                <a href="index.html">Ana Sayfa</a>
-                <a href="urunler.html">Ürünler</a>
-                <a href="masalar.html">Masalar</a>
-                <a href="#">Projeler</a>
-                <a href="#">İletişim</a>
-            </nav>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="urunler.html">Ürünler</a></li>
+                <li><a href="masalar.html" class="active">Masalar</a></li>
+                <li><a href="#">Projeler</a></li>
+                <li><a href="#">İletişim</a></li>
+            </ul>
 
             <div class="nav-actions">
 
-                <button class="nav-search-btn">
+                <button class="nav-search-btn" type="button" aria-label="Ara">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
 
-                <button class="wishlist-btn">
+                <button class="wishlist-btn" type="button" aria-label="Favoriler">
                     <i class="fa-regular fa-heart"></i>
                 </button>
 
-                <button class="cart-btn" type="button"
-                        onclick="window.location.href='sepet.html'">
+                <button class="cart-btn" type="button" aria-label="Sepeti aç">
                     <i class="fa-solid fa-bag-shopping"></i>
                     <span class="cart-count">0</span>
                 </button>
 
-                <a href="#" class="offer-btn">
-                    Teklif Al
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
-
             </div>
 
-        </div>
+            <button class="menu-toggle" id="menuToggle" type="button" aria-label="Menüyü aç" aria-expanded="false" aria-controls="navLinks">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+        </nav>
     </header>
 
 
@@ -457,10 +489,18 @@
 
             </div>
 
-            <button type="button" class="add-to-cart-btn" id="addToCartBtn">
-                <i class="fa-solid fa-bag-shopping"></i>
-                Sepete Ekle
-            </button>
+            <div class="cart-actions">
+                <button type="button" class="add-to-cart-btn" id="addToCartBtn">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    Sepete Ekle
+                </button>
+
+                <a class="go-to-cart-btn is-hidden" id="goToCartBtn"
+                   href="sepet.html">
+                    Sepete Git
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
 
             <p id="cartMessage" class="cart-message" aria-live="polite"></p>
 
@@ -631,6 +671,7 @@
 
             const addToCartBtn = document.getElementById("addToCartBtn");
             const cartMessage = document.getElementById("cartMessage");
+            const goToCartBtn = document.getElementById("goToCartBtn");
 
             function getCart() {
                 try {
@@ -653,6 +694,8 @@
                 if (cartCounter) {
                     cartCounter.textContent = count;
                 }
+
+                goToCartBtn.classList.toggle("is-hidden", count === 0);
             }
 
             addToCartBtn.addEventListener("click", () => {
@@ -694,10 +737,13 @@
                 }
 
                 localStorage.setItem("posusCart", JSON.stringify(cart));
+                window.dispatchEvent(new CustomEvent("posusCartUpdated", {
+                    detail: { source: "product-detail" }
+                }));
 
                 updateCartCount();
 
-    cartMessage.textContent = "Ürün sepetinize eklendi!";
+    cartMessage.textContent = "Ürün sepetinize eklendi! Sepete geçebilirsiniz.";
 });
 
 /* SHOW CURRENT CART COUNT */
@@ -712,6 +758,8 @@ updateCartCount();
         }
 
     </script>
+    <script src="js/script.js"></script>
+    <script src="js/cart-popover.js"></script>
 
 </body>
 </html>

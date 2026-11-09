@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ürünler | Posus Mermer</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mini-cart.css">
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -27,11 +28,20 @@
                 <li><a href="iletisim.html">İletişim</a></li>
             </ul>
 
-            <a href="iletisim.html" class="quote-btn">
-                Teklif Al
-            </a>
+            <div class="nav-actions">
+                <button class="nav-search-btn" type="button" aria-label="Ara">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <button class="wishlist-btn" type="button" aria-label="Favoriler">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+                <button class="cart-btn" type="button" aria-label="Sepeti aç">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count">0</span>
+                </button>
+            </div>
 
-            <button class="menu-toggle" id="menuToggle">
+            <button class="menu-toggle" id="menuToggle" type="button" aria-label="Menüyü aç" aria-expanded="false" aria-controls="navLinks">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -215,6 +225,7 @@
     <script src="js/travertines.js"></script>
     <script src="js/product-page.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/cart-popover.js"></script>
 
 </body>
 </html>
