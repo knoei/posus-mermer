@@ -30,33 +30,59 @@ const combinationLegs = [
     { name: "Kare Paslanmaz", image: "images/table-legs/cafe-leg-07-clean.png" },
     { name: "Yuvarlak Paslanmaz", image: "images/table-legs/cafe-leg-08-clean.png" },
     { name: "Çift Küre Siyah", image: "images/table-legs/cafe-leg-09-clean.png" },
-    { name: "Gold Dekoratif", image: "images/table-legs/cafe-leg-10-angle-v2.png" }
+    { name: "Gold Dekoratif", image: "images/table-legs/cafe-leg-10-angle-v2.png" },
+    { name: "Klasik Döküm Dört Ayak", image: "images/table-legs/cafe-leg-11-clean.png" },
+    { name: "Trompet Form Siyah", image: "images/table-legs/cafe-leg-12-clean.png", previewClass: "leg-wide" }
 ];
 
 const combinationEnvironments = [
     {
         name: "Şehir Kafesi",
-        image: "images/environments/environment-studio.png?v=3",
+        image: "images/environments/environment-studio.png?v=4",
         description: "Aydınlık, yalın ve gün ışıklı şehir kafesi.",
         mode: "street-cafe"
     },
     {
+        name: "Modern Pastane",
+        image: "images/environments/environment-patisserie.png?v=1",
+        description: "Gün ışığı alan, sıcak ve modern mahalle pastanesi.",
+        mode: "patisserie"
+    },
+    {
         name: "Endüstriyel Kafe",
-        image: "images/environments/environment-cafe.png?v=3",
+        image: "images/environments/environment-cafe.png?v=4",
         description: "Tuğla, çelik ve beton dokulu yaratıcı kafe.",
         mode: "cafe"
     },
     {
+        name: "Otel Restoranı",
+        image: "images/environments/environment-hotel.png?v=1",
+        description: "Sade, işlevsel ve çağdaş şehir oteli restoranı.",
+        mode: "hotel"
+    },
+    {
         name: "Akşam Restoranı",
-        image: "images/environments/environment-restaurant.png?v=3",
+        image: "images/environments/environment-restaurant.png?v=4",
         description: "Sıcak aydınlatmalı, şık ve samimi restoran düzeni.",
         mode: "restaurant"
     },
     {
         name: "Bahçe Terası",
-        image: "images/environments/environment-terrace.png?v=3",
-        description: "Doğal taş ve terracotta dokulu kapalı bahçe terası.",
+        image: "images/environments/environment-terrace.png?v=4",
+        description: "Şehir içinde, tenteli ve camla korunan gerçek kafe terası.",
         mode: "terrace"
+    },
+    {
+        name: "Çatı Kafesi",
+        image: "images/environments/environment-rooftop.png?v=1",
+        description: "Pergolalı, şehir manzaralı ve korunaklı çatı kafesi.",
+        mode: "rooftop"
+    },
+    {
+        name: "Sahil Restoranı",
+        image: "images/environments/environment-seaside.png?v=1",
+        description: "Deniz manzaralı, aydınlık ve sakin sahil restoranı.",
+        mode: "seaside"
     }
 ];
 
@@ -69,70 +95,6 @@ const comboLegImage = document.getElementById("comboLegImage");
 const legMiniatureImage = document.getElementById("legMiniatureImage");
 const environmentBackdrop = document.getElementById("environmentBackdrop");
 const environmentMiniature = document.getElementById("environmentMiniature");
-const environmentFit = document.getElementById("environmentFit");
-const fitLabel = document.getElementById("fitLabel");
-const fitScore = document.getElementById("fitScore");
-const fitDetail = document.getElementById("fitDetail");
-
-const premiumStoneIndexes = new Set([2, 3, 5, 10, 11, 13, 14, 15, 16, 18]);
-const blackLegIndexes = new Set([0, 1, 2, 5]);
-const decorativeLegIndexes = new Set([3, 4, 8, 9]);
-const stainlessLegIndexes = new Set([6, 7]);
-
-function getCompatibility() {
-    const environment = combinationEnvironments[currentEnvironmentIndex];
-    const isPremiumStone = premiumStoneIndexes.has(currentStoneIndex);
-    const isBlackLeg = blackLegIndexes.has(currentLegIndex);
-    const isDecorativeLeg = decorativeLegIndexes.has(currentLegIndex);
-    const isStainlessLeg = stainlessLegIndexes.has(currentLegIndex);
-
-    if (environment.mode === "street-cafe") {
-        const score = isBlackLeg ? 96 : isStainlessLeg ? 92 : 89;
-        return {
-            score,
-            label: score >= 94 ? "Şehir kafesi için ideal" : "Şehir kafesi için uyumlu",
-            detail: "60 cm tabla ve merkezi kaide, kompakt oturma düzeninde sandalye hareketi ve rahat dolaşım sağlar."
-        };
-    }
-
-    if (environment.mode === "cafe") {
-        const score = isBlackLeg ? 96 : isStainlessLeg ? 93 : 90;
-        return {
-            score,
-            label: score >= 94 ? "Kafe için çok uyumlu" : "Kafe için uyumlu",
-            detail: "60 cm tabla ve merkezi kaide yapısı, yoğun kafe kullanımı ve rahat dolaşım için uygundur."
-        };
-    }
-
-    if (environment.mode === "restaurant") {
-        const score = Math.min(98, 70 + (isDecorativeLeg ? 16 : isStainlessLeg ? 10 : 4) + (isPremiumStone ? 10 : 5));
-        return {
-            score,
-            label: score >= 90 ? "Fine dining için ideal" : score >= 80 ? "Restoran için uyumlu" : "Daha sade mekâna uygun",
-            detail: isDecorativeLeg || isPremiumStone
-                ? "Seçilen mermer ve ayak, koyu ahşap ve sıcak metal detaylarla güçlü bir premium uyum kurar."
-                : "Bu ortamda daha dekoratif bir ayak veya karakterli bir taş seçimi görsel etkiyi güçlendirir."
-        };
-    }
-
-    const score = isStainlessLeg ? 96 : isBlackLeg ? 76 : 68;
-    return {
-        score,
-        label: isStainlessLeg ? "Kapalı teras için ideal" : score >= 75 ? "Korunaklı alanda uyumlu" : "İç mekân kullanımı önerilir",
-        detail: isStainlessLeg
-            ? "Paslanmaz ayak, korunaklı teraslarda nem ve sıcaklık değişimlerine karşı en uygun seçenektir."
-            : "Bu ayak için doğrudan yağmur ve yoğun nemden uzak, tamamen kapalı bir teras önerilir."
-    };
-}
-
-function updateCompatibility() {
-    const compatibility = getCompatibility();
-    const level = compatibility.score >= 90 ? "fit-ideal" : compatibility.score >= 75 ? "fit-good" : "fit-limited";
-    environmentFit.className = `environment-fit ${level}`;
-    fitLabel.textContent = compatibility.label;
-    fitScore.textContent = compatibility.score;
-    fitDetail.textContent = compatibility.detail;
-}
 
 function renderStone() {
     const stone = combinationStones[currentStoneIndex];
@@ -144,7 +106,6 @@ function renderStone() {
     document.getElementById("stoneName").textContent = stone.name;
     document.getElementById("selectedStone").textContent = stone.name;
     document.getElementById("stoneCount").textContent = `${currentStoneIndex + 1} / ${combinationStones.length}`;
-    updateCompatibility();
 }
 
 function renderLeg() {
@@ -152,12 +113,12 @@ function renderLeg() {
     comboLegImage.classList.add("is-changing");
     comboLegImage.src = leg.image;
     comboLegImage.alt = `${leg.name} kafe masa ayağı`;
+    comboLegImage.classList.toggle("leg-wide", leg.previewClass === "leg-wide");
     legMiniatureImage.src = leg.image;
     document.getElementById("legName").textContent = leg.name;
     document.getElementById("selectedLeg").textContent = leg.name;
     document.getElementById("legCount").textContent = `${currentLegIndex + 1} / ${combinationLegs.length}`;
     requestAnimationFrame(() => comboLegImage.classList.remove("is-changing"));
-    updateCompatibility();
 }
 
 function renderEnvironment() {
@@ -169,7 +130,6 @@ function renderEnvironment() {
     document.getElementById("selectedEnvironment").textContent = environment.name;
     document.getElementById("environmentCount").textContent = `${currentEnvironmentIndex + 1} / ${combinationEnvironments.length}`;
     document.getElementById("environmentDescription").textContent = environment.description;
-    updateCompatibility();
     requestAnimationFrame(() => environmentBackdrop.classList.remove("is-changing"));
 }
 
@@ -194,7 +154,6 @@ document.getElementById("legPrev").addEventListener("click", () => moveLeg(-1));
 document.getElementById("legNext").addEventListener("click", () => moveLeg(1));
 document.getElementById("environmentPrev").addEventListener("click", () => moveEnvironment(-1));
 document.getElementById("environmentNext").addEventListener("click", () => moveEnvironment(1));
-
 renderStone();
 renderLeg();
 renderEnvironment();
