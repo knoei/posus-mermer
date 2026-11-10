@@ -36,21 +36,29 @@
             <a href="masalar.html" class="combination-back"><i class="fa-solid fa-arrow-left"></i> Masalara dön</a>
             <p class="combination-eyebrow">KENDİ MASANI OLUŞTUR</p>
             <h1>Tabla ve ayağı bir araya getir.</h1>
-            <p>Mermer türünü ve masa ayağını ayrı ayrı değiştirerek kombinasyonu anında görüntüle.</p>
+            <p>Mermer, masa ayağı ve kullanım ortamını değiştir; kombinasyonu gerçek bir mekânda gör ve uyum değerlendirmesini anında incele.</p>
         </div>
 
         <section class="combination-studio" aria-label="Masa kombinasyonu oluşturucu">
             <div class="combination-preview">
                 <div class="preview-stage">
+                    <div class="environment-backdrop" id="environmentBackdrop" aria-hidden="true"></div>
                     <div class="table-size-badge" aria-label="Tabla çapı 60 santimetre"><span>Ø</span> 60 cm</div>
                     <img class="combo-tabletop-image" id="comboTabletopImage" src="images/tabletops/tabletop-01-clean.png" alt="Muğla Beyazı mermer tabla">
                     <div class="table-junction-shadow" aria-hidden="true"></div>
                     <img class="combo-leg-image" id="comboLegImage" src="images/table-legs/cafe-leg-01-clean.png" alt="Yuvarlak taban siyah kafe masa ayağı">
+                    <div class="environment-fit fit-ideal" id="environmentFit" aria-live="polite">
+                        <span class="fit-dot" aria-hidden="true"></span>
+                        <div><small>Ortam Uyumu</small><strong id="fitLabel">Şehir kafesi için ideal</strong></div>
+                        <b id="fitScore">96</b>
+                    </div>
                 </div>
                 <div class="selection-summary" aria-live="polite">
                     <div><span>Seçili Mermer</span><strong id="selectedStone">Muğla Beyazı</strong></div>
                     <b>+</b>
                     <div><span>Seçili Ayak</span><strong id="selectedLeg">Merkez Kaide</strong></div>
+                    <b>+</b>
+                    <div><span>Seçili Ortam</span><strong id="selectedEnvironment">Şehir Kafesi</strong></div>
                 </div>
             </div>
 
@@ -75,6 +83,20 @@
                         <button class="carousel-arrow" id="legNext" type="button" aria-label="Sonraki masa ayağı"><i class="fa-solid fa-chevron-right"></i></button>
                     </div>
                     <p class="prototype-note">Kafe masaları için 10 farklı ayak modeli.</p>
+                </article>
+
+                <article class="carousel-control environment-control" aria-labelledby="environmentCarouselTitle">
+                    <div class="control-heading"><span>03</span><div><p>Ortam Önizleme</p><h2 id="environmentCarouselTitle">Kullanım Alanı</h2></div></div>
+                    <div class="carousel-row">
+                        <button class="carousel-arrow" id="environmentPrev" type="button" aria-label="Önceki ortam"><i class="fa-solid fa-chevron-left"></i></button>
+                        <div class="carousel-card">
+                            <div class="environment-miniature" id="environmentMiniature" aria-hidden="true"></div>
+                            <div><strong id="environmentName">Şehir Kafesi</strong><span id="environmentCount">1 / 4</span></div>
+                        </div>
+                        <button class="carousel-arrow" id="environmentNext" type="button" aria-label="Sonraki ortam"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                    <p class="environment-description" id="environmentDescription">Aydınlık, yalın ve gün ışıklı şehir kafesi.</p>
+                    <p class="fit-detail" id="fitDetail">60 cm tabla ve siyah merkez ayak, yoğun oturma düzeninde rahat dolaşım sağlar.</p>
                 </article>
             </div>
         </section>

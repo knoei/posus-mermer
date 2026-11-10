@@ -31,11 +31,7 @@ const tables = [
         price: 3000,
 
         prices: {
-            60: 3000,
-            70: null,
-            80: null,
-            90: null,
-            100: null
+            60: 3000
         },
 
         image: "images/tables/silvia-cafe.png"
@@ -325,11 +321,7 @@ const tables = [
         price: 4200,
 
         prices: {
-            60: 4200,
-            70: null,
-            80: null,
-            90: null,
-            100: null
+            60: 4200
         },
 
         image: "images/tables/menekse-cafe.png"
@@ -396,5 +388,91 @@ const tables = [
         },
 
         image: "images/tables/ash-black-cafe.png"
+    },
+
+    {
+        id: 20,
+        name: "Traverten Orta Sehpa",
+        model: "travertine_coffee",
+        type: "Orta Sehpa",
+        material: "Traverten",
+        category: "dining",
+        shape: "dikdortgen",
+        price: 18500,
+        prices: {
+            90: 18500,
+            100: 21000,
+            110: 23500,
+            120: 26000
+        },
+        image: "images/tables/home-living/travertine-coffee.png"
+    },
+
+    {
+        id: 22,
+        name: "Elazığ Vişne Yuvarlak Orta Sehpa",
+        model: "elazig_visne_round_coffee",
+        type: "Orta Sehpa",
+        material: "Mermer",
+        category: "dining",
+        shape: "yuvarlak",
+        price: 22500,
+        prices: {
+            80: 22500,
+            90: 26000,
+            100: 30500
+        },
+        image: "images/tables/home-living/elazig-visne-round-coffee.png"
+    },
+
+    {
+        id: 23,
+        name: "Elazığ Petrol Yeşili Blok Orta Sehpa",
+        model: "elazig_petrol_block_coffee",
+        type: "Orta Sehpa",
+        material: "Mermer",
+        category: "dining",
+        shape: "kare",
+        price: 20500,
+        prices: {
+            80: 20500,
+            90: 24000,
+            100: 28000
+        },
+        image: "images/tables/home-living/elazig-petrol-block-coffee.png"
+    },
+
+    {
+        id: 24,
+        name: "Verde Guatemala Yuvarlak Orta Sehpa",
+        model: "verde_guatemala_round_coffee",
+        type: "Orta Sehpa",
+        material: "Mermer",
+        category: "dining",
+        shape: "yuvarlak",
+        price: 25500,
+        prices: {
+            80: 25500,
+            90: 29500,
+            100: 34500
+        },
+        image: "images/tables/home-living/verde-guatemala-round-coffee.png"
+    },
+
+    {
+        id: 25,
+        name: "Leylak Orta Sehpa",
+        model: "leylak_coffee",
+        type: "Orta Sehpa",
+        material: "Mermer",
+        category: "dining",
+        shape: "yuvarlak",
+        price: 28500,
+        prices: {
+            70: 28500,
+            80: 32500,
+            90: 37000
+        },
+        image: "images/tables/home-living/leylak-coffee.png"
     }
 ];

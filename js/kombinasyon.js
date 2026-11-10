@@ -33,12 +33,106 @@ const combinationLegs = [
     { name: "Gold Dekoratif", image: "images/table-legs/cafe-leg-10-angle-v2.png" }
 ];
 
+const combinationEnvironments = [
+    {
+        name: "Şehir Kafesi",
+        image: "images/environments/environment-studio.png?v=3",
+        description: "Aydınlık, yalın ve gün ışıklı şehir kafesi.",
+        mode: "street-cafe"
+    },
+    {
+        name: "Endüstriyel Kafe",
+        image: "images/environments/environment-cafe.png?v=3",
+        description: "Tuğla, çelik ve beton dokulu yaratıcı kafe.",
+        mode: "cafe"
+    },
+    {
+        name: "Akşam Restoranı",
+        image: "images/environments/environment-restaurant.png?v=3",
+        description: "Sıcak aydınlatmalı, şık ve samimi restoran düzeni.",
+        mode: "restaurant"
+    },
+    {
+        name: "Bahçe Terası",
+        image: "images/environments/environment-terrace.png?v=3",
+        description: "Doğal taş ve terracotta dokulu kapalı bahçe terası.",
+        mode: "terrace"
+    }
+];
+
 let currentStoneIndex = 0;
 let currentLegIndex = 0;
+let currentEnvironmentIndex = 0;
 const comboTabletopImage = document.getElementById("comboTabletopImage");
 const stoneSwatch = document.getElementById("stoneSwatch");
 const comboLegImage = document.getElementById("comboLegImage");
 const legMiniatureImage = document.getElementById("legMiniatureImage");
+const environmentBackdrop = document.getElementById("environmentBackdrop");
+const environmentMiniature = document.getElementById("environmentMiniature");
+const environmentFit = document.getElementById("environmentFit");
+const fitLabel = document.getElementById("fitLabel");
+const fitScore = document.getElementById("fitScore");
+const fitDetail = document.getElementById("fitDetail");
+
+const premiumStoneIndexes = new Set([2, 3, 5, 10, 11, 13, 14, 15, 16, 18]);
+const blackLegIndexes = new Set([0, 1, 2, 5]);
+const decorativeLegIndexes = new Set([3, 4, 8, 9]);
+const stainlessLegIndexes = new Set([6, 7]);
+
+function getCompatibility() {
+    const environment = combinationEnvironments[currentEnvironmentIndex];
+    const isPremiumStone = premiumStoneIndexes.has(currentStoneIndex);
+    const isBlackLeg = blackLegIndexes.has(currentLegIndex);
+    const isDecorativeLeg = decorativeLegIndexes.has(currentLegIndex);
+    const isStainlessLeg = stainlessLegIndexes.has(currentLegIndex);
+
+    if (environment.mode === "street-cafe") {
+        const score = isBlackLeg ? 96 : isStainlessLeg ? 92 : 89;
+        return {
+            score,
+            label: score >= 94 ? "Şehir kafesi için ideal" : "Şehir kafesi için uyumlu",
+            detail: "60 cm tabla ve merkezi kaide, kompakt oturma düzeninde sandalye hareketi ve rahat dolaşım sağlar."
+        };
+    }
+
+    if (environment.mode === "cafe") {
+        const score = isBlackLeg ? 96 : isStainlessLeg ? 93 : 90;
+        return {
+            score,
+            label: score >= 94 ? "Kafe için çok uyumlu" : "Kafe için uyumlu",
+            detail: "60 cm tabla ve merkezi kaide yapısı, yoğun kafe kullanımı ve rahat dolaşım için uygundur."
+        };
+    }
+
+    if (environment.mode === "restaurant") {
+        const score = Math.min(98, 70 + (isDecorativeLeg ? 16 : isStainlessLeg ? 10 : 4) + (isPremiumStone ? 10 : 5));
+        return {
+            score,
+            label: score >= 90 ? "Fine dining için ideal" : score >= 80 ? "Restoran için uyumlu" : "Daha sade mekâna uygun",
+            detail: isDecorativeLeg || isPremiumStone
+                ? "Seçilen mermer ve ayak, koyu ahşap ve sıcak metal detaylarla güçlü bir premium uyum kurar."
+                : "Bu ortamda daha dekoratif bir ayak veya karakterli bir taş seçimi görsel etkiyi güçlendirir."
+        };
+    }
+
+    const score = isStainlessLeg ? 96 : isBlackLeg ? 76 : 68;
+    return {
+        score,
+        label: isStainlessLeg ? "Kapalı teras için ideal" : score >= 75 ? "Korunaklı alanda uyumlu" : "İç mekân kullanımı önerilir",
+        detail: isStainlessLeg
+            ? "Paslanmaz ayak, korunaklı teraslarda nem ve sıcaklık değişimlerine karşı en uygun seçenektir."
+            : "Bu ayak için doğrudan yağmur ve yoğun nemden uzak, tamamen kapalı bir teras önerilir."
+    };
+}
+
+function updateCompatibility() {
+    const compatibility = getCompatibility();
+    const level = compatibility.score >= 90 ? "fit-ideal" : compatibility.score >= 75 ? "fit-good" : "fit-limited";
+    environmentFit.className = `environment-fit ${level}`;
+    fitLabel.textContent = compatibility.label;
+    fitScore.textContent = compatibility.score;
+    fitDetail.textContent = compatibility.detail;
+}
 
 function renderStone() {
     const stone = combinationStones[currentStoneIndex];
@@ -50,6 +144,7 @@ function renderStone() {
     document.getElementById("stoneName").textContent = stone.name;
     document.getElementById("selectedStone").textContent = stone.name;
     document.getElementById("stoneCount").textContent = `${currentStoneIndex + 1} / ${combinationStones.length}`;
+    updateCompatibility();
 }
 
 function renderLeg() {
@@ -62,6 +157,20 @@ function renderLeg() {
     document.getElementById("selectedLeg").textContent = leg.name;
     document.getElementById("legCount").textContent = `${currentLegIndex + 1} / ${combinationLegs.length}`;
     requestAnimationFrame(() => comboLegImage.classList.remove("is-changing"));
+    updateCompatibility();
+}
+
+function renderEnvironment() {
+    const environment = combinationEnvironments[currentEnvironmentIndex];
+    environmentBackdrop.classList.add("is-changing");
+    environmentBackdrop.style.backgroundImage = `url("${environment.image}")`;
+    environmentMiniature.style.backgroundImage = `url("${environment.image}")`;
+    document.getElementById("environmentName").textContent = environment.name;
+    document.getElementById("selectedEnvironment").textContent = environment.name;
+    document.getElementById("environmentCount").textContent = `${currentEnvironmentIndex + 1} / ${combinationEnvironments.length}`;
+    document.getElementById("environmentDescription").textContent = environment.description;
+    updateCompatibility();
+    requestAnimationFrame(() => environmentBackdrop.classList.remove("is-changing"));
 }
 
 function moveStone(direction) {
@@ -74,10 +183,18 @@ function moveLeg(direction) {
     renderLeg();
 }
 
+function moveEnvironment(direction) {
+    currentEnvironmentIndex = (currentEnvironmentIndex + direction + combinationEnvironments.length) % combinationEnvironments.length;
+    renderEnvironment();
+}
+
 document.getElementById("stonePrev").addEventListener("click", () => moveStone(-1));
 document.getElementById("stoneNext").addEventListener("click", () => moveStone(1));
 document.getElementById("legPrev").addEventListener("click", () => moveLeg(-1));
 document.getElementById("legNext").addEventListener("click", () => moveLeg(1));
+document.getElementById("environmentPrev").addEventListener("click", () => moveEnvironment(-1));
+document.getElementById("environmentNext").addEventListener("click", () => moveEnvironment(1));
 
 renderStone();
 renderLeg();
+renderEnvironment();
