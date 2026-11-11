@@ -476,3 +476,44 @@ const tables = [
         image: "images/tables/home-living/leylak-coffee.png"
     }
 ];
+
+const cafeBasePrices = {
+    "Muğla Beyazı": 3250,
+    "Silvia Beige": 3250,
+    "Aurelia Gold": 3250,
+    "Golden Mist": 3250,
+    "Adranos": 3500,
+    "Emperador": 3750,
+    "Akhisar Beji": 3750,
+    "Spider Beige": 3750,
+    "Tundra Gri": 4500,
+    "Star Galaxy": 4500,
+    "Menekşe": 4500,
+    "Leylak": 4500,
+    "Sofita Bej": 4500,
+    "Traverten": 5000,
+    "Verde Guatemala": 4750,
+    "Elazığ Petrol Yeşili": 4750,
+    "Ash Black": 4750,
+    "Alexander Black": 7500,
+    "Elazığ Vişne": 7500
+};
+
+tables.forEach(table => {
+    const basePrice = cafeBasePrices[table.name];
+
+    if (table.category !== "cafe-restaurant" || !basePrice) return;
+
+    const previousBasePrice = table.prices[60];
+    const priceDifference = basePrice - previousBasePrice;
+
+    table.price = basePrice;
+    table.prices = Object.fromEntries(
+        Object.entries(table.prices).map(([size, currentPrice]) => [
+            size,
+            currentPrice === null || currentPrice === undefined
+                ? currentPrice
+                : currentPrice + priceDifference
+        ])
+    );
+});

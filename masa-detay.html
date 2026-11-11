@@ -505,7 +505,7 @@
             <p id="cartMessage" class="cart-message" aria-live="polite"></p>
 
             <p class="product-note">
-                Toplam tutar seçilen ölçü ve adede göre hesaplanır.
+                Fiyatlara KDV dahildir. Toplam tutar seçilen ölçü ve adede göre hesaplanır.
             </p>
 
         </div>
@@ -608,6 +608,10 @@
 
             }
 
+            function getUnitPrice(size, quantity) {
+                return product.prices[size];
+            }
+
 
             /* UPDATE PRICE AND TOTAL */
 
@@ -620,11 +624,11 @@
                     parseInt(productQuantity.value, 10) || 1
                 );
 
-                const unitPrice = product.prices[selectedSize];
+                const unitPrice = getUnitPrice(selectedSize, quantity);
 
 
                 selectionSummary.textContent =
-                    `${selectedSize} cm · ${quantity} adet`;
+                    `${selectedSize} cm · ${quantity} adet · KDV dahil`;
 
 
                 if (
@@ -702,7 +706,7 @@
 
                 const selectedSize = productSize.value;
                 const quantity = Number(productQuantity.value);
-                const unitPrice = product.prices[selectedSize];
+                const unitPrice = getUnitPrice(selectedSize, quantity);
 
                 if (!Number.isInteger(quantity) || quantity < 1) {
                     cartMessage.textContent = "Lütfen geçerli bir adet girin.";
@@ -723,7 +727,12 @@
 
                 if (existingItem) {
                     existingItem.quantity += quantity;
-                    existingItem.price = unitPrice;
+                    existingItem.retailUnitPrice = product.prices[selectedSize];
+                    existingItem.wholesaleUnitPrice = product.prices[selectedSize];
+                    existingItem.priceTier = existingItem.quantity >= 10 ? "wholesale" : "retail";
+                    existingItem.price = existingItem.priceTier === "wholesale"
+                        ? existingItem.wholesaleUnitPrice
+                        : existingItem.retailUnitPrice;
                 } else {
                     cart.push({
                         id: product.id,
@@ -732,7 +741,10 @@
                         material: product.material,
                         size: selectedSize,
                         quantity: quantity,
-                        price: unitPrice
+                        price: unitPrice,
+                        retailUnitPrice: product.prices[selectedSize],
+                        wholesaleUnitPrice: product.prices[selectedSize],
+                        priceTier: quantity >= 10 ? "wholesale" : "retail"
                     });
                 }
 

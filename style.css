@@ -1701,23 +1701,48 @@ header {
 .table-price {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    min-width: 0;
 }
 
 .table-price strong {
+    display: block;
     font-family: Georgia, serif;
-
     font-size: 19px;
     font-weight: 400;
-
     color: #7b4c27;
+    white-space: nowrap;
 }
 
-.table-price span {
-    margin-top: 2px;
+.table-price .price-amount {
+    font: inherit;
+    color: inherit;
+}
 
+.table-price .price-suffix {
+    font-family: Arial, sans-serif;
     font-size: 9px;
+    font-weight: 500;
+    color: #756b62;
+    line-height: 1.2;
+    white-space: nowrap;
+}
 
-    color: #8c837a;
+.table-price .tax-included {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 7px;
+    border: 1px solid rgba(123, 76, 39, .22);
+    border-radius: 999px;
+    background: rgba(179, 137, 89, .1);
+    color: #7b4c27;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    line-height: 1;
+    text-transform: uppercase;
 }
 
 .table-detail-btn {
@@ -1839,13 +1864,6 @@ header {
     max-height: 62px;
     object-fit: contain;
     display: block;
-}
-
-.table-price .sub-price {
-    display: block;
-    margin-top: 4px;
-    font-size: 11px;
-    color: #8c837a;
 }
 
 .table-card-content h3 {

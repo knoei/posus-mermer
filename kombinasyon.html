@@ -36,14 +36,18 @@
             <a href="masalar.html" class="combination-back"><i class="fa-solid fa-arrow-left"></i> Masalara dön</a>
             <p class="combination-eyebrow">KENDİ MASANI OLUŞTUR</p>
             <h1>Tabla ve ayağı bir araya getir.</h1>
-            <p>Mermer, masa ayağı ve kullanım ortamını değiştir; kombinasyonu gerçek bir mekânda anında incele.</p>
+            <p>Mermer, masa ayağı ve kullanım ortamını değiştir; fiyatı anında gör ve beğendiğin kombinasyonu sepete ekle.</p>
         </div>
 
         <section class="combination-studio" aria-label="Masa kombinasyonu oluşturucu">
             <div class="combination-preview">
+                <div class="preview-toolbar">
+                    <span><i class="fa-regular fa-eye" aria-hidden="true"></i> Canlı Önizleme</span>
+                    <small>Seçimleriniz sahneye anında uygulanır</small>
+                </div>
                 <div class="preview-stage">
                     <div class="environment-backdrop" id="environmentBackdrop" aria-hidden="true"></div>
-                    <div class="table-size-badge" aria-label="Tabla çapı 60 santimetre"><span>Ø</span> 60 cm</div>
+                    <div class="table-size-badge" id="tableSizeBadge" aria-label="Tabla çapı 60 santimetre"><span>Ø</span> <b id="tableSizeBadgeValue">60 cm</b></div>
                     <img class="combo-tabletop-image" id="comboTabletopImage" src="images/tabletops/tabletop-01-clean.png" alt="Muğla Beyazı mermer tabla">
                     <div class="table-junction-shadow" aria-hidden="true"></div>
                     <img class="combo-leg-image" id="comboLegImage" src="images/table-legs/cafe-leg-01-clean.png" alt="Yuvarlak taban siyah kafe masa ayağı">
@@ -73,11 +77,11 @@
                         <button class="carousel-arrow" id="legPrev" type="button" aria-label="Önceki masa ayağı"><i class="fa-solid fa-chevron-left"></i></button>
                         <div class="carousel-card">
                             <div class="leg-miniature"><img id="legMiniatureImage" src="images/table-legs/cafe-leg-01-clean.png" alt=""></div>
-                            <div><strong id="legName">Yuvarlak Taban Siyah</strong><span id="legCount">1 / 10</span></div>
+                            <div><strong id="legName">Yuvarlak Taban Siyah</strong><span id="legCount">1 / 13</span></div>
                         </div>
                         <button class="carousel-arrow" id="legNext" type="button" aria-label="Sonraki masa ayağı"><i class="fa-solid fa-chevron-right"></i></button>
                     </div>
-                    <p class="prototype-note">Kafe masaları için 12 farklı ayak modeli.</p>
+                    <p class="prototype-note">Kafe masaları için 13 farklı ayak modeli.</p>
                 </article>
 
                 <article class="carousel-control environment-control" aria-labelledby="environmentCarouselTitle">
@@ -92,12 +96,57 @@
                     </div>
                     <p class="environment-description" id="environmentDescription">Aydınlık, yalın ve gün ışıklı şehir kafesi.</p>
                 </article>
+
+                <article class="combination-purchase" aria-labelledby="purchaseTitle">
+                    <div class="control-heading purchase-heading">
+                        <span>04</span>
+                        <div><p>Sipariş Seçimi</p><h2 id="purchaseTitle">Ölçü & Sepet</h2></div>
+                    </div>
+
+                    <div class="purchase-options">
+                        <label>
+                            <span>Tabla çapı</span>
+                            <select id="combinationSize" aria-label="Tabla çapı"></select>
+                        </label>
+                        <label>
+                            <span>Adet</span>
+                            <input id="combinationQuantity" type="number" min="1" step="1" value="1" aria-label="Adet">
+                        </label>
+                    </div>
+
+                    <div class="purchase-summary" aria-live="polite">
+                        <div>
+                            <span>Birim fiyat</span>
+                            <strong id="combinationUnitPrice">—</strong>
+                        </div>
+                        <div>
+                            <span>Toplam</span>
+                            <strong id="combinationTotalPrice">—</strong>
+                        </div>
+                    </div>
+
+                    <p class="purchase-selection" id="purchaseSelection"></p>
+
+                    <div class="purchase-actions">
+                        <button class="combination-add-cart" id="combinationAddToCart" type="button">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                            Kombinasyonu Sepete Ekle
+                        </button>
+                        <a class="combination-go-cart is-hidden" id="combinationGoToCart" href="sepet.html">
+                            Sepete Git <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <p class="purchase-message" id="purchaseMessage" aria-live="polite"></p>
+                    <p class="purchase-note">Fiyatlara KDV dahildir. Seçtiğiniz tabla, ölçü ve masa ayağı sepete birlikte kaydedilir.</p>
+                </article>
             </div>
         </section>
     </main>
 
     <script src="js/script.js"></script>
     <script src="js/cart-popover.js"></script>
+    <script src="js/tables.js"></script>
     <script src="js/kombinasyon.js"></script>
 </body>
 </html>

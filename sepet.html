@@ -640,13 +640,39 @@
             }
         }
 
+        function updateTieredPrice(item) {
+            const retailUnitPrice = Number(item.retailUnitPrice);
+            const wholesaleUnitPrice = Number(item.wholesaleUnitPrice);
+
+            if ([retailUnitPrice, wholesaleUnitPrice].every(Number.isFinite)) {
+                const isWholesale = Number(item.quantity) >= 10;
+                item.price = isWholesale ? wholesaleUnitPrice : retailUnitPrice;
+                item.priceTier = isWholesale ? "wholesale" : "retail";
+                return item;
+            }
+
+            const basePrice = Number(item.basePrice);
+            const retailSurcharge = Number(item.retailLegSurcharge);
+            const wholesaleSurcharge = Number(item.wholesaleLegSurcharge);
+
+            if (![basePrice, retailSurcharge, wholesaleSurcharge].every(Number.isFinite)) {
+                return item;
+            }
+
+            const isWholesale = Number(item.quantity) >= 10;
+            item.legSurcharge = isWholesale ? wholesaleSurcharge : retailSurcharge;
+            item.price = basePrice + item.legSurcharge;
+            item.priceTier = isWholesale ? "wholesale" : "retail";
+            return item;
+        }
+
         let cart = getCart().filter(item =>
             item &&
             Number.isFinite(Number(item.price)) &&
             Number(item.price) >= 0 &&
             Number.isInteger(Number(item.quantity)) &&
             Number(item.quantity) > 0
-        ).map(item => ({
+        ).map(item => updateTieredPrice({
             ...item,
             price: Number(item.price),
             quantity: Number(item.quantity)
@@ -740,6 +766,7 @@
 
                         <p class="cart-item-meta item-material"></p>
                         <p class="cart-item-meta item-size"></p>
+                        <p class="cart-item-meta item-leg"></p>
 
                         <p class="cart-item-unit item-unit-price"></p>
 
@@ -780,8 +807,12 @@
                 row.querySelector(".item-size").textContent =
                     `Ölçü: ${item.size} cm`;
 
+                const legMeta = row.querySelector(".item-leg");
+                legMeta.textContent = item.leg ? `Masa ayağı: ${item.leg}` : "";
+                legMeta.hidden = !item.leg;
+
                 row.querySelector(".item-unit-price").textContent =
-                    `${formatPrice(item.price)} / adet`;
+                    `${formatPrice(item.price)} / adet${item.priceTier === "wholesale" ? " · Toptan fiyat" : ""}`;
 
                 row.querySelector(".item-total").textContent =
                     formatPrice(item.price * item.quantity);
@@ -825,6 +856,7 @@
             }
 
             cart[index].quantity = quantity;
+            updateTieredPrice(cart[index]);
 
             saveCart();
 
@@ -890,7 +922,7 @@
                 0
             );
             const productLines = cart.map((item, index) =>
-                `${index + 1}. ${item.name} — ${item.size} cm — ${item.quantity} adet — ${formatPrice(item.price * item.quantity)}`
+                `${index + 1}. ${item.name} — ${item.size} cm${item.leg ? ` — ${item.leg}` : ""} — ${item.quantity} adet — ${formatPrice(item.price * item.quantity)}`
             );
 
             const message = [

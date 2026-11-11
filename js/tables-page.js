@@ -66,13 +66,16 @@ productList.forEach((table) => {
             <div class="table-card-bottom">
 
                 <div class="table-price">
+                    <span class="tax-included">
+                        <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                        KDV dahil
+                    </span>
+
                     <strong>
-                        ${formatPrice(table.price)}
+                        <span class="price-amount">${formatPrice(table.retailPrice ?? table.price)}</span>
                     </strong>
 
-                    <span class="sub-price">
-                        'dan başlayan fiyatlarla
-                    </span>
+                    <span class="price-suffix">'den başlayan fiyatlarla</span>
                 </div>
 
                 <a
@@ -140,9 +143,9 @@ function applyFilters() {
     const sortedTables = [...filteredTables];
 
     if (sortTables.value === "price-low") {
-        sortedTables.sort((a, b) => a.price - b.price);
+        sortedTables.sort((a, b) => (a.retailPrice ?? a.price) - (b.retailPrice ?? b.price));
     } else if (sortTables.value === "price-high") {
-        sortedTables.sort((a, b) => b.price - a.price);
+        sortedTables.sort((a, b) => (b.retailPrice ?? b.price) - (a.retailPrice ?? a.price));
     } else if (sortTables.value === "name") {
         sortedTables.sort((a, b) => a.name.localeCompare(b.name, "tr"));
     }
