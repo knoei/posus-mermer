@@ -14,6 +14,10 @@ function formatPrice(price) {
     return new Intl.NumberFormat("tr-TR").format(price) + " ₺";
 }
 
+function renderTableVisual(table) {
+    return `<img src="${table.image}" alt="${table.name}">`;
+}
+
 function renderTables(productList) {
     tablesGrid.innerHTML = "";
 
@@ -34,7 +38,7 @@ productList.forEach((table) => {
     card.innerHTML = `
         <div class="table-card-image">
 
-            <img src="${table.image}" alt="${table.name}">                
+            ${renderTableVisual(table)}
 
             ${table.category === "dining" ? `
                 <span class="table-usage-badge">Ev & Yaşam</span>
@@ -66,16 +70,23 @@ productList.forEach((table) => {
             <div class="table-card-bottom">
 
                 <div class="table-price">
-                    <span class="tax-included">
-                        <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-                        KDV dahil
-                    </span>
-
-                    <strong>
-                        <span class="price-amount">${formatPrice(table.retailPrice ?? table.price)}</span>
-                    </strong>
-
-                    <span class="price-suffix">'den başlayan fiyatlarla</span>
+                    ${table.pricePending ? `
+                        <span class="tax-included porcelain-price-label">
+                            <i class="fa-solid fa-message" aria-hidden="true"></i>
+                            Projeye özel
+                        </span>
+                        <strong class="price-on-request">Fiyat için iletişime geçin</strong>
+                        <span class="price-suffix">Ölçüye göre fiyatlandırılır</span>
+                    ` : `
+                        <span class="tax-included">
+                            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                            KDV dahil
+                        </span>
+                        <strong>
+                            <span class="price-amount">${formatPrice(table.price)}</span>
+                        </strong>
+                        <span class="price-suffix">'den başlayan fiyatlarla</span>
+                    `}
                 </div>
 
                 <a
@@ -119,6 +130,10 @@ function getSelectedValue(inputName) {
 }
 
 function getAvailableSizes(table) {
+    if (Array.isArray(table.availableSizes)) {
+        return table.availableSizes;
+    }
+
     return Object.entries(table.prices)
         .filter(([, price]) => price !== null)
         .map(([size]) => Number(size));
@@ -143,9 +158,17 @@ function applyFilters() {
     const sortedTables = [...filteredTables];
 
     if (sortTables.value === "price-low") {
-        sortedTables.sort((a, b) => (a.retailPrice ?? a.price) - (b.retailPrice ?? b.price));
+        sortedTables.sort((a, b) => {
+            const priceA = a.price ?? Infinity;
+            const priceB = b.price ?? Infinity;
+            return priceA - priceB;
+        });
     } else if (sortTables.value === "price-high") {
-        sortedTables.sort((a, b) => (b.retailPrice ?? b.price) - (a.retailPrice ?? a.price));
+        sortedTables.sort((a, b) => {
+            const priceA = a.price ?? -Infinity;
+            const priceB = b.price ?? -Infinity;
+            return priceB - priceA;
+        });
     } else if (sortTables.value === "name") {
         sortedTables.sort((a, b) => a.name.localeCompare(b.name, "tr"));
     }

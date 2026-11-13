@@ -1040,8 +1040,21 @@ header {
 
 
 .stone-card {
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
     text-decoration: none;
     color: inherit;
+    text-align: left;
+    font: inherit;
+    cursor: zoom-in;
+}
+
+.stone-card:focus-visible {
+    outline: 2px solid #9c7445;
+    outline-offset: 5px;
+    border-radius: 6px;
 }
 
 
@@ -1119,7 +1132,160 @@ header {
 .stone-card:hover .stone-arrow {
     background: #171512;
     color: #fff;
-    transform: translateX(3px);
+    transform: scale(1.06);
+}
+
+body.lightbox-open {
+    overflow: hidden;
+}
+
+.stone-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 2500;
+    display: grid;
+    place-items: center;
+    padding: 28px;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.stone-lightbox.is-open {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.stone-lightbox-backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: rgba(17, 15, 13, 0.78);
+    backdrop-filter: blur(8px);
+    cursor: zoom-out;
+}
+
+.stone-lightbox-dialog {
+    position: relative;
+    z-index: 1;
+    width: min(760px, 100%);
+    max-height: calc(100vh - 56px);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 230px;
+    background: #f8f4ee;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 18px;
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.36);
+    transform: translateY(16px) scale(0.98);
+    transition: transform 0.3s ease;
+}
+
+.stone-lightbox.is-open .stone-lightbox-dialog {
+    transform: translateY(0) scale(1);
+}
+
+.stone-lightbox-image-wrap {
+    min-height: 460px;
+    background: #d9d3ca;
+}
+
+.stone-lightbox-image-wrap img {
+    width: 100%;
+    height: 100%;
+    min-height: 460px;
+    display: block;
+    object-fit: cover;
+}
+
+.stone-lightbox-info {
+    padding: 64px 28px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: linear-gradient(145deg, #fbf8f3 0%, #eee5da 100%);
+}
+
+.stone-lightbox-info span {
+    width: fit-content;
+    margin-bottom: 14px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #e4d5c2;
+    color: #725737;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.stone-lightbox-info h2 {
+    margin: 0;
+    color: #181512;
+    font-family: Georgia, serif;
+    font-size: clamp(30px, 4vw, 46px);
+    font-weight: 400;
+    line-height: 1.05;
+}
+
+.stone-lightbox-info p {
+    margin: 20px 0 0;
+    color: #6b6259;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.stone-lightbox-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    z-index: 2;
+    width: 42px;
+    height: 42px;
+    border: 0;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #171512;
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.stone-lightbox-close:hover {
+    transform: rotate(5deg) scale(1.06);
+    background: #fff;
+}
+
+@media (max-width: 760px) {
+    .stone-lightbox {
+        padding: 14px;
+    }
+
+    .stone-lightbox-dialog {
+        max-height: calc(100vh - 28px);
+        grid-template-columns: 1fr;
+        overflow-y: auto;
+    }
+
+    .stone-lightbox-image-wrap,
+    .stone-lightbox-image-wrap img {
+        min-height: 0;
+        height: min(48vh, 380px);
+    }
+
+    .stone-lightbox-info {
+        padding: 24px;
+    }
+
+    .stone-lightbox-info p {
+        margin-top: 12px;
+    }
 }
 
 
@@ -1621,6 +1787,10 @@ header {
     backdrop-filter: blur(6px);
 }
 
+.table-usage-badge--porcelain {
+    background: rgba(117, 83, 51, .86);
+}
+
 .table-material {
     display: block;
     min-height: 17px;
@@ -1718,6 +1888,20 @@ header {
 .table-price .price-amount {
     font: inherit;
     color: inherit;
+}
+
+.table-price .price-on-request {
+    max-width: 132px;
+    color: #6f4c2f;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.25;
+    white-space: normal;
+}
+
+.porcelain-price-label {
+    color: #8a6340;
 }
 
 .table-price .price-suffix {

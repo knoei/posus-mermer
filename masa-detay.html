@@ -43,6 +43,93 @@
             border-radius: 10px;
         }
 
+        .product-gallery-stage {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            background: #f3f0eb;
+        }
+
+        .product-gallery-stage img {
+            transition: opacity 0.22s ease, transform 0.35s ease;
+        }
+
+        .product-gallery-stage img.is-detail-photo {
+            object-fit: contain;
+        }
+
+        .product-gallery-stage.is-changing img {
+            opacity: 0.35;
+            transform: scale(0.985);
+        }
+
+        .gallery-arrow {
+            position: absolute;
+            top: 50%;
+            z-index: 2;
+            display: grid;
+            width: 44px;
+            height: 44px;
+            place-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.78);
+            border-radius: 50%;
+            background: rgba(28, 24, 20, 0.78);
+            color: #fff;
+            cursor: pointer;
+            transform: translateY(-50%);
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .gallery-arrow:hover {
+            background: #9f7547;
+            transform: translateY(-50%) scale(1.06);
+        }
+
+        .gallery-arrow--prev {
+            left: 16px;
+        }
+
+        .gallery-arrow--next {
+            right: 16px;
+        }
+
+        .gallery-arrow[hidden] {
+            display: none;
+        }
+
+        .product-thumbnails {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(72px, 88px));
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .product-thumbnails[hidden] {
+            display: none;
+        }
+
+        .gallery-thumbnail {
+            padding: 4px;
+            border: 1px solid #d8cec4;
+            border-radius: 9px;
+            background: #fff;
+            cursor: pointer;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .gallery-thumbnail img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 6px;
+            object-fit: cover;
+        }
+
+        .gallery-thumbnail:hover,
+        .gallery-thumbnail.is-active {
+            border-color: #9f7547;
+            box-shadow: 0 0 0 2px rgba(159, 117, 71, 0.16);
+        }
+
         /* PRODUCT INFORMATION */
 
         .product-info-panel {
@@ -388,8 +475,20 @@
 
         <!-- LEFT: PRODUCT IMAGE -->
 
-        <div class="product-visual">
-            <img id="productImage" alt="">
+        <div class="product-visual" id="productVisual">
+            <div class="product-gallery-stage" id="productGalleryStage">
+                <img id="productImage" alt="">
+
+                <button class="gallery-arrow gallery-arrow--prev" id="galleryPrev" type="button" aria-label="Önceki görsel" hidden>
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+
+                <button class="gallery-arrow gallery-arrow--next" id="galleryNext" type="button" aria-label="Sonraki görsel" hidden>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <div class="product-thumbnails" id="productThumbnails" aria-label="Ürün görselleri" hidden></div>
         </div>
 
 
@@ -504,7 +603,7 @@
 
             <p id="cartMessage" class="cart-message" aria-live="polite"></p>
 
-            <p class="product-note">
+            <p class="product-note" id="productNote">
                 Fiyatlara KDV dahildir. Toplam tutar seçilen ölçü ve adede göre hesaplanır.
             </p>
 
@@ -530,17 +629,88 @@
 
             document.title = `${product.name} | Posus Mermer`;
 
-            document.getElementById("productImage").src =
-                product.image;
+            const productVisual = document.getElementById("productVisual");
 
-            document.getElementById("productImage").alt =
-                `${product.name} masa`;
+            const productImage = document.getElementById("productImage");
+            const galleryStage = document.getElementById("productGalleryStage");
+            const galleryPrev = document.getElementById("galleryPrev");
+            const galleryNext = document.getElementById("galleryNext");
+            const productThumbnails = document.getElementById("productThumbnails");
+
+            const extraDetailImages = Array.isArray(product.detailImages)
+                ? product.detailImages
+                : product.detailImage
+                    ? [product.detailImage]
+                    : [];
+
+            const galleryImages = [
+                {
+                    src: product.image,
+                    alt: `${product.name} masa`
+                },
+                ...extraDetailImages.map((image, index) => ({
+                    src: typeof image === "string" ? image : image.src,
+                    alt: typeof image === "string"
+                        ? `${product.name} gerçek taş görseli ${index + 1}`
+                        : image.alt || `${product.name} gerçek taş görseli ${index + 1}`
+                }))
+            ].filter(image => image.src);
+
+            let activeGalleryIndex = 0;
+
+            function showGalleryImage(index) {
+                activeGalleryIndex = (index + galleryImages.length) % galleryImages.length;
+                const activeImage = galleryImages[activeGalleryIndex];
+
+                galleryStage.classList.add("is-changing");
+
+                window.setTimeout(() => {
+                    productImage.src = activeImage.src;
+                    productImage.alt = activeImage.alt;
+                    productImage.classList.toggle("is-detail-photo", activeGalleryIndex > 0);
+                    galleryStage.classList.remove("is-changing");
+                }, 110);
+
+                productThumbnails.querySelectorAll(".gallery-thumbnail").forEach((thumbnail, thumbnailIndex) => {
+                    const isActive = thumbnailIndex === activeGalleryIndex;
+                    thumbnail.classList.toggle("is-active", isActive);
+                    thumbnail.setAttribute("aria-current", isActive ? "true" : "false");
+                });
+            }
+
+            productImage.src = galleryImages[0].src;
+            productImage.alt = galleryImages[0].alt;
+
+            if (galleryImages.length > 1) {
+                galleryPrev.hidden = false;
+                galleryNext.hidden = false;
+                productThumbnails.hidden = false;
+
+                galleryImages.forEach((image, index) => {
+                    const thumbnail = document.createElement("button");
+                    thumbnail.type = "button";
+                    thumbnail.className = `gallery-thumbnail${index === 0 ? " is-active" : ""}`;
+                    thumbnail.setAttribute("aria-label", `${index + 1}. görseli göster`);
+                    thumbnail.setAttribute("aria-current", index === 0 ? "true" : "false");
+                    thumbnail.innerHTML = `<img src="${image.src}" alt="">`;
+                    thumbnail.addEventListener("click", () => showGalleryImage(index));
+                    productThumbnails.appendChild(thumbnail);
+                });
+
+                galleryPrev.addEventListener("click", () => showGalleryImage(activeGalleryIndex - 1));
+                galleryNext.addEventListener("click", () => showGalleryImage(activeGalleryIndex + 1));
+            }
 
             document.getElementById("productName").textContent =
                 product.name;
 
             document.getElementById("productMaterial").textContent =
                 product.material;
+
+            document.querySelector(".product-eyebrow").textContent =
+                product.material === "Porselen"
+                    ? "Porselen masa koleksiyonu"
+                    : "Doğal taş masa koleksiyonu";
 
 
             /* SHAPE AND CATEGORY NAMES */
@@ -584,7 +754,11 @@
 
             /* POPULATE SIZE OPTIONS */
 
-            Object.keys(product.prices).forEach(size => {
+            const availableSizes = Array.isArray(product.availableSizes)
+                ? product.availableSizes
+                : Object.keys(product.prices);
+
+            availableSizes.forEach(size => {
 
                 const option = document.createElement("option");
 
@@ -627,8 +801,15 @@
                 const unitPrice = getUnitPrice(selectedSize, quantity);
 
 
-                selectionSummary.textContent =
-                    `${selectedSize} cm · ${quantity} adet · KDV dahil`;
+                selectionSummary.textContent = product.pricePending
+                    ? `${selectedSize} cm · ${quantity} adet · Fiyat için iletişime geçin`
+                    : `${selectedSize} cm · ${quantity} adet · KDV dahil`;
+
+                if (product.pricePending) {
+                    productPrice.textContent = "Fiyat için iletişime geçin";
+                    totalPrice.textContent = "Teklif ile belirlenir";
+                    return;
+                }
 
 
                 if (
@@ -676,6 +857,13 @@
             const addToCartBtn = document.getElementById("addToCartBtn");
             const cartMessage = document.getElementById("cartMessage");
             const goToCartBtn = document.getElementById("goToCartBtn");
+
+            if (product.pricePending) {
+                addToCartBtn.disabled = true;
+                addToCartBtn.innerHTML = '<i class="fa-solid fa-message"></i> Fiyat bilgisi yakında';
+                document.getElementById("productNote").textContent =
+                    "Porselen masa fiyatı seçilen ölçü ve proje detaylarına göre hazırlanır.";
+            }
 
             function getCart() {
                 try {
@@ -727,12 +915,11 @@
 
                 if (existingItem) {
                     existingItem.quantity += quantity;
-                    existingItem.retailUnitPrice = product.prices[selectedSize];
-                    existingItem.wholesaleUnitPrice = product.prices[selectedSize];
-                    existingItem.priceTier = existingItem.quantity >= 10 ? "wholesale" : "retail";
-                    existingItem.price = existingItem.priceTier === "wholesale"
-                        ? existingItem.wholesaleUnitPrice
-                        : existingItem.retailUnitPrice;
+                    existingItem.price = unitPrice;
+                    existingItem.unitPrice = unitPrice;
+                    delete existingItem.retailUnitPrice;
+                    delete existingItem.wholesaleUnitPrice;
+                    delete existingItem.priceTier;
                 } else {
                     cart.push({
                         id: product.id,
@@ -742,9 +929,7 @@
                         size: selectedSize,
                         quantity: quantity,
                         price: unitPrice,
-                        retailUnitPrice: product.prices[selectedSize],
-                        wholesaleUnitPrice: product.prices[selectedSize],
-                        priceTier: quantity >= 10 ? "wholesale" : "retail"
+                        unitPrice: unitPrice
                     });
                 }
 

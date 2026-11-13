@@ -640,29 +640,20 @@
             }
         }
 
-        function updateTieredPrice(item) {
-            const retailUnitPrice = Number(item.retailUnitPrice);
-            const wholesaleUnitPrice = Number(item.wholesaleUnitPrice);
-
-            if ([retailUnitPrice, wholesaleUnitPrice].every(Number.isFinite)) {
-                const isWholesale = Number(item.quantity) >= 10;
-                item.price = isWholesale ? wholesaleUnitPrice : retailUnitPrice;
-                item.priceTier = isWholesale ? "wholesale" : "retail";
-                return item;
+        function normalizeUnitPrice(item) {
+            const unitPrice = Number(item.unitPrice ?? item.retailUnitPrice ?? item.price);
+            if (Number.isFinite(unitPrice)) {
+                item.price = unitPrice;
+                item.unitPrice = unitPrice;
             }
-
-            const basePrice = Number(item.basePrice);
-            const retailSurcharge = Number(item.retailLegSurcharge);
-            const wholesaleSurcharge = Number(item.wholesaleLegSurcharge);
-
-            if (![basePrice, retailSurcharge, wholesaleSurcharge].every(Number.isFinite)) {
-                return item;
+            if (Number.isFinite(Number(item.retailLegSurcharge))) {
+                item.legSurcharge = Number(item.retailLegSurcharge);
             }
-
-            const isWholesale = Number(item.quantity) >= 10;
-            item.legSurcharge = isWholesale ? wholesaleSurcharge : retailSurcharge;
-            item.price = basePrice + item.legSurcharge;
-            item.priceTier = isWholesale ? "wholesale" : "retail";
+            delete item.retailUnitPrice;
+            delete item.wholesaleUnitPrice;
+            delete item.retailLegSurcharge;
+            delete item.wholesaleLegSurcharge;
+            delete item.priceTier;
             return item;
         }
 
@@ -672,7 +663,7 @@
             Number(item.price) >= 0 &&
             Number.isInteger(Number(item.quantity)) &&
             Number(item.quantity) > 0
-        ).map(item => updateTieredPrice({
+        ).map(item => normalizeUnitPrice({
             ...item,
             price: Number(item.price),
             quantity: Number(item.quantity)
@@ -812,7 +803,7 @@
                 legMeta.hidden = !item.leg;
 
                 row.querySelector(".item-unit-price").textContent =
-                    `${formatPrice(item.price)} / adet${item.priceTier === "wholesale" ? " · Toptan fiyat" : ""}`;
+                    `${formatPrice(item.price)} / adet`;
 
                 row.querySelector(".item-total").textContent =
                     formatPrice(item.price * item.quantity);
@@ -856,7 +847,7 @@
             }
 
             cart[index].quantity = quantity;
-            updateTieredPrice(cart[index]);
+            normalizeUnitPrice(cart[index]);
 
             saveCart();
 

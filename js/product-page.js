@@ -29,6 +29,15 @@ const categoryButtons =
 const pagination =
     document.getElementById("pagination");
 
+const stoneLightbox = document.getElementById("stoneLightbox");
+const stoneLightboxImage = document.getElementById("stoneLightboxImage");
+const stoneLightboxTitle = document.getElementById("stoneLightboxTitle");
+const stoneLightboxCategory = document.getElementById("stoneLightboxCategory");
+const stoneLightboxClose = document.getElementById("stoneLightboxClose");
+const stoneLightboxBackdrop = stoneLightbox.querySelector(".stone-lightbox-backdrop");
+
+let lastFocusedStoneCard = null;
+
 
 /* =========================
    PAGINATION SETTINGS
@@ -46,6 +55,39 @@ let currentPage = 1;
 function capitalize(text) {
     return text.charAt(0).toUpperCase() + text.slice(1);
 }
+
+function openStoneLightbox(stone, trigger) {
+    lastFocusedStoneCard = trigger;
+    stoneLightboxImage.src = stone.image;
+    stoneLightboxImage.alt = `${stone.name} ${capitalize(stone.category)} taşı`;
+    stoneLightboxTitle.textContent = stone.name;
+    stoneLightboxCategory.textContent = capitalize(stone.category);
+    stoneLightbox.classList.add("is-open");
+    stoneLightbox.setAttribute("aria-hidden", "false");
+    document.body.classList.add("lightbox-open");
+    stoneLightboxClose.focus();
+}
+
+function closeStoneLightbox() {
+    if (!stoneLightbox.classList.contains("is-open")) {
+        return;
+    }
+
+    stoneLightbox.classList.remove("is-open");
+    stoneLightbox.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("lightbox-open");
+    stoneLightboxImage.src = "";
+    lastFocusedStoneCard?.focus();
+}
+
+stoneLightboxClose.addEventListener("click", closeStoneLightbox);
+stoneLightboxBackdrop.addEventListener("click", closeStoneLightbox);
+
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+        closeStoneLightbox();
+    }
+});
 
 
 /* =========================
@@ -86,14 +128,12 @@ function renderStones(items) {
     pageItems.forEach(stone => {
 
         const card =
-            document.createElement("a");
+            document.createElement("button");
 
 
         card.className = "stone-card";
-
-
-        card.href =
-            `urun.html?id=${stone.id}`;
+        card.type = "button";
+        card.setAttribute("aria-label", `${stone.name} taşını büyüt`);
 
 
         card.innerHTML = `
@@ -120,10 +160,6 @@ function renderStones(items) {
                             ${capitalize(stone.category)}
                         </span>
 
-                        <span>
-                            ${capitalize(stone.series)}
-                        </span>
-
                     </div>
 
                 </div>
@@ -131,12 +167,16 @@ function renderStones(items) {
 
                 <div class="stone-arrow">
 
-                    <i class="fa-solid fa-arrow-right"></i>
+                    <i class="fa-solid fa-expand"></i>
 
                 </div>
 
             </div>
         `;
+
+        card.addEventListener("click", () => {
+            openStoneLightbox(stone, card);
+        });
 
 
         stoneGrid.appendChild(card);

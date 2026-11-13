@@ -17,7 +17,8 @@ const tables = [
             100: 7600
         },
 
-        image: "images/tables/mugla-beyazi-cafe.png"
+        image: "images/tables/mugla-beyazi-cafe.png",
+        detailImage: "images/table-details/mugla-beyazi-real.png"
     },
 
     {
@@ -34,7 +35,8 @@ const tables = [
             60: 3000
         },
 
-        image: "images/tables/silvia-cafe.png"
+        image: "images/tables/silvia-cafe.png",
+        detailImage: "images/table-details/silvia-beige-real.png"
     },
 
     {
@@ -55,7 +57,8 @@ const tables = [
             100: 7600
         },
 
-        image: "images/tables/golden-mist-cafe.png"
+        image: "images/tables/golden-mist-cafe.png",
+        detailImage: "images/table-details/golden-mist-real.png"
     },
 
     {
@@ -76,7 +79,8 @@ const tables = [
             100: 7600
         },
 
-        image: "images/tables/aurelia-gold-cafe.png"
+        image: "images/tables/aurelia-gold-cafe.png",
+        detailImage: "images/table-details/aurelia-gold-real.png"
     },
 
     {
@@ -97,7 +101,8 @@ const tables = [
             100: null
         },
 
-        image: "images/tables/adranos-cafe.png"
+        image: "images/tables/adranos-cafe.png",
+        detailImage: "images/table-details/adranos-real.png"
     },
 
     {
@@ -118,7 +123,8 @@ const tables = [
             100: null
         },
 
-        image: "images/tables/emperador-cafe.png"
+        image: "images/tables/emperador-cafe.png",
+        detailImage: "images/table-details/emperador-real.png"
     },
 
     {
@@ -139,7 +145,8 @@ const tables = [
             100: null
         },
 
-        image: "images/tables/akhisar-cafe.png"
+        image: "images/tables/akhisar-cafe.png",
+        detailImage: "images/table-details/akhisar-beji-real.png"
     },
 
     {
@@ -160,7 +167,8 @@ const tables = [
             100: null
         },
 
-        image: "images/tables/spider-cafe.png"
+        image: "images/tables/spider-cafe.png",
+        detailImage: "images/table-details/spider-beige-real.png"
     },
 
     {
@@ -181,7 +189,8 @@ const tables = [
             100: null
         },
 
-        image: "images/tables/tundra-cafe.png"
+        image: "images/tables/tundra-cafe.png",
+        detailImage: "images/table-details/tundra-gri-real.png"
     },
 
     {
@@ -202,7 +211,8 @@ const tables = [
             100: null
         },
 
-        image: "images/tables/traverten-cafe.png"
+        image: "images/tables/traverten-cafe.png",
+        detailImage: "images/table-details/traverten-real.png"
     },
 
     {
@@ -223,7 +233,8 @@ const tables = [
             100: null
         },
 
-        image: "images/tables/verde-cafe.png"
+        image: "images/tables/verde-cafe.png",
+        detailImage: "images/table-details/verde-guatemala-real.png"
     },
 
     {
@@ -244,7 +255,8 @@ const tables = [
             100: null
         },
 
-        image: "images/tables/elazig-petrol-cafe.png"
+        image: "images/tables/elazig-petrol-cafe.png",
+        detailImage: "images/table-details/elazig-petrol-yesili-real.png"
     },
 
     {
@@ -265,7 +277,8 @@ const tables = [
             100: null
         },
 
-        image: "images/tables/galaxy-cafe.png"
+        image: "images/tables/galaxy-cafe.png",
+        detailImage: "images/table-details/star-galaxy-real.png"
     },
 
     {
@@ -286,7 +299,8 @@ const tables = [
             100: null
         },
 
-        image: "images/tables/alexander-black-cafe.png"
+        image: "images/tables/alexander-black-cafe.png",
+        detailImage: "images/table-details/alexander-black-real.png"
     },
 
     {
@@ -307,7 +321,8 @@ const tables = [
             100: null
         },
 
-        image: "images/tables/visne-cafe.png"
+        image: "images/tables/visne-cafe.png",
+        detailImage: "images/table-details/elazig-visne-real.png"
     },
 
     {
@@ -324,7 +339,8 @@ const tables = [
             60: 4200
         },
 
-        image: "images/tables/menekse-cafe.png"
+        image: "images/tables/menekse-cafe.png",
+        detailImage: "images/table-details/menekse-real.png"
     },
 
     {
@@ -345,7 +361,8 @@ const tables = [
             100: null
         },
 
-        image: "images/tables/leylak-cafe.png"
+        image: "images/tables/leylak-cafe.png",
+        detailImage: "images/table-details/leylak-real.png"
     },
 
     {
@@ -366,7 +383,8 @@ const tables = [
             100: null
         },
 
-        image: "images/tables/sofita-cafe.png"
+        image: "images/tables/sofita-cafe.png",
+        detailImage: "images/table-details/sofita-bej-real.png"
     },
 
     {
@@ -387,7 +405,8 @@ const tables = [
             100: null
         },
 
-        image: "images/tables/ash-black-cafe.png"
+        image: "images/tables/ash-black-cafe.png",
+        detailImage: "images/table-details/ash-black-real.png"
     },
 
     {
@@ -477,43 +496,29 @@ const tables = [
     }
 ];
 
-const cafeBasePrices = {
-    "Muğla Beyazı": 3250,
-    "Silvia Beige": 3250,
-    "Aurelia Gold": 3250,
-    "Golden Mist": 3250,
-    "Adranos": 3500,
-    "Emperador": 3750,
-    "Akhisar Beji": 3750,
-    "Spider Beige": 3750,
-    "Tundra Gri": 4500,
-    "Star Galaxy": 4500,
-    "Menekşe": 4500,
-    "Leylak": 4500,
-    "Sofita Bej": 4500,
-    "Traverten": 5000,
-    "Verde Guatemala": 4750,
-    "Elazığ Petrol Yeşili": 4750,
-    "Ash Black": 4750,
-    "Alexander Black": 7500,
-    "Elazığ Vişne": 7500
-};
+const porcelainTables = [
+    { id: 26, name: "Lush", model: "porcelain_lush", texture: "images/porcelain/lush.png", image: "images/tables/porcelain/lush-cafe.png", detailImage: "images/table-details/lush-real.jpg" },
+    { id: 27, name: "Calacatta Borghini", model: "porcelain_calacatta_borghini", texture: "images/porcelain/calacatta-borghini.png", image: "images/tables/porcelain/calacatta-borghini-cafe.png", detailImage: "images/table-details/calacatta-borghini-real.jpg" },
+    { id: 28, name: "Calacatta Oro", model: "porcelain_calacatta_oro", texture: "images/porcelain/calacatta-oro.png", image: "images/tables/porcelain/calacatta-oro-cafe.png", detailImage: "images/table-details/calacatta-oro-real.jpg" },
+    { id: 29, name: "White Traverten", model: "porcelain_white_traverten", texture: "images/porcelain/white-traverten.png", image: "images/tables/porcelain/white-traverten-cafe.png", detailImage: "images/table-details/white-traverten-real.jpg" },
+    { id: 30, name: "Taj Mahal", model: "porcelain_taj_mahal", texture: "images/porcelain/taj-mahal.png", image: "images/tables/porcelain/taj-mahal-cafe.png", detailImage: "images/table-details/taj-mahal-real.jpg" },
+    { id: 31, name: "Beige Traverten", model: "porcelain_beige_traverten", texture: "images/porcelain/beige-traverten.png", image: "images/tables/porcelain/beige-traverten-cafe.png", detailImage: "images/table-details/beige-traverten-real.jpg" },
+    { id: 32, name: "Silver Root", model: "porcelain_silver_root", texture: "images/porcelain/silver-root.png", image: "images/tables/porcelain/silver-root-cafe.png", detailImage: "images/table-details/silver-root-real.jpg" },
+    { id: 33, name: "Pietra Grey", model: "porcelain_pietra_grey", texture: "images/porcelain/pietra-grey.png", image: "images/tables/porcelain/pietra-grey-cafe.png", detailImage: "images/table-details/pietra-grey-real.jpg" },
+    { id: 34, name: "Patagonia", model: "porcelain_patagonia", texture: "images/porcelain/patagonia.png", image: "images/tables/porcelain/patagonia-cafe.png", detailImage: "images/table-details/patagonia-real.jpg" },
+    { id: 35, name: "Lustre", model: "porcelain_lustre", texture: "images/porcelain/lustre.png", image: "images/tables/porcelain/lustre-cafe.png", detailImage: "images/table-details/lustre-real.jpg" },
+    { id: 36, name: "Calacatta Black", model: "porcelain_calacatta_black", texture: "images/porcelain/calacatta-black.png", image: "images/tables/porcelain/calacatta-black-cafe.png", detailImage: "images/table-details/calacatta-black-real.jpg" }
+].map(table => ({
+    ...table,
+    type: "Kafe Masası",
+    material: "Porselen",
+    category: "cafe-restaurant",
+    shape: "yuvarlak",
+    price: 6000,
+    pricePending: false,
+    availableSizes: [60],
+    prices: { 60: 6000 },
+    image: table.image
+}));
 
-tables.forEach(table => {
-    const basePrice = cafeBasePrices[table.name];
-
-    if (table.category !== "cafe-restaurant" || !basePrice) return;
-
-    const previousBasePrice = table.prices[60];
-    const priceDifference = basePrice - previousBasePrice;
-
-    table.price = basePrice;
-    table.prices = Object.fromEntries(
-        Object.entries(table.prices).map(([size, currentPrice]) => [
-            size,
-            currentPrice === null || currentPrice === undefined
-                ? currentPrice
-                : currentPrice + priceDifference
-        ])
-    );
-});
+tables.push(...porcelainTables);
