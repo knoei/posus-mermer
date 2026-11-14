@@ -78,15 +78,27 @@
         }
 
         .clear-cart {
-            border: none;
-            background: transparent;
-            color: #9f7547;
-            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            min-height: 38px;
+            padding: 0 13px;
+            border: 1px solid #d9c9b9;
+            border-radius: 8px;
+            background: #fff;
+            color: #8d493e;
+            font: inherit;
+            font-size: 11px;
+            font-weight: 700;
             cursor: pointer;
+            transition: background .2s ease, border-color .2s ease, color .2s ease;
         }
 
         .clear-cart:hover {
-            color: #765330;
+            border-color: #9b4135;
+            background: #fff7f5;
+            color: #9b4135;
         }
 
         .cart-item {
@@ -519,6 +531,7 @@
 
                     <button class="clear-cart" id="clearCartBtn"
                             type="button">
+                        <i class="fa-regular fa-trash-can"></i>
                         Sepeti Temizle
                     </button>
 

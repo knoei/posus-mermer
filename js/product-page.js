@@ -34,9 +34,13 @@ const stoneLightboxImage = document.getElementById("stoneLightboxImage");
 const stoneLightboxTitle = document.getElementById("stoneLightboxTitle");
 const stoneLightboxCategory = document.getElementById("stoneLightboxCategory");
 const stoneLightboxClose = document.getElementById("stoneLightboxClose");
+const stoneLightboxPrev = document.getElementById("stoneLightboxPrev");
+const stoneLightboxNext = document.getElementById("stoneLightboxNext");
 const stoneLightboxBackdrop = stoneLightbox.querySelector(".stone-lightbox-backdrop");
 
 let lastFocusedStoneCard = null;
+let lightboxItems = [];
+let activeLightboxIndex = -1;
 
 
 /* =========================
@@ -56,16 +60,37 @@ function capitalize(text) {
     return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
-function openStoneLightbox(stone, trigger) {
-    lastFocusedStoneCard = trigger;
+function updateStoneLightbox(stone) {
     stoneLightboxImage.src = stone.image;
     stoneLightboxImage.alt = `${stone.name} ${capitalize(stone.category)} taşı`;
     stoneLightboxTitle.textContent = stone.name;
     stoneLightboxCategory.textContent = capitalize(stone.category);
+    stoneLightboxPrev.disabled = lightboxItems.length < 2;
+    stoneLightboxNext.disabled = lightboxItems.length < 2;
+    stoneLightboxPrev.setAttribute("aria-label", `Önceki taşı göster: ${lightboxItems[(activeLightboxIndex - 1 + lightboxItems.length) % lightboxItems.length].name}`);
+    stoneLightboxNext.setAttribute("aria-label", `Sonraki taşı göster: ${lightboxItems[(activeLightboxIndex + 1) % lightboxItems.length].name}`);
+}
+
+function openStoneLightbox(stone, trigger, items, index) {
+    lastFocusedStoneCard = trigger;
+    lightboxItems = items;
+    activeLightboxIndex = index;
+    updateStoneLightbox(stone);
     stoneLightbox.classList.add("is-open");
     stoneLightbox.setAttribute("aria-hidden", "false");
     document.body.classList.add("lightbox-open");
     stoneLightboxClose.focus();
+}
+
+function navigateStoneLightbox(direction) {
+    if (!stoneLightbox.classList.contains("is-open") || lightboxItems.length < 2) {
+        return;
+    }
+
+    activeLightboxIndex =
+        (activeLightboxIndex + direction + lightboxItems.length) % lightboxItems.length;
+
+    updateStoneLightbox(lightboxItems[activeLightboxIndex]);
 }
 
 function closeStoneLightbox() {
@@ -82,10 +107,22 @@ function closeStoneLightbox() {
 
 stoneLightboxClose.addEventListener("click", closeStoneLightbox);
 stoneLightboxBackdrop.addEventListener("click", closeStoneLightbox);
+stoneLightboxPrev.addEventListener("click", () => navigateStoneLightbox(-1));
+stoneLightboxNext.addEventListener("click", () => navigateStoneLightbox(1));
 
 document.addEventListener("keydown", event => {
     if (event.key === "Escape") {
         closeStoneLightbox();
+    }
+
+    if (event.key === "ArrowLeft" && stoneLightbox.classList.contains("is-open")) {
+        event.preventDefault();
+        navigateStoneLightbox(-1);
+    }
+
+    if (event.key === "ArrowRight" && stoneLightbox.classList.contains("is-open")) {
+        event.preventDefault();
+        navigateStoneLightbox(1);
     }
 });
 
@@ -125,7 +162,7 @@ function renderStones(items) {
         items.slice(startIndex, endIndex);
 
 
-    pageItems.forEach(stone => {
+    pageItems.forEach((stone, pageIndex) => {
 
         const card =
             document.createElement("button");
@@ -175,7 +212,7 @@ function renderStones(items) {
         `;
 
         card.addEventListener("click", () => {
-            openStoneLightbox(stone, card);
+            openStoneLightbox(stone, card, items, startIndex + pageIndex);
         });
 
 
@@ -209,6 +246,8 @@ function renderPagination(items) {
         document.createElement("button");
 
     previousButton.className = "pagination-arrow";
+    previousButton.setAttribute("aria-label", "Önceki sayfa");
+    previousButton.title = "Önceki sayfa";
 
     previousButton.innerHTML =
         '<i class="fa-solid fa-chevron-left"></i>';
@@ -230,53 +269,63 @@ function renderPagination(items) {
     pagination.appendChild(previousButton);
 
 
-    // FIRST PAGE
-    if (currentPage > 3) {
+    // FIXED PAGE SLOTS
+    const pageSlots = document.createElement("div");
+    pageSlots.className = "pagination-pages";
+    pageSlots.setAttribute("aria-label", "Sayfa numaraları");
 
-        createPageButton(1, items);
+    let pageTokens;
 
-        const dots =
-            document.createElement("span");
-
-        dots.className = "pagination-dots";
-        dots.textContent = "...";
-
-        pagination.appendChild(dots);
+    if (totalPages <= 7) {
+        pageTokens = Array.from(
+            { length: totalPages },
+            (_, index) => index + 1
+        );
+    } else if (currentPage <= 4) {
+        pageTokens = [1, 2, 3, 4, 5, "dots", totalPages];
+    } else if (currentPage >= totalPages - 3) {
+        pageTokens = [
+            1,
+            "dots",
+            totalPages - 4,
+            totalPages - 3,
+            totalPages - 2,
+            totalPages - 1,
+            totalPages
+        ];
+    } else {
+        pageTokens = [
+            1,
+            "dots",
+            currentPage - 1,
+            currentPage,
+            currentPage + 1,
+            "dots",
+            totalPages
+        ];
     }
 
+    pageTokens.forEach(token => {
+        if (token === "dots") {
+            const dots = document.createElement("span");
+            dots.className = "pagination-dots";
+            dots.textContent = "…";
+            dots.setAttribute("aria-hidden", "true");
+            pageSlots.appendChild(dots);
+            return;
+        }
 
-    // NEAR CURRENT PAGE
-    const startPage =
-        Math.max(1, currentPage - 1);
+        createPageButton(token, items, pageSlots);
+    });
 
-    const endPage =
-        Math.min(totalPages, currentPage + 1);
-
-
-    for (
-        let page = startPage;
-        page <= endPage;
-        page++
-    ) {
-
-        createPageButton(page, items);
-
+    while (pageSlots.children.length < 7) {
+        const spacer = document.createElement("span");
+        spacer.className = "pagination-spacer";
+        spacer.setAttribute("aria-hidden", "true");
+        pageSlots.appendChild(spacer);
     }
 
-
-    // LAST PAGE
-    if (currentPage < totalPages - 2) {
-
-        const dots =
-            document.createElement("span");
-
-        dots.className = "pagination-dots";
-        dots.textContent = "...";
-
-        pagination.appendChild(dots);
-
-        createPageButton(totalPages, items);
-    }
+    pagination.appendChild(pageSlots);
 
 
     // NEXT
@@ -284,6 +333,8 @@ function renderPagination(items) {
         document.createElement("button");
 
     nextButton.className = "pagination-arrow";
+    nextButton.setAttribute("aria-label", "Sonraki sayfa");
+    nextButton.title = "Sonraki sayfa";
 
     nextButton.innerHTML =
         '<i class="fa-solid fa-chevron-right"></i>';
@@ -318,13 +369,14 @@ function renderPagination(items) {
     pagination.appendChild(pageInfo);
 }
 
-function createPageButton(page, items) {
+function createPageButton(page, items, target = pagination) {
 
     const pageButton =
         document.createElement("button");
 
 
     pageButton.textContent = page;
+    pageButton.setAttribute("aria-label", `${page}. sayfaya git`);
 
 
     if (page === currentPage) {
@@ -343,7 +395,7 @@ function createPageButton(page, items) {
     });
 
 
-    pagination.appendChild(pageButton);
+    target.appendChild(pageButton);
 }
 
 

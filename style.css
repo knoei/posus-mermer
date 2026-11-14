@@ -1041,6 +1041,7 @@ header {
 
 .stone-card {
     width: 100%;
+    height: 100%;
     padding: 0;
     border: 0;
     background: transparent;
@@ -1088,12 +1089,19 @@ header {
     gap: 10px;
 }
 
+.stone-info > div:first-child {
+    min-width: 0;
+    flex: 1;
+}
+
 
 .stone-info h3 {
     margin: 0 0 6px;
+    min-height: 38px;
     font-family: Georgia, serif;
     font-size: 16px;
     font-weight: 400;
+    line-height: 1.18;
     color: #171512;
 }
 
@@ -1172,11 +1180,11 @@ body.lightbox-open {
 .stone-lightbox-dialog {
     position: relative;
     z-index: 1;
-    width: min(760px, 100%);
+    width: min(820px, 100%);
     max-height: calc(100vh - 56px);
     overflow: hidden;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 230px;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 0.48fr);
     background: #f8f4ee;
     border: 1px solid rgba(255, 255, 255, 0.24);
     border-radius: 18px;
@@ -1190,6 +1198,7 @@ body.lightbox-open {
 }
 
 .stone-lightbox-image-wrap {
+    position: relative;
     min-height: 460px;
     background: #d9d3ca;
 }
@@ -1200,9 +1209,49 @@ body.lightbox-open {
     min-height: 460px;
     display: block;
     object-fit: cover;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.stone-lightbox-nav {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    width: 46px;
+    height: 46px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #171512;
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.stone-lightbox-nav:hover,
+.stone-lightbox-nav:focus-visible {
+    background: #fff;
+    transform: translateY(-50%) scale(1.08);
+}
+
+.stone-lightbox-nav:disabled {
+    opacity: 0.35;
+    cursor: default;
+    transform: translateY(-50%);
+}
+
+.stone-lightbox-nav--prev {
+    left: 16px;
+}
+
+.stone-lightbox-nav--next {
+    right: 16px;
 }
 
 .stone-lightbox-info {
+    min-width: 0;
     padding: 64px 28px 30px;
     display: flex;
     flex-direction: column;
@@ -1225,18 +1274,14 @@ body.lightbox-open {
 
 .stone-lightbox-info h2 {
     margin: 0;
+    max-width: 100%;
     color: #181512;
     font-family: Georgia, serif;
-    font-size: clamp(30px, 4vw, 46px);
+    font-size: clamp(25px, 3vw, 36px);
     font-weight: 400;
-    line-height: 1.05;
-}
-
-.stone-lightbox-info p {
-    margin: 20px 0 0;
-    color: #6b6259;
-    font-size: 13px;
-    line-height: 1.7;
+    line-height: 1.08;
+    overflow-wrap: anywhere;
+    hyphens: auto;
 }
 
 .stone-lightbox-close {
@@ -1283,9 +1328,16 @@ body.lightbox-open {
         padding: 24px;
     }
 
-    .stone-lightbox-info p {
-        margin-top: 12px;
+    .stone-lightbox-info h2 {
+        font-size: clamp(26px, 8vw, 36px);
+        overflow-wrap: break-word;
     }
+
+    .stone-lightbox-nav {
+        width: 42px;
+        height: 42px;
+    }
+
 }
 
 
@@ -1298,11 +1350,19 @@ body.lightbox-open {
 
 .pagination {
     margin-top: 42px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 42px 314px 42px;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    flex-wrap: wrap;
+}
+
+.pagination-pages {
+    display: grid;
+    grid-template-columns: repeat(7, 38px);
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 .pagination button {
@@ -1343,17 +1403,48 @@ body.lightbox-open {
 }
 
 .pagination-dots {
-    padding: 0 3px;
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
     color: #998f85;
     font-size: 13px;
 }
 
+.pagination-spacer {
+    width: 38px;
+    height: 38px;
+    visibility: hidden;
+}
+
 .pagination-info {
-    width: 100%;
+    grid-column: 1 / -1;
     margin-top: 8px;
     text-align: center;
     font-size: 11px;
     color: #8b8177;
+}
+
+@media (max-width: 520px) {
+    .pagination {
+        grid-template-columns: 40px minmax(0, 1fr) 40px;
+        width: 100%;
+        gap: 6px;
+    }
+
+    .pagination-pages {
+        grid-template-columns: repeat(7, minmax(28px, 34px));
+        gap: 3px;
+    }
+
+    .pagination button,
+    .pagination-dots,
+    .pagination-spacer {
+        min-width: 0;
+        width: 100%;
+        height: 36px;
+        padding: 0;
+    }
 }
 
 .stone-grid {

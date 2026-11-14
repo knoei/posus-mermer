@@ -1,23 +1,23 @@
 const combinationStones = [
     { name: "Muğla Beyazı", tabletop: "images/tabletops/tabletop-01-clean.png", texture: "images/marbles/mugla-beyazi.jpg" },
-    { name: "Silvia Beige", tabletop: "images/tabletops/tabletop-silvia-beige.png", texture: "images/tabletops/tabletop-silvia-beige.png" },
-    { name: "Golden Mist", tabletop: "images/tabletops/tabletop-golden-mist.png", texture: "images/tabletops/tabletop-golden-mist.png" },
-    { name: "Aurelia Gold", tabletop: "images/tabletops/tabletop-06-clean.png", texture: "images/marbles/golden-brown.jpg" },
+    { name: "Silvia Beige", tabletop: "images/tabletops/tabletop-silvia-beige.png", texture: "images/tabletops/tabletop-silvia-beige.png", swatchFromTabletop: true },
+    { name: "Golden Mist", tabletop: "images/tabletops/tabletop-golden-mist.png", texture: "images/tabletops/tabletop-golden-mist.png", swatchFromTabletop: true },
+    { name: "Aurelia Gold", tabletop: "images/tabletops/tabletop-06-clean.png", texture: "images/tabletops/tabletop-06-clean.png", swatchFromTabletop: true },
     { name: "Adranos", tabletop: "images/tabletops/tabletop-adranos.png", texture: "images/marbles/adranos.png" },
-    { name: "Emperador", tabletop: "images/tabletops/tabletop-emperador.png", texture: "images/tabletops/tabletop-emperador.png" },
-    { name: "Akhisar Beji", tabletop: "images/tabletops/tabletop-akhisar-beji.png", texture: "images/tabletops/tabletop-akhisar-beji.png" },
-    { name: "Spider Beige", tabletop: "images/tabletops/tabletop-spider-beige.png", texture: "images/tabletops/tabletop-spider-beige.png" },
-    { name: "Tundra Gri", tabletop: "images/tabletops/tabletop-tundra-gri.png", texture: "images/tabletops/tabletop-tundra-gri.png" },
+    { name: "Emperador", tabletop: "images/tabletops/tabletop-emperador.png", texture: "images/tabletops/tabletop-emperador.png", swatchFromTabletop: true },
+    { name: "Akhisar Beji", tabletop: "images/tabletops/tabletop-akhisar-beji.png", texture: "images/tabletops/tabletop-akhisar-beji.png", swatchFromTabletop: true },
+    { name: "Spider Beige", tabletop: "images/tabletops/tabletop-spider-beige.png", texture: "images/tabletops/tabletop-spider-beige.png", swatchFromTabletop: true },
+    { name: "Tundra Gri", tabletop: "images/tabletops/tabletop-tundra-gri.png", texture: "images/tabletops/tabletop-tundra-gri.png", swatchFromTabletop: true },
     { name: "Traverten", tabletop: "images/tabletops/tabletop-04-clean.png", texture: "images/travertines/denizli-travertine.jpg" },
     { name: "Verde Guatemala", tabletop: "images/tabletops/tabletop-03-clean.png", texture: "images/marbles/verde-guatemala.jpg" },
-    { name: "Elazığ Petrol Yeşili", tabletop: "images/tabletops/tabletop-elazig-petrol-yesili.png", texture: "images/tabletops/tabletop-elazig-petrol-yesili.png" },
+    { name: "Elazığ Petrol Yeşili", tabletop: "images/tabletops/tabletop-elazig-petrol-yesili.png", texture: "images/tabletops/tabletop-elazig-petrol-yesili.png", swatchFromTabletop: true },
     { name: "Star Galaxy", tabletop: "images/tabletops/tabletop-05-clean.png", texture: "images/granites/star-galaxy.jpg" },
     { name: "Alexander Black", tabletop: "images/tabletops/tabletop-02-clean.png", texture: "images/marbles/nero-marquina.jpg" },
-    { name: "Elazığ Vişne", tabletop: "images/tabletops/tabletop-elazig-visne.png", texture: "images/tabletops/tabletop-elazig-visne.png" },
-    { name: "Menekşe", tabletop: "images/tabletops/tabletop-menekse.png", texture: "images/tabletops/tabletop-menekse.png" },
-    { name: "Leylak", tabletop: "images/tabletops/tabletop-leylak.png", texture: "images/tabletops/tabletop-leylak.png" },
-    { name: "Sofita Bej", tabletop: "images/tabletops/tabletop-sofita-bej.png", texture: "images/tabletops/tabletop-sofita-bej.png" },
-    { name: "Ash Black", tabletop: "images/tabletops/tabletop-ash-black.png", texture: "images/tabletops/tabletop-ash-black.png" },
+    { name: "Elazığ Vişne", tabletop: "images/tabletops/tabletop-elazig-visne.png", texture: "images/tabletops/tabletop-elazig-visne.png", swatchFromTabletop: true },
+    { name: "Menekşe", tabletop: "images/tabletops/tabletop-menekse.png", texture: "images/tabletops/tabletop-menekse.png", swatchFromTabletop: true },
+    { name: "Leylak", tabletop: "images/tabletops/tabletop-leylak.png", texture: "images/tabletops/tabletop-leylak.png", swatchFromTabletop: true },
+    { name: "Sofita Bej", tabletop: "images/tabletops/tabletop-sofita-bej.png", texture: "images/tabletops/tabletop-sofita-bej.png", swatchFromTabletop: true },
+    { name: "Ash Black", tabletop: "images/tabletops/tabletop-ash-black.png", texture: "images/tabletops/tabletop-ash-black.png", swatchFromTabletop: true },
     { name: "Lush", material: "Porselen", tabletop: "images/tabletops/porcelain/tabletop-lush.png", texture: "images/porcelain/lush.png" },
     { name: "Calacatta Borghini", material: "Porselen", tabletop: "images/tabletops/porcelain/tabletop-calacatta-borghini.png", texture: "images/porcelain/calacatta-borghini.png" },
     { name: "Calacatta Oro", material: "Porselen", tabletop: "images/tabletops/porcelain/tabletop-calacatta-oro.png", texture: "images/porcelain/calacatta-oro.png" },
@@ -156,6 +156,71 @@ function getCart() {
     }
 }
 
+function loadCombinationImage(src) {
+    return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = reject;
+        image.src = src;
+    });
+}
+
+function drawContainedImage(context, image, box) {
+    const scale = Math.min(box.width / image.naturalWidth, box.height / image.naturalHeight);
+    const width = image.naturalWidth * scale;
+    const height = image.naturalHeight * scale;
+    const x = box.x + (box.width - width) / 2;
+    const y = box.y + (box.height - height) / 2;
+
+    context.drawImage(image, x, y, width, height);
+}
+
+async function createCombinationCartImage(stone, leg, selectedSize) {
+    const [tabletopImage, legImage] = await Promise.all([
+        loadCombinationImage(stone.tabletop),
+        loadCombinationImage(leg.image)
+    ]);
+
+    const canvas = document.createElement("canvas");
+    canvas.width = 720;
+    canvas.height = 720;
+    const context = canvas.getContext("2d");
+
+    const background = context.createRadialGradient(220, 120, 20, 360, 360, 620);
+    background.addColorStop(0, "#fffdf9");
+    background.addColorStop(1, "#e9dfd3");
+    context.fillStyle = background;
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    context.save();
+    context.filter = "blur(16px)";
+    context.fillStyle = "rgba(41, 32, 24, 0.22)";
+    context.beginPath();
+    context.ellipse(360, 620, 180, 28, 0, 0, Math.PI * 2);
+    context.fill();
+    context.restore();
+
+    const isTrumpet = leg.previewClass === "leg-trumpet-large";
+    const legBox = {
+        x: isTrumpet ? 185 : 205,
+        y: 245,
+        width: isTrumpet ? 350 : 310,
+        height: 395
+    };
+    drawContainedImage(context, legImage, legBox);
+
+    const size = Number(selectedSize) || 60;
+    const tabletopWidth = Math.min(520, 390 + Math.max(0, size - 60) * 3.25);
+    drawContainedImage(context, tabletopImage, {
+        x: (canvas.width - tabletopWidth) / 2,
+        y: 155,
+        width: tabletopWidth,
+        height: 235
+    });
+
+    return canvas.toDataURL("image/webp", 0.88);
+}
+
 function renderPurchaseSizes() {
     const product = getSelectedTableProduct();
     const previousSize = combinationSize.value;
@@ -222,7 +287,7 @@ function updatePurchase() {
         : "";
 }
 
-function addCombinationToCart() {
+async function addCombinationToCart() {
     const stone = combinationStones[currentStoneIndex];
     const leg = combinationLegs[currentLegIndex];
     const product = getSelectedTableProduct();
@@ -243,6 +308,17 @@ function addCombinationToCart() {
         return;
     }
 
+    combinationAddToCart.disabled = true;
+    purchaseMessage.textContent = "Kombinasyon görseli hazırlanıyor…";
+
+    let combinationImage = product.image;
+
+    try {
+        combinationImage = await createCombinationCartImage(stone, leg, selectedSize);
+    } catch {
+        combinationImage = product.image;
+    }
+
     const cart = getCart();
     const combinationId = `combo-${product.id}-${currentLegIndex}`;
     const existingItem = cart.find(item =>
@@ -254,6 +330,12 @@ function addCombinationToCart() {
         existingItem.price = Number(unitPrice);
         existingItem.unitPrice = Number(unitPrice);
         existingItem.basePrice = Number(basePrice);
+        existingItem.name = `${stone.name} Kafe Masası`;
+        existingItem.image = combinationImage;
+        existingItem.material = product.material;
+        existingItem.leg = leg.name;
+        existingItem.legImage = leg.image;
+        existingItem.tabletopImage = stone.tabletop;
         existingItem.legSurcharge = legSurcharge;
         delete existingItem.retailLegSurcharge;
         delete existingItem.wholesaleLegSurcharge;
@@ -265,10 +347,12 @@ function addCombinationToCart() {
             id: combinationId,
             tableId: product.id,
             name: `${stone.name} Kafe Masası`,
-            image: product.image,
+            image: combinationImage,
             material: product.material,
             size: selectedSize,
             leg: leg.name,
+            legImage: leg.image,
+            tabletopImage: stone.tabletop,
             basePrice: Number(basePrice),
             legSurcharge,
             unitPrice: Number(unitPrice),
@@ -283,6 +367,7 @@ function addCombinationToCart() {
     }));
     combinationGoToCart.classList.remove("is-hidden");
     purchaseMessage.textContent = "Kombinasyon sepetinize eklendi.";
+    combinationAddToCart.disabled = false;
 }
 
 function renderStone() {
@@ -293,6 +378,8 @@ function renderStone() {
     requestAnimationFrame(() => comboTabletopImage.classList.remove("is-changing"));
 
     stoneSwatch.style.backgroundImage = `url("${stone.texture}")`;
+    stoneSwatch.style.backgroundSize = stone.swatchFromTabletop ? "auto 250%" : "cover";
+    stoneSwatch.style.backgroundPosition = stone.swatchFromTabletop ? "50% 40%" : "center";
     document.getElementById("stoneName").textContent = stone.name;
     document.getElementById("selectedStone").textContent = stone.name;
     document.getElementById("stoneCount").textContent = `${currentStoneIndex + 1} / ${combinationStones.length}`;

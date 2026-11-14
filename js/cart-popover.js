@@ -77,6 +77,10 @@
                     <span>Ürün toplamı</span>
                     <strong>₺0</strong>
                 </div>
+                <button class="mini-cart-clear" type="button">
+                    <i class="fa-regular fa-trash-can"></i>
+                    Sepeti Temizle
+                </button>
                 <a href="sepet.html" class="mini-cart-link">
                     Sepete Git
                     <i class="fa-solid fa-arrow-right"></i>
@@ -92,6 +96,7 @@
     const footer = miniCart.querySelector(".mini-cart-footer");
     const total = miniCart.querySelector(".mini-cart-total strong");
     const closeButton = miniCart.querySelector(".mini-cart-close");
+    const clearButton = miniCart.querySelector(".mini-cart-clear");
     let lastCartActionAt = 0;
 
     const updateCounters = cart => {
@@ -214,6 +219,19 @@
     });
 
     closeButton.addEventListener("click", close);
+
+    clearButton.addEventListener("click", () => {
+        const cart = getCart();
+        if (cart.length === 0) return;
+
+        const confirmed = confirm(
+            "Sepetinizdeki tüm ürünleri kaldırmak istiyor musunuz?"
+        );
+
+        if (!confirmed) return;
+
+        saveCart([]);
+    });
 
     itemList.addEventListener("click", event => {
         const actionButton = event.target.closest("[data-action]");
