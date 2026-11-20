@@ -526,15 +526,15 @@ const porcelainTables = [
     { id: 36, name: "Calacatta Black", model: "porcelain_calacatta_black", texture: "images/porcelain/calacatta-black.png", image: "images/tables/porcelain/calacatta-black-cafe.png", detailImage: "images/table-details/calacatta-black-real.jpg" }
 ].map(table => ({
     ...table,
-    type: "Kafe Masası",
     material: "Porselen",
     category: "cafe-restaurant",
     shape: "yuvarlak",
     price: 6000,
     pricePending: false,
-    availableSizes: [60],
-    prices: { 60: 6000 },
+    availableSizes: [60, 70, 80, 90, 100],
+    prices: { 60: 6000, 70: 8400, 80: 10800, 90: 13200, 100: 16400 },
     image: table.image
 }));
 
-tables.push(...porcelainTables);
+const firstHomeLivingIndex = tables.findIndex(table => table.category !== "cafe-restaurant");
+tables.splice(firstHomeLivingIndex, 0, ...porcelainTables);
