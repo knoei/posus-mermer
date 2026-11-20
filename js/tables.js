@@ -57,7 +57,14 @@ const tables = [
             100: 7600
         },
 
-        image: "images/tables/golden-mist-cafe.png",
+        image: "images/tables/golden-mist-cafe-farther.png",
+        sizeImages: {
+            60: "images/tables/golden-mist-cafe-farther.png",
+            70: "images/tables/golden-mist-cafe-70-v2.png",
+            80: "images/tables/golden-mist-cafe-80.png",
+            90: "images/tables/golden-mist-cafe-90.png",
+            100: "images/tables/golden-mist-cafe-100.png"
+        },
         detailImage: "images/table-details/golden-mist-real.png"
     },
 
@@ -538,3 +545,42 @@ const porcelainTables = [
 
 const firstHomeLivingIndex = tables.findIndex(table => table.category !== "cafe-restaurant");
 tables.splice(firstHomeLivingIndex, 0, ...porcelainTables);
+
+const cafeTabletopImages = {
+    "Muğla Beyazı": "images/tabletops/tabletop-01-clean.png",
+    "Silvia Beige": "images/tabletops/tabletop-silvia-beige.png",
+    "Golden Mist": "images/tabletops/tabletop-golden-mist.png",
+    "Aurelia Gold": "images/tabletops/tabletop-06-clean.png",
+    "Adranos": "images/tabletops/tabletop-adranos.png",
+    "Emperador": "images/tabletops/tabletop-emperador.png",
+    "Akhisar Beji": "images/tabletops/tabletop-akhisar-beji.png",
+    "Spider Beige": "images/tabletops/tabletop-spider-beige.png",
+    "Tundra Gri": "images/tabletops/tabletop-tundra-gri.png",
+    "Traverten": "images/tabletops/tabletop-04-clean.png",
+    "Verde Guatemala": "images/tabletops/tabletop-03-clean.png",
+    "Elazığ Petrol Yeşili": "images/tabletops/tabletop-elazig-petrol-yesili.png",
+    "Star Galaxy": "images/tabletops/tabletop-05-clean.png",
+    "Alexander Black": "images/tabletops/tabletop-02-clean.png",
+    "Elazığ Vişne": "images/tabletops/tabletop-elazig-visne.png",
+    "Menekşe": "images/tabletops/tabletop-menekse.png",
+    "Leylak": "images/tabletops/tabletop-leylak.png",
+    "Sofita Bej": "images/tabletops/tabletop-sofita-bej.png",
+    "Ash Black": "images/tabletops/tabletop-ash-black.png",
+    "Lush": "images/tabletops/porcelain/tabletop-lush.png",
+    "Calacatta Borghini": "images/tabletops/porcelain/tabletop-calacatta-borghini.png",
+    "Calacatta Oro": "images/tabletops/porcelain/tabletop-calacatta-oro.png",
+    "White Traverten": "images/tabletops/porcelain/tabletop-white-traverten.png",
+    "Taj Mahal": "images/tabletops/porcelain/tabletop-taj-mahal.png",
+    "Beige Traverten": "images/tabletops/porcelain/tabletop-beige-traverten.png",
+    "Silver Root": "images/tabletops/porcelain/tabletop-silver-root.png",
+    "Pietra Grey": "images/tabletops/porcelain/tabletop-pietra-grey.png",
+    "Patagonia": "images/tabletops/porcelain/tabletop-patagonia.png",
+    "Lustre": "images/tabletops/porcelain/tabletop-lustre.png",
+    "Calacatta Black": "images/tabletops/porcelain/tabletop-calacatta-black.png"
+};
+
+tables.forEach(table => {
+    if (table.category === "cafe-restaurant" && cafeTabletopImages[table.name]) {
+        table.tabletopImage = cafeTabletopImages[table.name];
+    }
+});

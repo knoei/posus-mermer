@@ -659,6 +659,146 @@
 
             let activeGalleryIndex = 0;
 
+            const cafeSizeImageCache = new Map();
+            let primaryImageRequest = 0;
+
+            function loadCafeLayer(src) {
+                return new Promise((resolve, reject) => {
+                    const image = new Image();
+                    image.onload = () => resolve(image);
+                    image.onerror = reject;
+                    image.src = src;
+                });
+            }
+
+            function getOpaqueBounds(image) {
+                if (image.__opaqueBounds) return image.__opaqueBounds;
+
+                const scanCanvas = document.createElement("canvas");
+                scanCanvas.width = image.naturalWidth;
+                scanCanvas.height = image.naturalHeight;
+                const scanContext = scanCanvas.getContext("2d", { willReadFrequently: true });
+                scanContext.drawImage(image, 0, 0);
+
+                const pixels = scanContext.getImageData(0, 0, scanCanvas.width, scanCanvas.height).data;
+                let minX = scanCanvas.width;
+                let minY = scanCanvas.height;
+                let maxX = -1;
+                let maxY = -1;
+
+                for (let y = 0; y < scanCanvas.height; y += 2) {
+                    for (let x = 0; x < scanCanvas.width; x += 2) {
+                        if (pixels[(y * scanCanvas.width + x) * 4 + 3] < 12) continue;
+                        minX = Math.min(minX, x);
+                        minY = Math.min(minY, y);
+                        maxX = Math.max(maxX, x);
+                        maxY = Math.max(maxY, y);
+                    }
+                }
+
+                image.__opaqueBounds = maxX >= 0
+                    ? { x: minX, y: minY, width: maxX - minX + 2, height: maxY - minY + 2 }
+                    : { x: 0, y: 0, width: image.naturalWidth, height: image.naturalHeight };
+
+                return image.__opaqueBounds;
+            }
+
+            function drawVisibleLayer(context, image, box) {
+                const source = getOpaqueBounds(image);
+                context.drawImage(
+                    image,
+                    source.x,
+                    source.y,
+                    source.width,
+                    source.height,
+                    box.x,
+                    box.y,
+                    box.width,
+                    box.height
+                );
+            }
+
+            async function createCafeSizeImage(selectedSize) {
+                const size = Number(selectedSize) || 60;
+                const cacheKey = `${product.id}:${size}`;
+                if (cafeSizeImageCache.has(cacheKey)) return cafeSizeImageCache.get(cacheKey);
+
+                const goldenMistTemplates = {
+                    60: "images/tables/golden-mist-cafe-farther.png",
+                    70: "images/tables/golden-mist-cafe-70-v2.png",
+                    80: "images/tables/golden-mist-cafe-80.png",
+                    90: "images/tables/golden-mist-cafe-90.png",
+                    100: "images/tables/golden-mist-cafe-100.png"
+                };
+                const porcelainTemplates = {
+                    60: "images/tables/golden-mist-standard-no-tabletop.png",
+                    70: "images/tables/golden-mist-standard-no-tabletop.png",
+                    80: "images/tables/golden-mist-standard-no-tabletop.png",
+                    90: "images/tables/golden-mist-x-no-tabletop.png",
+                    100: "images/tables/golden-mist-x-no-tabletop.png"
+                };
+                const templatePath = product.material === "Porselen"
+                    ? porcelainTemplates[size] || porcelainTemplates[60]
+                    : goldenMistTemplates[size] || goldenMistTemplates[60];
+                const [tabletopImage, templateImage] = await Promise.all([
+                    loadCafeLayer(product.tabletopImage),
+                    loadCafeLayer(templatePath)
+                ]);
+
+                const canvas = document.createElement("canvas");
+                canvas.width = 1254;
+                canvas.height = 1254;
+                const context = canvas.getContext("2d");
+                context.drawImage(templateImage, 0, 0, canvas.width, canvas.height);
+
+                const tabletopBoxes = {
+                    60: { x: 240, y: 170, width: 774, height: 300 },
+                    70: { x: 164, y: 145, width: 927, height: 330 },
+                    80: { x: 134, y: 140, width: 987, height: 350 },
+                    90: { x: 250, y: 300, width: 754, height: 270 },
+                    100: { x: 219, y: 290, width: 816, height: 290 }
+                };
+                const tabletopBox = tabletopBoxes[size] || tabletopBoxes[60];
+                drawVisibleLayer(context, tabletopImage, tabletopBox);
+
+                const renderedImage = canvas.toDataURL("image/webp", 0.92);
+                cafeSizeImageCache.set(cacheKey, renderedImage);
+                return renderedImage;
+            }
+
+            function getPrimaryImageForSelectedSize() {
+                const selectedSize = document.getElementById("productSize")?.value || "60";
+                const cacheKey = `${product.id}:${Number(selectedSize) || 60}`;
+                return product.sizeImages?.[selectedSize]
+                    || cafeSizeImageCache.get(cacheKey)
+                    || product.image;
+            }
+
+            async function updatePrimaryImageForSelectedSize() {
+                const selectedSize = document.getElementById("productSize")?.value || "60";
+                const requestId = ++primaryImageRequest;
+
+                if (activeGalleryIndex !== 0) return;
+
+                let primaryImage = getPrimaryImageForSelectedSize();
+
+                if (product.category === "cafe-restaurant" && product.tabletopImage && !product.sizeImages?.[selectedSize]) {
+                    try {
+                        primaryImage = await createCafeSizeImage(selectedSize);
+                    } catch (error) {
+                        console.error("Kafe masası ölçü görseli hazırlanamadı:", error);
+                    }
+                }
+
+                if (requestId !== primaryImageRequest || activeGalleryIndex !== 0) return;
+
+                productImage.src = primaryImage;
+                productImage.alt = `${product.name} ${selectedSize} cm masa`;
+
+                const firstThumbnailImage = productThumbnails.querySelector(".gallery-thumbnail:first-child img");
+                if (firstThumbnailImage) firstThumbnailImage.src = primaryImage;
+            }
+
             function showGalleryImage(index) {
                 activeGalleryIndex = (index + galleryImages.length) % galleryImages.length;
                 const activeImage = galleryImages[activeGalleryIndex];
@@ -666,10 +806,16 @@
                 galleryStage.classList.add("is-changing");
 
                 window.setTimeout(() => {
-                    productImage.src = activeImage.src;
-                    productImage.alt = activeImage.alt;
+                    productImage.src = activeGalleryIndex === 0
+                        ? getPrimaryImageForSelectedSize()
+                        : activeImage.src;
+                    productImage.alt = activeGalleryIndex === 0
+                        ? `${product.name} ${document.getElementById("productSize")?.value || 60} cm masa`
+                        : activeImage.alt;
                     productImage.classList.toggle("is-detail-photo", activeGalleryIndex > 0);
                     galleryStage.classList.remove("is-changing");
+
+                    if (activeGalleryIndex === 0) updatePrimaryImageForSelectedSize();
                 }, 110);
 
                 productThumbnails.querySelectorAll(".gallery-thumbnail").forEach((thumbnail, thumbnailIndex) => {
@@ -793,6 +939,8 @@
             function updateSelection() {
 
                 const selectedSize = productSize.value;
+
+                updatePrimaryImageForSelectedSize();
 
                 const quantity = Math.max(
                     1,
