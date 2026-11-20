@@ -496,6 +496,22 @@ const tables = [
     }
 ];
 
+const cafePriceTiers = {
+    3000: { 60: 3000, 70: 4200, 80: 5400, 90: 6600, 100: 8200 },
+    3300: { 60: 3300, 70: 4600, 80: 5900, 90: 7300, 100: 9000 },
+    3600: { 60: 3600, 70: 5000, 80: 6500, 90: 7900, 100: 9800 },
+    4200: { 60: 4200, 70: 5900, 80: 7600, 90: 9200, 100: 11500 },
+    4500: { 60: 4500, 70: 6300, 80: 8100, 90: 9900, 100: 12300 },
+    6600: { 60: 6600, 70: 9200, 80: 11900, 90: 15500, 100: 20000 }
+};
+
+tables.forEach(table => {
+    if (table.category !== "cafe-restaurant") return;
+
+    const priceTier = cafePriceTiers[table.price];
+    if (priceTier) table.prices = { ...priceTier };
+});
+
 const porcelainTables = [
     { id: 26, name: "Lush", model: "porcelain_lush", texture: "images/porcelain/lush.png", image: "images/tables/porcelain/lush-cafe.png", detailImage: "images/table-details/lush-real.jpg" },
     { id: 27, name: "Calacatta Borghini", model: "porcelain_calacatta_borghini", texture: "images/porcelain/calacatta-borghini.png", image: "images/tables/porcelain/calacatta-borghini-cafe.png", detailImage: "images/table-details/calacatta-borghini-real.jpg" },
