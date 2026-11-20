@@ -32,6 +32,7 @@ tableCount.textContent = productList.length;
 
 productList.forEach((table) => {
     const card = document.createElement("article");
+    const isFavorite = window.PosusWishlist?.has(table.id) || false;
 
     card.classList.add("table-product-card");
 
@@ -45,10 +46,13 @@ productList.forEach((table) => {
             ` : ""}
 
             <button
-                class="table-favorite"
-                aria-label="Favorilere ekle"
+                class="table-favorite${isFavorite ? " is-active" : ""}"
+                type="button"
+                aria-label="${isFavorite ? "Favorilerden kaldır" : "Favorilere ekle"}"
+                aria-pressed="${isFavorite}"
+                data-table-id="${table.id}"
             >
-                <i class="fa-regular fa-heart"></i>
+                <i class="${isFavorite ? "fa-solid" : "fa-regular"} fa-heart"></i>
             </button>
 
         </div>
@@ -108,10 +112,31 @@ productList.forEach((table) => {
         window.location.href = `masa-detay.html?id=${table.id}`
     })
 
+    card.querySelector(".table-favorite").addEventListener("click", (event) => {
+        event.stopPropagation();
+        window.PosusWishlist?.toggle(table.id);
+    });
+
     tablesGrid.appendChild(card);
 });
 
 }
+
+function syncFavoriteButtons() {
+    document.querySelectorAll(".table-favorite[data-table-id]").forEach(button => {
+        const tableId = Number(button.dataset.tableId);
+        const isFavorite = window.PosusWishlist?.has(tableId) || false;
+        const icon = button.querySelector("i");
+
+        button.classList.toggle("is-active", isFavorite);
+        button.setAttribute("aria-pressed", String(isFavorite));
+        button.setAttribute("aria-label", isFavorite ? "Favorilerden kaldır" : "Favorilere ekle");
+        icon.classList.toggle("fa-solid", isFavorite);
+        icon.classList.toggle("fa-regular", !isFavorite);
+    });
+}
+
+window.addEventListener("posus:wishlist-change", syncFavoriteButtons);
 
 function capitalizeShape(shape) {
     const shapes = {

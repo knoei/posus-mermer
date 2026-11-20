@@ -1049,7 +1049,7 @@ header {
     color: inherit;
     text-align: left;
     font: inherit;
-    cursor: zoom-in;
+    cursor: pointer;
 }
 
 .stone-card:focus-visible {
@@ -1174,7 +1174,7 @@ body.lightbox-open {
     border: 0;
     background: rgba(17, 15, 13, 0.78);
     backdrop-filter: blur(8px);
-    cursor: zoom-out;
+    cursor: pointer;
 }
 
 .stone-lightbox-dialog {
@@ -1255,13 +1255,13 @@ body.lightbox-open {
     padding: 64px 28px 30px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: flex-start;
     background: linear-gradient(145deg, #fbf8f3 0%, #eee5da 100%);
 }
 
 .stone-lightbox-info span {
     width: fit-content;
-    margin-bottom: 14px;
+    margin-top: 14px;
     padding: 6px 10px;
     border-radius: 999px;
     background: #e4d5c2;

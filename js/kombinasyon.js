@@ -370,12 +370,104 @@ async function addCombinationToCart() {
     combinationAddToCart.disabled = false;
 }
 
+const porcelainPreviewCache = new Map();
+let lustreBoundsPromise;
+let stoneRenderSequence = 0;
+
+function readOpaqueBounds(image) {
+    const canvas = document.createElement("canvas");
+    canvas.width = image.naturalWidth || image.width;
+    canvas.height = image.naturalHeight || image.height;
+    const context = canvas.getContext("2d", { willReadFrequently: true });
+    context.drawImage(image, 0, 0);
+    const pixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
+    let minX = canvas.width;
+    let minY = canvas.height;
+    let maxX = -1;
+    let maxY = -1;
+
+    for (let y = 0; y < canvas.height; y += 1) {
+        const rowOffset = y * canvas.width * 4;
+        for (let x = 0; x < canvas.width; x += 1) {
+            if (pixels[rowOffset + x * 4 + 3] > 8) {
+                minX = Math.min(minX, x);
+                minY = Math.min(minY, y);
+                maxX = Math.max(maxX, x);
+                maxY = Math.max(maxY, y);
+            }
+        }
+    }
+
+    return {
+        x: minX,
+        y: minY,
+        width: Math.max(1, maxX - minX + 1),
+        height: Math.max(1, maxY - minY + 1)
+    };
+}
+
+function getLustreBounds() {
+    if (!lustreBoundsPromise) {
+        lustreBoundsPromise = loadCombinationImage("images/tabletops/porcelain/tabletop-lustre.png")
+            .then(image => readOpaqueBounds(image));
+    }
+    return lustreBoundsPromise;
+}
+
+async function getNormalizedPorcelainPreview(source) {
+    if (source.endsWith("tabletop-lustre.png")) return source;
+    if (porcelainPreviewCache.has(source)) return porcelainPreviewCache.get(source);
+
+    const previewPromise = Promise.all([
+        loadCombinationImage(source),
+        getLustreBounds()
+    ]).then(([image, targetBounds]) => {
+        const sourceBounds = readOpaqueBounds(image);
+        const canvas = document.createElement("canvas");
+        canvas.width = image.naturalWidth || image.width;
+        canvas.height = image.naturalHeight || image.height;
+        const context = canvas.getContext("2d");
+        context.drawImage(
+            image,
+            sourceBounds.x,
+            sourceBounds.y,
+            sourceBounds.width,
+            sourceBounds.height,
+            targetBounds.x,
+            targetBounds.y,
+            targetBounds.width,
+            targetBounds.height
+        );
+        return canvas.toDataURL("image/png");
+    });
+
+    porcelainPreviewCache.set(source, previewPromise);
+    return previewPromise;
+}
+
 function renderStone() {
     const stone = combinationStones[currentStoneIndex];
+    const isPorcelain = stone.material === "Porselen";
+    const renderSequence = ++stoneRenderSequence;
     comboTabletopImage.classList.add("is-changing");
     comboTabletopImage.src = stone.tabletop;
-    comboTabletopImage.alt = `${stone.name} ${stone.material === "Porselen" ? "porselen" : "mermer"} tabla`;
-    requestAnimationFrame(() => comboTabletopImage.classList.remove("is-changing"));
+    comboTabletopImage.alt = `${stone.name} ${isPorcelain ? "porselen" : "mermer"} tabla`;
+
+    if (isPorcelain) {
+        getNormalizedPorcelainPreview(stone.tabletop)
+            .then(source => {
+                if (renderSequence !== stoneRenderSequence) return;
+                comboTabletopImage.src = source;
+                requestAnimationFrame(() => comboTabletopImage.classList.remove("is-changing"));
+            })
+            .catch(() => {
+                if (renderSequence === stoneRenderSequence) {
+                    requestAnimationFrame(() => comboTabletopImage.classList.remove("is-changing"));
+                }
+            });
+    } else {
+        requestAnimationFrame(() => comboTabletopImage.classList.remove("is-changing"));
+    }
 
     stoneSwatch.style.backgroundImage = `url("${stone.texture}")`;
     stoneSwatch.style.backgroundSize = stone.swatchFromTabletop ? "auto 250%" : "cover";

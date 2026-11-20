@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+    <defs>
+        <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#f8df9b"/>
+            <stop offset="0.45" stop-color="#c99643"/>
+            <stop offset="1" stop-color="#8d5a22"/>
+        </linearGradient>
+    </defs>
+    <text x="29" y="43" fill="url(#gold)" font-family="Georgia, 'Times New Roman', serif" font-size="51" font-weight="700" text-anchor="middle">P</text>
+    <text x="41" y="55" fill="url(#gold)" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-weight="700" text-anchor="middle">M</text>
+</svg>

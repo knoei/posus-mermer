@@ -190,6 +190,9 @@
 
     const open = () => {
         render();
+        window.dispatchEvent(new CustomEvent("posus:panel-open", {
+            detail: { panel: "cart" }
+        }));
         miniCart.classList.add("is-open");
         miniCart.setAttribute("aria-hidden", "false");
         cartButtons.forEach(button => {
@@ -277,6 +280,10 @@
 
     window.addEventListener("posusCartUpdated", event => {
         if (event.detail?.source !== "mini-cart") render();
+    });
+
+    window.addEventListener("posus:panel-open", event => {
+        if (event.detail?.panel !== "cart") close();
     });
 
     render();
