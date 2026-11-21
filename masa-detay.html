@@ -4,8 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masa Detayı | Posus Mermer</title>
-    <link rel="icon" type="image/png" href="images/favicon-pm.png">
+    <title>Masa Detayı | Posel Madencilik</title>
+    <meta id="pageDescription" name="description" content="Posel Madencilik masa modelinin malzeme, ölçü, fiyat ve gerçek taş görünümünü inceleyin.">
+    <meta name="robots" content="index, follow">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:type" content="product">
+    <meta id="ogTitle" property="og:title" content="Masa Detayı | Posel Madencilik">
+    <meta id="ogDescription" property="og:description" content="Masa modelinin malzeme, ölçü ve fiyat seçeneklerini inceleyin.">
+    <meta name="twitter:card" content="summary">
+    <meta id="twitterTitle" name="twitter:title" content="Masa Detayı | Posel Madencilik">
+    <meta id="twitterDescription" name="twitter:description" content="Masa modelinin malzeme, ölçü ve fiyat seçeneklerini inceleyin.">
+    <link rel="icon" type="image/png" href="images/posel-favicon.png">
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="mini-cart.css">
@@ -387,6 +396,97 @@
             display: none;
         }
 
+        /* PRODUCT GUIDE */
+
+        .product-detail-guide {
+            max-width: 1184px;
+            margin: -42px auto 110px;
+            padding: 0 28px;
+        }
+
+        .product-guide-heading {
+            max-width: 760px;
+        }
+
+        .product-guide-heading .product-eyebrow {
+            margin-top: 0;
+        }
+
+        .product-guide-heading h2 {
+            margin: 0;
+            color: #171512;
+            font-family: Georgia, serif;
+            font-size: clamp(30px, 4vw, 46px);
+            font-weight: 400;
+            line-height: 1.16;
+        }
+
+        .product-guide-intro {
+            margin: 18px 0 0;
+            color: #6f675f;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .product-guide-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 36px;
+        }
+
+        .product-guide-card {
+            min-width: 0;
+            padding: 26px;
+            border: 1px solid #e6dfd7;
+            border-radius: 14px;
+            background: #f7f4ef;
+        }
+
+        .product-guide-card i {
+            display: grid;
+            width: 38px;
+            height: 38px;
+            place-items: center;
+            border-radius: 50%;
+            background: #ede3d8;
+            color: #8c5c35;
+            font-size: 15px;
+        }
+
+        .product-guide-card h3 {
+            margin: 18px 0 9px;
+            color: #25201c;
+            font-family: Georgia, serif;
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .product-guide-card p {
+            margin: 0;
+            color: #746b63;
+            font-size: 14px;
+            line-height: 1.75;
+        }
+
+        .product-variation-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 13px;
+            margin-top: 16px;
+            padding: 18px 20px;
+            border-left: 3px solid #9f7547;
+            background: #f0ebe4;
+            color: #675f57;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .product-variation-note i {
+            margin-top: 4px;
+            color: #9f7547;
+        }
+
         /* RESPONSIVE */
 
         @media (max-width: 900px) {
@@ -410,6 +510,15 @@
             .product-visual {
                 padding: 10px;
             }
+
+            .product-detail-guide {
+                margin-top: -28px;
+                padding: 0 22px;
+            }
+
+            .product-guide-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 390px) {
@@ -432,15 +541,15 @@
         <nav class="navbar">
 
             <a href="index.html" class="navbar-logo">
-                <img src="images/posus-logo.png" alt="Posus Mermer">
+                <img src="images/posel-logo.png" alt="Posel Madencilik">
             </a>
 
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Ana Sayfa</a></li>
                 <li><a href="urunler.html">Ürünler</a></li>
                 <li><a href="masalar.html" class="active">Masalar</a></li>
-                <li><a href="#">Projeler</a></li>
-                <li><a href="#">İletişim</a></li>
+                <li><a href="projeler.html">S.S.S</a></li>
+                <li><a href="iletisim.html">İletişim</a></li>
             </ul>
 
             <div class="nav-actions">
@@ -612,6 +721,39 @@
 
     </main>
 
+    <section class="product-detail-guide" aria-labelledby="productGuideTitle">
+        <div class="product-guide-heading">
+            <p class="product-eyebrow">ÜRÜN BİLGİLERİ</p>
+            <h2 id="productGuideTitle"><span id="productGuideName"></span> hakkında bilmeniz gerekenler.</h2>
+            <p class="product-guide-intro" id="productGuideIntro"></p>
+        </div>
+
+        <div class="product-guide-grid">
+            <article class="product-guide-card">
+                <i class="fa-regular fa-gem" aria-hidden="true"></i>
+                <h3>Malzeme karakteri</h3>
+                <p id="productMaterialGuide"></p>
+            </article>
+
+            <article class="product-guide-card">
+                <i class="fa-solid fa-droplet" aria-hidden="true"></i>
+                <h3>Bakım & kullanım</h3>
+                <p id="productCareGuide"></p>
+            </article>
+
+            <article class="product-guide-card">
+                <i class="fa-solid fa-truck" aria-hidden="true"></i>
+                <h3>Sipariş & teslimat</h3>
+                <p>Teslimat kapsamı ve taşıma koşulları, sipariş adedi ile teslimat adresine göre sipariş öncesinde netleştirilir.</p>
+            </article>
+        </div>
+
+        <div class="product-variation-note">
+            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+            <span id="productVariationNote"></span>
+        </div>
+    </section>
+
 
     <!-- PRODUCT DATA -->
 
@@ -628,7 +770,14 @@
 
         if (product) {
 
-            document.title = `${product.name} | Posus Mermer`;
+            document.title = `${product.name} | Posel Madencilik`;
+
+            const detailDescription = `${product.name} ${product.material} masa modelinin ölçü, fiyat, bakım ve malzeme özelliklerini inceleyin.`;
+            document.getElementById("pageDescription").content = detailDescription;
+            document.getElementById("ogTitle").content = `${product.name} | Posel Madencilik`;
+            document.getElementById("ogDescription").content = detailDescription;
+            document.getElementById("twitterTitle").content = `${product.name} | Posel Madencilik`;
+            document.getElementById("twitterDescription").content = detailDescription;
 
             const productVisual = document.getElementById("productVisual");
 
@@ -858,6 +1007,31 @@
                 product.material === "Porselen"
                     ? "Porselen masa koleksiyonu"
                     : "Doğal taş masa koleksiyonu";
+
+            const materialKey = String(product.material || "").toLocaleLowerCase("tr-TR");
+            const isPorcelain = materialKey.includes("porselen");
+
+            const materialGuides = {
+                mermer: "Doğal damarlar ve ton geçişleri her mermer tablayı kendine özgü kılar. Görsel hareket, taşın çıkarıldığı bloğa göre değişebilir.",
+                granit: "Belirgin mineral taneleri ve doğal renk dağılımı, granitin güçlü ve karakterli yüzey görünümünü oluşturur.",
+                traverten: "Katmanlı geçişler, küçük gözenekler ve doğal boşluklar traverten yüzeyinin kendine özgü karakterinin bir parçasıdır.",
+                porselen: "Kontrollü desen ve dengeli yüzey görünümü sunar. Desen yerleşimi ile tonu üretim serisine göre küçük farklılıklar gösterebilir."
+            };
+
+            const guideType = Object.keys(materialGuides).find(type => materialKey.includes(type));
+
+            document.getElementById("productGuideName").textContent = product.name;
+            document.getElementById("productGuideIntro").textContent = isPorcelain
+                ? "Seçiminizi yaparken yüzey görünümü, günlük bakım ve teslimat koşullarını birlikte değerlendirebilirsiniz."
+                : "Doğal taşın kendine özgü yapısını, günlük bakımını ve sipariş sürecini seçimden önce inceleyebilirsiniz.";
+            document.getElementById("productMaterialGuide").textContent =
+                materialGuides[guideType] || "Malzemenin renk, doku ve yüzey karakteri her ürüne kendine özgü bir görünüm kazandırır.";
+            document.getElementById("productCareGuide").textContent = isPorcelain
+                ? "Yumuşak bir bez ve yüzeye uygun nötr temizleyici kullanın. Aşındırıcı sünger ve temizlik ekipmanlarından kaçının."
+                : "Yumuşak, nemli bir bez ve nötr temizleyici kullanın. Asitli ya da aşındırıcı ürünlerden kaçının; dökülen sıvıları bekletmeden temizleyin.";
+            document.getElementById("productVariationNote").textContent = isPorcelain
+                ? "Ekran renkleri ve üretim serileri arasında küçük ton veya desen farklılıkları görülebilir."
+                : "Doğal taş ürünlerde damar, ton ve desen farklılıkları kusur değil; her tablayı benzersiz kılan doğal özelliklerdir. Teslim edilecek ürün, ekrandaki örnekten farklılık gösterebilir.";
 
 
             /* SHAPE AND CATEGORY NAMES */
@@ -1105,6 +1279,7 @@ updateCartCount();
 
     </script>
     <script src="js/script.js"></script>
+    <script src="js/site-search.js"></script>
     <script src="js/cart-popover.js"></script>
 
 </body>

@@ -4,8 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sepetim | Posus Mermer</title>
-    <link rel="icon" type="image/png" href="images/favicon-pm.png">
+    <title>Sepetim | Posel Madencilik</title>
+    <meta name="description" content="Seçtiğiniz Posel Madencilik ürünlerini, ölçüleri ve adetleri kontrol ederek teslimat dahil fiyat talebinizi oluşturun.">
+    <meta name="robots" content="noindex, follow">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Sepetim | Posel Madencilik">
+    <meta property="og:description" content="Seçtiğiniz masa modellerini ve ölçüleri kontrol edin.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Sepetim | Posel Madencilik">
+    <meta name="twitter:description" content="Seçtiğiniz masa modellerini ve ölçüleri kontrol edin.">
+    <link rel="icon" type="image/png" href="images/posel-favicon.png">
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="mini-cart.css">
@@ -49,6 +58,49 @@
             margin: 12px 0 0;
             color: #7d756c;
             font-size: 14px;
+        }
+
+        .order-steps {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .order-step {
+            display: grid;
+            grid-template-columns: 42px minmax(0, 1fr);
+            column-gap: 14px;
+            min-width: 0;
+            padding: 20px;
+            border: 1px solid #e6dfd7;
+            border-radius: 12px;
+            background: #f8f5f1;
+        }
+
+        .order-step i {
+            grid-row: 1 / span 2;
+            display: grid;
+            width: 42px;
+            height: 42px;
+            place-items: center;
+            border-radius: 50%;
+            background: #eee4d9;
+            color: #8c5c35;
+        }
+
+        .order-step h2 {
+            margin: 0 0 5px;
+            color: #25201c;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .order-step p {
+            margin: 0;
+            color: #786f67;
+            font-size: 13px;
+            line-height: 1.55;
         }
 
         /* CART LAYOUT */
@@ -421,6 +473,10 @@
                 grid-template-columns: 1fr;
             }
 
+            .order-steps {
+                grid-template-columns: 1fr;
+            }
+
         }
 
         @media (max-width: 550px) {
@@ -466,15 +522,15 @@
         <nav class="navbar">
 
             <a href="index.html" class="navbar-logo">
-                <img src="images/posus-logo.png" alt="Posus Mermer">
+                <img src="images/posel-logo.png" alt="Posel Madencilik">
             </a>
 
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Ana Sayfa</a></li>
                 <li><a href="urunler.html">Ürünler</a></li>
                 <li><a href="masalar.html">Masalar</a></li>
-                <li><a href="#">Projeler</a></li>
-                <li><a href="#">İletişim</a></li>
+                <li><a href="projeler.html">S.S.S</a></li>
+                <li><a href="iletisim.html">İletişim</a></li>
             </ul>
 
             <div class="nav-actions">
@@ -511,13 +567,31 @@
             ← Alışverişe devam et
         </a>
 
-        <p class="cart-eyebrow">POSUS MERMER</p>
+        <p class="cart-eyebrow">POSEL MADENCİLİK</p>
 
         <h1>Sepetim</h1>
 
         <p class="cart-description">
-            Seçtiğiniz doğal taş ürünlerini buradan inceleyebilirsiniz.
+            Seçtiğiniz ürünleri kontrol edin, teslimat konumunuzu paylaşın ve kargo dahil kesin toplamı öğrenin.
         </p>
+
+        <section class="order-steps" aria-label="Sipariş süreci">
+            <article class="order-step">
+                <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
+                <h2>Sepetinizi kontrol edin</h2>
+                <p>Ürün, ölçü, ayak ve adet seçimlerinizi gözden geçirin.</p>
+            </article>
+            <article class="order-step">
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                <h2>Konumunuzu paylaşın</h2>
+                <p>Şehir ve ilçenizi girerek teslimat hesabını başlatın.</p>
+            </article>
+            <article class="order-step">
+                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                <h2>Kesin toplamı öğrenin</h2>
+                <p>Hazır sepet mesajını WhatsApp'ta kontrol edip bize gönderin.</p>
+            </article>
+        </section>
 
 
         <!-- CART CONTENT -->
@@ -974,6 +1048,7 @@
 
     </script>
     <script src="js/script.js"></script>
+    <script src="js/site-search.js"></script>
     <script src="js/cart-popover.js"></script>
 
 </body>

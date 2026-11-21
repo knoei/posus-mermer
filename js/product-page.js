@@ -530,4 +530,11 @@ categoryButtons.forEach(button => {
    FIRST RENDER
 ========================= */
 
-renderStones(allProducts);
+const initialSearch = new URLSearchParams(window.location.search).get("search");
+
+if (initialSearch) {
+    searchInput.value = initialSearch;
+    filterStones();
+} else {
+    renderStones(allProducts);
+}
