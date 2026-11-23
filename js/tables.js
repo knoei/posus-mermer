@@ -515,6 +515,11 @@ const cafePriceTiers = {
 tables.forEach(table => {
     if (table.category !== "cafe-restaurant") return;
 
+    if (table.model === "silvia_beige") {
+        table.prices = { 60: table.price };
+        return;
+    }
+
     const priceTier = cafePriceTiers[table.price];
     if (priceTier) table.prices = { ...priceTier };
 });
