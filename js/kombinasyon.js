@@ -32,19 +32,20 @@ const combinationStones = [
 ];
 
 const combinationLegs = [
-    { name: "Yuvarlak Taban Siyah", image: "images/table-legs/cafe-leg-01-clean.png", surcharge: 0 },
-    { name: "Kare Taban Siyah", image: "images/table-legs/cafe-leg-02-clean.png", surcharge: 0 },
-    { name: "Standart Döküm Dört Ayak", image: "images/table-legs/cafe-leg-13-clean.png", surcharge: 0 },
-    { name: "Kademeli Yuvarlak Siyah", image: "images/table-legs/cafe-leg-03-angle-v2.png", surcharge: 750 },
-    { name: "Klasik Dekoratif Siyah", image: "images/table-legs/cafe-leg-04-clean.png", surcharge: 1750 },
+    { name: "Yuvarlak Taban", image: "images/table-legs/cafe-leg-01-clean.png", surcharge: 0 },
+    { name: "Kare Taban", image: "images/table-legs/cafe-leg-02-clean.png", surcharge: 0 },
+    { name: "Aslan Döküm Taban", image: "images/table-legs/cafe-leg-13-clean.png", surcharge: 0 },
+    { name: "Kademeli Yuvarlak", image: "images/table-legs/cafe-leg-03-angle-v2.png", surcharge: 750 },
+    { name: "Damla", image: "images/table-legs/cafe-leg-04-clean.png", surcharge: 1750 },
     { name: "Üç Küre Dekoratif", image: "images/table-legs/cafe-leg-05-clean.png", surcharge: 1250 },
     { name: "Konik Siyah", image: "images/table-legs/cafe-leg-06-clean.png", surcharge: 750 },
-    { name: "Kare Paslanmaz", image: "images/table-legs/cafe-leg-07-clean.png", surcharge: 1250 },
-    { name: "Yuvarlak Paslanmaz", image: "images/table-legs/cafe-leg-08-clean.png", previewClass: "leg-round-stainless-short", surcharge: 1250 },
+    { name: "Kare Satine", image: "images/table-legs/cafe-leg-07-clean.png", surcharge: 1250 },
+    { name: "Yuvarlak Satine", image: "images/table-legs/cafe-leg-08-clean.png", previewClass: "leg-round-stainless-short", surcharge: 1250 },
     { name: "Çift Küre Siyah", image: "images/table-legs/cafe-leg-09-clean.png", surcharge: 750 },
     { name: "Gold Dekoratif", image: "images/table-legs/cafe-leg-10-angle-v2.png", surcharge: 2000 },
-    { name: "Klasik Kompozit Ayak", image: "images/table-legs/cafe-leg-11-clean.png", surcharge: 1250 },
-    { name: "Trompet Form Siyah", image: "images/table-legs/cafe-leg-12-clean.png", previewClass: "leg-trumpet-large", surcharge: 4000 }
+    { name: "Klasik Kompozit Ayak", image: "images/table-legs/cafe-leg-11-four-base.png", surcharge: 1250 },
+    { name: "Kum Saati", image: "images/table-legs/cafe-leg-12-clean.png", previewClass: "leg-trumpet-large", surcharge: 4000 },
+    { name: "X Form Siyah", image: "images/table-legs/cafe-leg-x-clean.png", previewClass: "leg-x-large", surcharge: 0 }
 ];
 
 const combinationEnvironments = [
@@ -123,6 +124,12 @@ const combinationAddToCart = document.getElementById("combinationAddToCart");
 const combinationGoToCart = document.getElementById("combinationGoToCart");
 const tableSizeBadge = document.getElementById("tableSizeBadge");
 const tableSizeBadgeValue = document.getElementById("tableSizeBadgeValue");
+const legPrevButton = document.getElementById("legPrev");
+const legNextButton = document.getElementById("legNext");
+const legSelectionNote = document.getElementById("legSelectionNote");
+const hourglassLegIndex = combinationLegs.findIndex(leg => leg.name === "Kum Saati");
+const xLegIndex = combinationLegs.findIndex(leg => leg.name === "X Form Siyah");
+const largeTableLegIndexes = [hourglassLegIndex, xLegIndex];
 
 function getSelectedTableProduct() {
     const stone = combinationStones[currentStoneIndex];
@@ -248,7 +255,54 @@ function renderPurchaseSizes() {
     updatePurchase();
 }
 
+function isLargeTableSize() {
+    return Number(combinationSize.value) >= 90;
+}
+
+function isXLegAllowed() {
+    return Number(combinationSize.value) >= 70;
+}
+
+function updateLegNavigationState() {
+    const largeTable = isLargeTableSize();
+    const restrictionMessage = largeTable
+        ? "90 ve 100 cm tablalar için Kum Saati veya X Form Siyah ayak seçilebilir."
+        : "";
+
+    [legPrevButton, legNextButton].forEach(button => {
+        button.disabled = false;
+        button.title = restrictionMessage;
+        button.setAttribute("aria-disabled", "false");
+    });
+
+    legSelectionNote.textContent = largeTable
+        ? "90 ve 100 cm tablalar için Kum Saati veya X Form Siyah seçilebilir."
+        : isXLegAllowed()
+            ? `Kafe masaları için ${combinationLegs.length} farklı ayak modeli.`
+            : "60 cm tablalar için 13 farklı ayak modeli.";
+}
+
+function enforceLegCompatibility() {
+    if (!isXLegAllowed() && currentLegIndex === xLegIndex) {
+        currentLegIndex = 0;
+        return true;
+    }
+
+    if (!isLargeTableSize() || largeTableLegIndexes.includes(currentLegIndex)) {
+        return false;
+    }
+
+    currentLegIndex = hourglassLegIndex;
+    return true;
+}
+
 function updatePurchase() {
+    if (enforceLegCompatibility()) {
+        renderLeg();
+        return;
+    }
+
+    updateLegNavigationState();
     const stone = combinationStones[currentStoneIndex];
     const leg = combinationLegs[currentLegIndex];
     const product = getSelectedTableProduct();
@@ -264,16 +318,16 @@ function updatePurchase() {
         `Tabla çapı ${selectedSize || 60} santimetre`
     );
 
+    const numericSize = Number(selectedSize) || 60;
     const previewWidth = selectedSize
-        ? Math.min(56, 44 + (Number(selectedSize) - 60) * .3)
-        : 44;
+        ? Math.min(54, 42 + (numericSize - 60) * .3)
+        : 42;
+    const previewOffset = Math.max(0, numericSize - 60) * .3;
     comboTabletopImage.style.width = `${previewWidth}%`;
+    comboTabletopImage.style.setProperty("--tabletop-size-offset", `${previewOffset}px`);
 
-    const legPriceLabel = legSurcharge > 0
-        ? `Ayak farkı ${formatPrice(legSurcharge)}`
-        : "Standart ayak dahil";
     purchaseSelection.textContent = selectedSize
-        ? `${stone.name} · ${leg.name} · ${legPriceLabel} · Ø ${selectedSize} cm · ${quantity} adet`
+        ? `${stone.name} · ${leg.name} · Ø ${selectedSize} cm · ${quantity} adet`
         : `${stone.name} · ${leg.name}`;
 
     const hasPrice = basePrice !== null && basePrice !== undefined && Number.isFinite(Number(basePrice));
@@ -482,6 +536,7 @@ function renderLeg() {
     const leg = combinationLegs[currentLegIndex];
     comboLegImage.classList.add("is-changing");
     comboLegImage.classList.toggle("leg-trumpet-large", leg.previewClass === "leg-trumpet-large");
+    comboLegImage.classList.toggle("leg-x-large", leg.previewClass === "leg-x-large");
     comboLegImage.classList.toggle("leg-round-stainless-short", leg.previewClass === "leg-round-stainless-short");
     comboLegImage.src = leg.image;
     comboLegImage.alt = `${leg.name} kafe masa ayağı`;
@@ -511,7 +566,19 @@ function moveStone(direction) {
 }
 
 function moveLeg(direction) {
-    currentLegIndex = (currentLegIndex + direction + combinationLegs.length) % combinationLegs.length;
+    if (isLargeTableSize()) {
+        const activeLargeLegPosition = Math.max(0, largeTableLegIndexes.indexOf(currentLegIndex));
+        const nextLargeLegPosition = (
+            activeLargeLegPosition + direction + largeTableLegIndexes.length
+        ) % largeTableLegIndexes.length;
+        currentLegIndex = largeTableLegIndexes[nextLargeLegPosition];
+        renderLeg();
+        return;
+    }
+
+    do {
+        currentLegIndex = (currentLegIndex + direction + combinationLegs.length) % combinationLegs.length;
+    } while (!isXLegAllowed() && currentLegIndex === xLegIndex);
     renderLeg();
 }
 
@@ -522,8 +589,8 @@ function moveEnvironment(direction) {
 
 document.getElementById("stonePrev").addEventListener("click", () => moveStone(-1));
 document.getElementById("stoneNext").addEventListener("click", () => moveStone(1));
-document.getElementById("legPrev").addEventListener("click", () => moveLeg(-1));
-document.getElementById("legNext").addEventListener("click", () => moveLeg(1));
+legPrevButton.addEventListener("click", () => moveLeg(-1));
+legNextButton.addEventListener("click", () => moveLeg(1));
 document.getElementById("environmentPrev").addEventListener("click", () => moveEnvironment(-1));
 document.getElementById("environmentNext").addEventListener("click", () => moveEnvironment(1));
 combinationSize.addEventListener("change", updatePurchase);

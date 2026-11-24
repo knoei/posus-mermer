@@ -403,11 +403,20 @@ ul {
 
 .calculator-promo {
     position: relative;
+    display: block;
     max-width: 1800px;
     height: 500px;
     margin: 35px auto;
     border-radius: 18px;
     overflow: hidden;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.calculator-promo:focus-visible {
+    outline: 3px solid #a8845f;
+    outline-offset: 4px;
 }
 
 .calculator-promo-image {
@@ -460,7 +469,9 @@ ul {
     transition: 0.3s ease;
 }
 
-.calculator-cta:hover {
+.calculator-cta:hover,
+.calculator-promo:hover .calculator-cta,
+.calculator-promo:focus-visible .calculator-cta {
     background-color: #a8845f;
     transform: translateX(4px);
 }
@@ -1079,7 +1090,7 @@ header {
     width: 160px;
     height: auto;
     display: block;
-    filter: drop-shadow(0 0 0.7px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 1.4px rgba(255, 255, 255, 0.55));
+    filter: drop-shadow(0 0 0.6px rgba(255, 255, 255, 0.72)) drop-shadow(0 0 1.2px rgba(255, 255, 255, 0.34));
 }
 
 .footer-column {
@@ -2458,12 +2469,12 @@ body.lightbox-open {
 ========================= */
 
 .navbar {
-    height: 76px;
+    height: 82px;
 }
 
 .navbar-inner {
     max-width: 1400px;
-    height: 76px;
+    height: 82px;
     margin: 0 auto;
     padding: 0 32px;
     display: flex;

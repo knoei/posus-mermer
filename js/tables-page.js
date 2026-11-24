@@ -148,10 +148,23 @@ function capitalizeShape(shape) {
     return shapes[shape] || shape;
 }
 
-renderTables(tables);
-
 function getSelectedValue(inputName) {
     return document.querySelector(`input[name="${inputName}"]:checked`).value;
+}
+
+function applyUrlFilters() {
+    const material = new URLSearchParams(window.location.search)
+        .get("material")
+        ?.toLocaleLowerCase("tr-TR");
+    const supportedMaterials = ["mermer", "granit", "porselen"];
+
+    if (!supportedMaterials.includes(material)) return;
+
+    const materialInput = document.querySelector(
+        `input[name="material"][value="${material}"]`
+    );
+
+    if (materialInput) materialInput.checked = true;
 }
 
 function getAvailableSizes(table) {
@@ -217,3 +230,6 @@ clearFilters.addEventListener("click", () => {
     sortTables.value = "featured";
     applyFilters();
 });
+
+applyUrlFilters();
+applyFilters();

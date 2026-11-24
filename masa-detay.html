@@ -872,23 +872,14 @@
                 const cacheKey = `${product.id}:${size}`;
                 if (cafeSizeImageCache.has(cacheKey)) return cafeSizeImageCache.get(cacheKey);
 
-                const goldenMistTemplates = {
-                    60: "images/tables/golden-mist-cafe-farther.png",
-                    70: "images/tables/golden-mist-cafe-70-v2.png",
-                    80: "images/tables/golden-mist-cafe-80.png",
-                    90: "images/tables/golden-mist-cafe-90.png",
-                    100: "images/tables/golden-mist-cafe-100.png"
-                };
-                const porcelainTemplates = {
+                const legTemplates = {
                     60: "images/tables/golden-mist-standard-no-tabletop.png",
                     70: "images/tables/golden-mist-standard-no-tabletop.png",
                     80: "images/tables/golden-mist-standard-no-tabletop.png",
                     90: "images/tables/golden-mist-x-no-tabletop.png",
                     100: "images/tables/golden-mist-x-no-tabletop.png"
                 };
-                const templatePath = product.material === "Porselen"
-                    ? porcelainTemplates[size] || porcelainTemplates[60]
-                    : goldenMistTemplates[size] || goldenMistTemplates[60];
+                const templatePath = legTemplates[size] || legTemplates[60];
                 const [tabletopImage, templateImage] = await Promise.all([
                     loadCafeLayer(product.tabletopImage),
                     loadCafeLayer(templatePath)
