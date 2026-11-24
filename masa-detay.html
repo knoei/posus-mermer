@@ -7,8 +7,11 @@
     <title>Masa Detayı | Posel Madencilik</title>
     <meta id="pageDescription" name="description" content="Posel Madencilik masa modelinin malzeme, ölçü, fiyat ve gerçek taş görünümünü inceleyin.">
     <meta name="robots" content="index, follow">
+    <link id="canonicalUrl" rel="canonical" href="https://poselmadencilik.com/masa-detay.html">
     <meta property="og:locale" content="tr_TR">
     <meta property="og:type" content="product">
+    <meta property="og:site_name" content="Posel Madencilik">
+    <meta id="ogUrl" property="og:url" content="https://poselmadencilik.com/masa-detay.html">
     <meta id="ogTitle" property="og:title" content="Masa Detayı | Posel Madencilik">
     <meta id="ogDescription" property="og:description" content="Masa modelinin malzeme, ölçü ve fiyat seçeneklerini inceleyin.">
     <meta name="twitter:card" content="summary">
@@ -771,6 +774,10 @@
         if (product) {
 
             document.title = `${product.name} | Posel Madencilik`;
+
+            const productUrl = `https://poselmadencilik.com/masa-detay.html?id=${product.id}`;
+            document.getElementById("canonicalUrl").href = productUrl;
+            document.getElementById("ogUrl").content = productUrl;
 
             const detailDescription = `${product.name} ${product.material} masa modelinin ölçü, fiyat, bakım ve malzeme özelliklerini inceleyin.`;
             document.getElementById("pageDescription").content = detailDescription;
