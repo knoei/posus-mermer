@@ -83,7 +83,7 @@
                     <span class="wishlist-item-info">
                         <strong>${table.name}</strong>
                         <small>${table.type ? `${table.type} · ` : ""}${table.material}</small>
-                        <b>${table.pricePending ? "Fiyat için iletişime geçin" : formatWishlistPrice(table.price)}</b>
+                        <b>${table.pricePending ? "Yakında!" : formatWishlistPrice(table.price)}</b>
                     </span>
                 </a>
                 <button class="wishlist-remove" type="button" aria-label="${table.name} ürününü favorilerden kaldır">

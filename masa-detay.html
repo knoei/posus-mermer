@@ -1123,12 +1123,12 @@
 
 
                 selectionSummary.textContent = product.pricePending
-                    ? `${selectedSize} cm · ${quantity} adet · Fiyat için iletişime geçin`
+                    ? `${selectedSize} cm · ${quantity} adet`
                     : `${selectedSize} cm · ${quantity} adet · KDV dahil`;
 
                 if (product.pricePending) {
-                    productPrice.textContent = "Fiyat için iletişime geçin";
-                    totalPrice.textContent = "Teklif ile belirlenir";
+                    productPrice.textContent = "Yakında!";
+                    totalPrice.textContent = "Yakında!";
                     return;
                 }
 
@@ -1183,7 +1183,7 @@
                 addToCartBtn.disabled = true;
                 addToCartBtn.innerHTML = '<i class="fa-solid fa-message"></i> Fiyat bilgisi yakında';
                 document.getElementById("productNote").textContent =
-                    "Porselen masa fiyatı seçilen ölçü ve proje detaylarına göre hazırlanır.";
+                    "Fiyat bilgisi yakında yayınlanacak.";
             }
 
             function getCart() {
@@ -1212,6 +1212,7 @@
             }
 
             addToCartBtn.addEventListener("click", () => {
+                if (product.pricePending) return;
 
                 const selectedSize = productSize.value;
                 const quantity = Number(productQuantity.value);

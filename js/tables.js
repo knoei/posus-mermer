@@ -513,6 +513,7 @@ const cafePriceTiers = {
 };
 
 tables.forEach(table => {
+    if (table.category === "dining") table.pricePending = true;
     if (table.category !== "cafe-restaurant") return;
 
     if (table.model === "silvia_beige") {

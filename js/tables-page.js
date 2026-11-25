@@ -75,12 +75,7 @@ productList.forEach((table) => {
 
                 <div class="table-price">
                     ${table.pricePending ? `
-                        <span class="tax-included porcelain-price-label">
-                            <i class="fa-solid fa-message" aria-hidden="true"></i>
-                            Projeye özel
-                        </span>
-                        <strong class="price-on-request">Fiyat için iletişime geçin</strong>
-                        <span class="price-suffix">Ölçüye göre fiyatlandırılır</span>
+                        <strong class="price-on-request">Yakında!</strong>
                     ` : `
                         <span class="tax-included">
                             <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
@@ -195,17 +190,13 @@ function applyFilters() {
 
     const sortedTables = [...filteredTables];
 
-    if (sortTables.value === "price-low") {
+    if (sortTables.value === "price-low" || sortTables.value === "price-high") {
+        const direction = sortTables.value === "price-low" ? 1 : -1;
         sortedTables.sort((a, b) => {
-            const priceA = a.price ?? Infinity;
-            const priceB = b.price ?? Infinity;
-            return priceA - priceB;
-        });
-    } else if (sortTables.value === "price-high") {
-        sortedTables.sort((a, b) => {
-            const priceA = a.price ?? -Infinity;
-            const priceB = b.price ?? -Infinity;
-            return priceB - priceA;
+            const pendingA = a.pricePending || a.price == null;
+            const pendingB = b.pricePending || b.price == null;
+            if (pendingA || pendingB) return Number(pendingA) - Number(pendingB);
+            return direction * (a.price - b.price);
         });
     } else if (sortTables.value === "name") {
         sortedTables.sort((a, b) => a.name.localeCompare(b.name, "tr"));
