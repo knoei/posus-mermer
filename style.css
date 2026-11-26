@@ -3565,7 +3565,7 @@ body.lightbox-open {
 
 .contact-layout {
     display: grid;
-    grid-template-columns: 1.1fr .9fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 20px;
     max-width: 1240px;
     margin: 0 auto;
@@ -3682,6 +3682,45 @@ body.lightbox-open {
 
 .contact-details h3 {
     margin-top: 10px;
+}
+
+.contact-map-frame {
+    margin-top: 16px;
+    overflow: hidden;
+    border: 1px solid #e6ddd4;
+    border-radius: 16px;
+    background: #faf7f3;
+}
+
+.contact-map {
+    display: block;
+    width: 100%;
+    height: clamp(220px, 24vw, 280px);
+    border: 0;
+}
+
+.contact-map-directions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 12px 16px;
+    border-top: 1px solid #e6ddd4;
+    color: #765330;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.contact-map-directions:hover,
+.contact-map-directions:focus-visible {
+    color: #514237;
+    background: #f1e8de;
+}
+
+.contact-map-directions:focus-visible {
+    outline: 2px solid #8d653f;
+    outline-offset: -3px;
 }
 
 @media (max-width: 800px) {

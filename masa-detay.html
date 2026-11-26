@@ -199,6 +199,10 @@
             border-bottom: 1px solid #e6dfd7;
         }
 
+        .product-specs > div[hidden] {
+            display: none;
+        }
+
         .product-specs dt {
             color: #7d756c;
             font-size: 14px;
@@ -639,6 +643,16 @@
                     <dd id="productCategory"></dd>
                 </div>
 
+                <div id="productStoneSpec" hidden>
+                    <dt>Tabla Taşı</dt>
+                    <dd id="productStone"></dd>
+                </div>
+
+                <div id="productLegSpec" hidden>
+                    <dt>Ayak</dt>
+                    <dd id="productLeg"></dd>
+                </div>
+
             </dl>
 
 
@@ -768,7 +782,8 @@
             new URLSearchParams(window.location.search).get("id")
         );
 
-        const product = tables.find(table => table.id === id);
+        const featuredProduct = featuredTables.find(table => table.id === id);
+        const product = featuredProduct || tables.find(table => table.id === id);
 
 
         if (product) {
@@ -803,7 +818,7 @@
             const galleryImages = [
                 {
                     src: product.image,
-                    alt: `${product.name} masa`
+                    alt: product.name
                 },
                 ...extraDetailImages.map((image, index) => ({
                     src: typeof image === "string" ? image : image.src,
@@ -1052,6 +1067,16 @@
             document.getElementById("productCategory").textContent =
                 categoryNames[product.category] || product.category;
 
+            if (featuredProduct) {
+                const backLink = document.querySelector(".product-back");
+                backLink.href = "index.html#one-cikan-urunler";
+                backLink.textContent = "← Öne çıkan ürünlere dön";
+                document.getElementById("productStone").textContent = product.stone;
+                document.getElementById("productLeg").textContent = product.leg;
+                document.getElementById("productStoneSpec").hidden = false;
+                document.getElementById("productLegSpec").hidden = false;
+            }
+
 
             /* ELEMENT REFERENCES */
 
@@ -1070,6 +1095,12 @@
             const selectionSummary =
                 document.getElementById("selectionSummary");
 
+            const addToCartBtn = document.getElementById("addToCartBtn");
+            const cartMessage = document.getElementById("cartMessage");
+            const goToCartBtn = document.getElementById("goToCartBtn");
+            const productNote = document.getElementById("productNote");
+            const defaultCartButton = addToCartBtn.innerHTML;
+            const defaultProductNote = productNote.textContent;
 
             /* POPULATE SIZE OPTIONS */
 
@@ -1120,13 +1151,21 @@
                 );
 
                 const unitPrice = getUnitPrice(selectedSize, quantity);
+                const pricePending = product.pricePending || (featuredProduct && unitPrice == null);
 
+                addToCartBtn.disabled = Boolean(pricePending);
+                addToCartBtn.innerHTML = pricePending
+                    ? '<i class="fa-solid fa-message"></i> Fiyat bilgisi yakında'
+                    : defaultCartButton;
+                productNote.textContent = pricePending
+                    ? "Fiyat bilgisi yakında yayınlanacak."
+                    : defaultProductNote;
 
-                selectionSummary.textContent = product.pricePending
+                selectionSummary.textContent = pricePending
                     ? `${selectedSize} cm · ${quantity} adet`
                     : `${selectedSize} cm · ${quantity} adet · KDV dahil`;
 
-                if (product.pricePending) {
+                if (pricePending) {
                     productPrice.textContent = "Yakında!";
                     totalPrice.textContent = "Yakında!";
                     return;
@@ -1174,17 +1213,6 @@
             updateSelection();
 
                         /* ADD TO CART */
-
-            const addToCartBtn = document.getElementById("addToCartBtn");
-            const cartMessage = document.getElementById("cartMessage");
-            const goToCartBtn = document.getElementById("goToCartBtn");
-
-            if (product.pricePending) {
-                addToCartBtn.disabled = true;
-                addToCartBtn.innerHTML = '<i class="fa-solid fa-message"></i> Fiyat bilgisi yakında';
-                document.getElementById("productNote").textContent =
-                    "Fiyat bilgisi yakında yayınlanacak.";
-            }
 
             function getCart() {
                 try {
@@ -1248,6 +1276,7 @@
                         name: product.name,
                         image: product.image,
                         material: product.material,
+                        ...(featuredProduct ? { leg: product.leg } : {}),
                         size: selectedSize,
                         quantity: quantity,
                         price: unitPrice,

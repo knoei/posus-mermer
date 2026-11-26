@@ -512,6 +512,53 @@ const cafePriceTiers = {
     6600: { 60: 6600, 70: 9200, 80: 11900, 90: 15500, 100: 24000 }
 };
 
+const featuredTables = [
+    {
+        id: 37,
+        name: "Alba Mermer Masa",
+        material: "Mermer",
+        stone: "Muğla Beyazı",
+        leg: "Mermer Ayak",
+        prices: { 100: 27500, 110: 30000, 120: 35000, 130: 40000 },
+        image: "images/product-1.png",
+        detailImage: "images/table-details/mugla-beyazi-real.png"
+    },
+    {
+        id: 38,
+        name: "Terra Mermer Masa",
+        material: "Mermer",
+        stone: "Akhisar Beji",
+        leg: "Ahşap Ayak",
+        prices: { 100: 25000, 110: 27500, 120: 32500, 130: 37500 },
+        image: "images/product-2.png",
+        detailImage: "images/table-details/akhisar-beji-real.png"
+    },
+    {
+        id: 39,
+        name: "Rome Traverten Masa",
+        material: "Traverten",
+        stone: "Traverten",
+        leg: "Traverten Ayak",
+        prices: { 100: 35000, 110: 37500, 120: 42500, 130: 47500 },
+        image: "images/product-3.png",
+        detailImage: "images/table-details/traverten-real.png"
+    },
+    {
+        id: 40,
+        name: "Guatemala Mermer Masa",
+        material: "Mermer",
+        stone: "Verde Guatemala",
+        leg: "Ahşap Ayak",
+        prices: { 100: 30000, 110: 32500, 120: 37500, 130: 42500 },
+        image: "images/product-4.png",
+        detailImage: "images/table-details/verde-guatemala-real.png"
+    }
+].map(table => ({
+    ...table,
+    category: "dining",
+    shape: "yuvarlak"
+}));
+
 tables.forEach(table => {
     if (table.category === "dining") table.pricePending = true;
     if (table.category !== "cafe-restaurant") return;
