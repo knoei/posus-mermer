@@ -19,7 +19,7 @@
     <link rel="icon" type="image/png" href="images/posel-favicon.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="mini-cart.css">
-    <link rel="stylesheet" href="kombinasyon.css">
+    <link rel="stylesheet" href="kombinasyon.css?v=preview-controls-1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
@@ -64,6 +64,19 @@
                     <img class="combo-tabletop-image" id="comboTabletopImage" src="images/tabletops/tabletop-01-clean.png" alt="Muğla Beyazı mermer tabla">
                     <div class="table-junction-shadow" aria-hidden="true"></div>
                     <img class="combo-leg-image" id="comboLegImage" src="images/table-legs/cafe-leg-01-clean.png" alt="Yuvarlak taban siyah kafe masa ayağı">
+                    <div class="preview-control preview-control--environment" role="group" aria-label="Ortam">
+                        <button class="preview-arrow" type="button" data-preview-control="environment" data-direction="-1" aria-label="Önceki ortam"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+                        <span aria-hidden="true">Ortam</span>
+                        <button class="preview-arrow" type="button" data-preview-control="environment" data-direction="1" aria-label="Sonraki ortam"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+                    </div>
+                    <div class="preview-control preview-control--stone" role="group" aria-label="Tabla">
+                        <button class="preview-arrow" type="button" data-preview-control="stone" data-direction="-1" aria-label="Önceki tabla"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+                        <button class="preview-arrow" type="button" data-preview-control="stone" data-direction="1" aria-label="Sonraki tabla"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+                    </div>
+                    <div class="preview-control preview-control--leg" role="group" aria-label="Masa ayağı">
+                        <button class="preview-arrow" type="button" data-preview-control="leg" data-direction="-1" aria-label="Önceki masa ayağı"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+                        <button class="preview-arrow" type="button" data-preview-control="leg" data-direction="1" aria-label="Sonraki masa ayağı"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+                    </div>
                 </div>
                 <div class="selection-summary" aria-live="polite">
                     <div><span>Seçili Tabla</span><strong id="selectedStone">Muğla Beyazı</strong></div>
@@ -161,6 +174,6 @@
     <script src="js/site-search.js"></script>
     <script src="js/cart-popover.js"></script>
     <script src="js/tables.js"></script>
-    <script src="js/kombinasyon.js"></script>
+    <script src="js/kombinasyon.js?v=preview-controls-1"></script>
 </body>
 </html>

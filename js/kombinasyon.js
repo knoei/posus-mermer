@@ -126,6 +126,8 @@ const tableSizeBadge = document.getElementById("tableSizeBadge");
 const tableSizeBadgeValue = document.getElementById("tableSizeBadgeValue");
 const legPrevButton = document.getElementById("legPrev");
 const legNextButton = document.getElementById("legNext");
+const previewButtons = document.querySelectorAll("[data-preview-control]");
+const previewLegButtons = document.querySelectorAll('[data-preview-control="leg"]');
 const legSelectionNote = document.getElementById("legSelectionNote");
 const hourglassLegIndex = combinationLegs.findIndex(leg => leg.name === "Kum Saati");
 const xLegIndex = combinationLegs.findIndex(leg => leg.name === "X Form Siyah");
@@ -269,7 +271,7 @@ function updateLegNavigationState() {
         ? "90 ve 100 cm tablalar için Kum Saati veya X Form Siyah ayak seçilebilir."
         : "";
 
-    [legPrevButton, legNextButton].forEach(button => {
+    [legPrevButton, legNextButton, ...previewLegButtons].forEach(button => {
         button.disabled = false;
         button.title = restrictionMessage;
         button.setAttribute("aria-disabled", "false");
@@ -593,6 +595,12 @@ legPrevButton.addEventListener("click", () => moveLeg(-1));
 legNextButton.addEventListener("click", () => moveLeg(1));
 document.getElementById("environmentPrev").addEventListener("click", () => moveEnvironment(-1));
 document.getElementById("environmentNext").addEventListener("click", () => moveEnvironment(1));
+const previewActions = { stone: moveStone, leg: moveLeg, environment: moveEnvironment };
+previewButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        previewActions[button.dataset.previewControl](Number(button.dataset.direction));
+    });
+});
 combinationSize.addEventListener("change", updatePurchase);
 combinationQuantity.addEventListener("input", updatePurchase);
 combinationAddToCart.addEventListener("click", addCombinationToCart);
