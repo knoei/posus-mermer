@@ -41,7 +41,9 @@
 
     <link rel="icon" type="image/png" href="images/posel-favicon.png">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="preload" as="image" href="images/hero-table-mobile.webp" media="(max-width: 768px)" fetchpriority="high">
+    <link rel="preload" as="image" href="images/hero-table-desktop.webp" media="(width > 768px)" fetchpriority="high">
+    <link rel="stylesheet" href="style.css?v=home-images-1">
     <link rel="stylesheet" href="mini-cart.css">
     <link
         rel="stylesheet"
@@ -121,7 +123,10 @@
                     <span class="table-category-arrow">➜</span>
                 </div>
 
-                <img src="images/marble-table-category.png" alt="Mermer Masa">
+                <img src="images/marble-table-category-1040.webp"
+                     srcset="images/marble-table-category-640.webp 640w, images/marble-table-category-1040.webp 1040w"
+                     sizes="(max-width: 1024px) 50vw, (max-width: 1600px) 33vw, 523px"
+                     width="1040" height="585" alt="Mermer Masa" loading="lazy" decoding="async">
             </a>
 
             <a href="masalar.html?material=granit" class="table-category-card">
@@ -130,7 +135,10 @@
                     <span class="table-category-arrow">➜</span>
                 </div>
 
-                <img src="images/granite-table-category.png" alt="Granit Masa">
+                <img src="images/granite-table-category-1040.webp"
+                     srcset="images/granite-table-category-640.webp 640w, images/granite-table-category-1040.webp 1040w"
+                     sizes="(max-width: 1024px) 50vw, (max-width: 1600px) 33vw, 523px"
+                     width="1040" height="585" alt="Granit Masa" loading="lazy" decoding="async">
             </a>
 
             <a href="masalar.html?material=porselen" class="table-category-card">
@@ -139,7 +147,10 @@
                     <span class="table-category-arrow">➜</span>
                 </div>
 
-                <img src="images/porcelain-table-category.png" alt="Porselen Masa">
+                <img src="images/porcelain-table-category-1040.webp"
+                     srcset="images/porcelain-table-category-640.webp 640w, images/porcelain-table-category-1040.webp 1040w"
+                     sizes="(max-width: 1024px) 50vw, (max-width: 1600px) 33vw, 523px"
+                     width="1040" height="585" alt="Porselen Masa" loading="lazy" decoding="async">
             </a>
 
 
@@ -147,7 +158,10 @@
 
         <a href="kombinasyon.html" class="calculator-promo" aria-label="Masa kombinasyonunu oluştur ve fiyatını gör">
             
-            <img src="images/calculator-promo.png" 
+            <img src="images/calculator-promo-1600.webp"
+                 srcset="images/calculator-promo-960.webp 960w, images/calculator-promo-1600.webp 1600w"
+                 sizes="(max-width: 768px) 1120px, (max-width: 1800px) 100vw, 1800px"
+                 width="1600" height="572" loading="lazy" decoding="async"
                  alt="Masa Fiyat Hesaplayıcı"
                  class="calculator-promo-image"
             >
@@ -190,7 +204,10 @@
             <div class="product-grid">
                 <a href="masa-detay.html?id=37" class="product-card">
                     <div class="product-image-wrap">
-                        <img src="images/product-1.png" alt="Alba Mermer Masa">
+                        <img src="images/product-1-840.webp"
+                             srcset="images/product-1-480.webp 480w, images/product-1-840.webp 840w"
+                             sizes="(max-width: 480px) calc(100vw - 40px), (max-width: 1024px) 50vw, (max-width: 1400px) 25vw, 350px"
+                             width="840" height="741" alt="Alba Mermer Masa" loading="lazy" decoding="async">
                     </div>
 
                     <div class="product-info">
@@ -202,7 +219,10 @@
 
                  <a href="masa-detay.html?id=38" class="product-card">
                     <div class="product-image-wrap">
-                        <img src="images/product-2.png" alt="Terra Mermer Masa">
+                        <img src="images/product-2-840.webp"
+                             srcset="images/product-2-480.webp 480w, images/product-2-840.webp 840w"
+                             sizes="(max-width: 480px) calc(100vw - 40px), (max-width: 1024px) 50vw, (max-width: 1400px) 25vw, 350px"
+                             width="840" height="840" alt="Terra Mermer Masa" loading="lazy" decoding="async">
                     </div>
 
                     <div class="product-info">
@@ -214,7 +234,10 @@
 
                  <a href="masa-detay.html?id=39" class="product-card">
                     <div class="product-image-wrap">
-                        <img src="images/product-3.png" alt="Rome Traverten Masa">
+                        <img src="images/product-3-840.webp"
+                             srcset="images/product-3-480.webp 480w, images/product-3-840.webp 840w"
+                             sizes="(max-width: 480px) calc(100vw - 40px), (max-width: 1024px) 50vw, (max-width: 1400px) 25vw, 350px"
+                             width="840" height="742" alt="Rome Traverten Masa" loading="lazy" decoding="async">
                     </div>
 
                     <div class="product-info">
@@ -226,7 +249,10 @@
 
                  <a href="masa-detay.html?id=40" class="product-card">
                     <div class="product-image-wrap">
-                        <img src="images/product-4.png" alt="Guatemala Mermer Masa">
+                        <img src="images/product-4-840.webp"
+                             srcset="images/product-4-480.webp 480w, images/product-4-840.webp 840w"
+                             sizes="(max-width: 480px) calc(100vw - 40px), (max-width: 1024px) 50vw, (max-width: 1400px) 25vw, 350px"
+                             width="840" height="840" alt="Guatemala Mermer Masa" loading="lazy" decoding="async">
                     </div>
 
                     <div class="product-info">
@@ -327,7 +353,7 @@
         <div class="footer-column footer-contact">
             <h3>İletişim</h3>
 
-            <p><a href="https://share.google/lPxmTnoxhRvr2K1og" target="_blank" rel="noopener noreferrer">Yayla Mah. Pirinççi Köy Yolu Sk. No:78 Sultangazi, İstanbul, Türkiye</a></p>
+            <p><a href="https://www.google.com/maps/dir/?api=1&amp;destination=41.1454445%2C28.8390483" target="_blank" rel="noopener noreferrer">Yayla Mah. Pirinççi Köy Yolu Sk. No:78 Sultangazi, İstanbul, Türkiye</a></p>
             <p><a href="tel:+905312847383">+90 531 284 7383</a></p>
             <p><a href="mailto:info@poselmadencilik.com">info@poselmadencilik.com</a></p>
 

@@ -494,6 +494,14 @@
             color: #9f7547;
         }
 
+        .product-variation-note p {
+            margin: 0;
+        }
+
+        .product-variation-note p + p {
+            margin-top: 4px;
+        }
+
         /* RESPONSIVE */
 
         @media (max-width: 900px) {
@@ -767,7 +775,10 @@
 
         <div class="product-variation-note">
             <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
-            <span id="productVariationNote"></span>
+            <div>
+                <p id="productVariationNote"></p>
+                <p id="productGalleryDisclosure" hidden>İlk görsel yapay zekâ kullanılarak üretilmiştir, ikinci görsel gerçek görüntüdür.</p>
+            </div>
         </div>
     </section>
 
@@ -1045,6 +1056,7 @@
             document.getElementById("productVariationNote").textContent = isPorcelain
                 ? "Ekran renkleri ve üretim serileri arasında küçük ton veya desen farklılıkları görülebilir."
                 : "Doğal taş ürünlerde damar, ton ve desen farklılıkları kusur değil; her tablayı benzersiz kılan doğal özelliklerdir. Teslim edilecek ürün, ekrandaki örnekten farklılık gösterebilir.";
+            document.getElementById("productGalleryDisclosure").hidden = !isPorcelain || galleryImages.length < 2;
 
 
             /* SHAPE AND CATEGORY NAMES */
